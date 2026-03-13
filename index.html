@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bridge Bank — Connect your bank to Actual Budget</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080b12;
+    --surface: #0f1420;
+    --surface2: #161d2e;
+    --border: #1e2a40;
+    --border2: #253450;
+    --accent: #3b82f6;
+    --accent2: #6366f1;
+    --green: #10b981;
+    --text: #e8edf5;
+    --text2: #94a3b8;
+    --muted: #4a5568;
+    --danger: #ef4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .blob { position: fixed; border-radius: 50%; filter: blur(140px); pointer-events: none; z-index: 0; opacity: 0.12; }
+  .blob-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -150px; }
+  .blob-2 { width: 400px; height: 400px; background: var(--accent2); bottom: 0; right: -100px; }
+
+  /* HEADER */
+  header {
+    position: relative; z-index: 10;
+    padding: 20px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(8,11,18,0.8);
+    backdrop-filter: blur(12px);
+  }
+
+  .logo { font-weight: 700; font-size: 17px; letter-spacing: -0.3px; color: var(--text); display: flex; align-items: center; gap: 10px; }
+  .logo-icon { width: 30px; height: 30px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .badge { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text2); background: var(--surface2); border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; }
+
+  /* HERO */
+  .hero {
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto;
+    padding: 96px 48px 64px; text-align: center;
+  }
+
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--accent); background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); padding: 6px 14px; border-radius: 20px; margin-bottom: 32px; letter-spacing: 0.3px; }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+  h1 { font-size: clamp(38px, 5.5vw, 66px); font-weight: 800; line-height: 1.08; letter-spacing: -2.5px; margin-bottom: 22px; }
+  h1 .highlight { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .hero-sub { font-size: 17px; font-weight: 400; color: var(--text2); line-height: 1.65; max-width: 560px; margin: 0 auto 40px; }
+
+  /* CTA SECTION */
+  .cta-section { position: relative; z-index: 1; text-align: center; padding: 0 48px 72px; }
+
+  .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; padding: 16px 36px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px; border-radius: 10px; cursor: pointer; transition: all 0.2s; letter-spacing: -0.2px; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(59,130,246,0.35); }
+
+  .btn-secondary { background: transparent; color: var(--text2); border: 1px solid var(--border2); padding: 16px 28px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; border-radius: 10px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--text); }
+
+  /* Privacy note */
+  .privacy-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16,185,129,0.07);
+    border: 1px solid rgba(16,185,129,0.2);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6ee7b7;
+  }
+
+  .privacy-note svg { flex-shrink: 0; color: var(--green); }
+
+  /* SECTION LABEL */
+  .section-label { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* HOW IT WORKS */
+  .how { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 48px 72px; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+  .step { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px 24px; transition: border-color 0.2s; }
+  .step:hover { border-color: var(--border2); }
+
+  .step-num { font-size: 11px; font-weight: 600; font-family: 'JetBrains Mono', monospace; color: var(--accent); letter-spacing: 1px; margin-bottom: 16px; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15); display: inline-block; padding: 3px 10px; border-radius: 20px; }
+  .step-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--text); letter-spacing: -0.3px; }
+  .step-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  /* PRICING */
+  .price-section { position: relative; z-index: 1; max-width: 440px; margin: 0 auto; padding: 0 48px 100px; }
+
+  .price-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; padding: 36px; position: relative; overflow: hidden; }
+  .price-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent); }
+
+  .price-label { font-size: 11px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; text-align: center; }
+
+  .price-amount { font-size: 64px; font-weight: 800; letter-spacing: -3px; line-height: 1; margin-bottom: 4px; display: flex; align-items: flex-start; justify-content: center; gap: 2px; }
+  .price-amount sup { font-size: 24px; font-weight: 600; letter-spacing: 0; margin-top: 10px; }
+
+  .price-type { font-size: 12px; color: var(--text2); margin-bottom: 28px; font-weight: 500; text-align: center; }
+
+  .price-features { list-style: none; margin-bottom: 0; }
+  .price-features li { font-size: 13px; color: var(--text2); padding: 9px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .price-features li:last-child { border-bottom: none; }
+  .price-features li::before { content: '✓'; color: var(--green); font-size: 13px; font-weight: 700; flex-shrink: 0; }
+
+  /* WIZARD */
+  #wizard { position: relative; z-index: 1; max-width: 660px; margin: 0 auto; padding: 0 48px 120px; display: none; }
+  #wizard.visible { display: block; }
+
+  .wizard-header { text-align: center; margin-bottom: 40px; }
+  .wizard-header h2 { font-size: 26px; font-weight: 800; letter-spacing: -1px; margin-bottom: 6px; }
+  .wizard-header p { font-size: 13px; color: var(--text2); font-family: 'JetBrains Mono', monospace; }
+
+  .progress-bar { display: flex; gap: 4px; margin-bottom: 40px; }
+  .progress-step { flex: 1; height: 2px; background: var(--border); border-radius: 2px; transition: background 0.3s; }
+  .progress-step.active { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+  .wizard-step { display: none; animation: fadeIn 0.25s ease; }
+  .wizard-step.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .step-heading { font-size: 19px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .step-hint { font-size: 13px; color: var(--text2); margin-bottom: 28px; line-height: 1.65; }
+  .step-hint a { color: var(--accent); text-decoration: none; }
+  .step-hint a:hover { text-decoration: underline; }
+
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 11px; font-weight: 600; color: var(--text2); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 7px; }
+
+  .field input, .field select { width: 100%; background: var(--surface); border: 1px solid var(--border2); color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 11px 14px; border-radius: 8px; outline: none; transition: border-color 0.2s; appearance: none; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+  .field input::placeholder { color: var(--muted); }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .field-note { font-size: 11px; color: var(--muted); margin-top: 5px; line-height: 1.5; font-family: 'JetBrains Mono', monospace; }
+
+  .optional-tag { font-size: 10px; font-weight: 500; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); padding: 2px 7px; border-radius: 10px; vertical-align: middle; margin-left: 4px; text-transform: none; letter-spacing: 0; }
+
+  .wizard-divider { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin: 28px 0 20px; display: flex; align-items: center; gap: 12px; }
+  .wizard-divider::before, .wizard-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .wizard-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
+
+  .btn-back { background: transparent; color: var(--text2); border: 1px solid var(--border2); padding: 11px 22px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+  .btn-back:hover { color: var(--text); border-color: var(--accent); }
+
+  .btn-next { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; padding: 11px 26px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+  .btn-next:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.3); }
+
+  .step-counter { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+  #review-box { background: var(--surface); border: 1px solid var(--border2); border-radius: 10px; padding: 20px; font-size: 12px; font-family: 'JetBrains Mono', monospace; line-height: 2; color: var(--text2); }
+
+  /* OUTPUT */
+  #output { display: none; position: relative; z-index: 1; max-width: 660px; margin: 0 auto; padding: 0 48px 120px; animation: fadeIn 0.4s ease; }
+  #output.visible { display: block; }
+
+  .output-header { text-align: center; margin-bottom: 36px; }
+  .success-icon { width: 52px; height: 52px; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; font-size: 22px; }
+  .output-header h2 { font-size: 26px; font-weight: 800; letter-spacing: -1px; margin-bottom: 6px; }
+  .output-header p { font-size: 13px; color: var(--text2); }
+
+  .file-block { background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; margin-bottom: 14px; overflow: hidden; }
+  .file-header { display: flex; align-items: center; justify-content: space-between; padding: 13px 18px; border-bottom: 1px solid var(--border); background: var(--surface2); }
+  .file-name { font-size: 13px; font-weight: 600; font-family: 'JetBrains Mono', monospace; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .file-name .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+
+  .btn-download { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; padding: 7px 16px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+  .btn-download:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(59,130,246,0.35); }
+
+  .file-preview { padding: 18px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text2); line-height: 1.9; max-height: 160px; overflow-y: auto; white-space: pre; }
+
+  .next-steps { background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; padding: 26px; margin-top: 24px; }
+  .next-steps h3 { font-size: 15px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.3px; }
+  .next-step-item { display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
+  .next-step-num { width: 22px; height: 22px; background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+  .next-step-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .next-step-text code { background: var(--surface2); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--accent); }
+  .renewal-note { margin-top: 20px; display: flex; align-items: flex-start; gap: 10px; background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.25); border-radius: 8px; padding: 14px 16px; font-size: 13px; font-weight: 500; color: #fcd34d; line-height: 1.6; }
+  .renewal-note svg { flex-shrink: 0; margin-top: 1px; }
+
+  /* FOOTER */
+  footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer .left { font-size: 12px; color: var(--muted); }
+  footer .right { display: flex; gap: 20px; }
+  footer a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--text); }
+
+  .field input.error { border-color: var(--danger); }
+  .error-msg { font-size: 11px; color: var(--danger); margin-top: 5px; display: none; }
+  .error-msg.visible { display: block; }
+
+  @media (max-width: 640px) {
+    header { padding: 16px 20px; }
+    .hero { padding: 60px 20px 48px; }
+    .how, .price-section, .cta-section, #wizard, #output { padding-left: 20px; padding-right: 20px; }
+    .steps { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+    h1 { letter-spacing: -1.5px; }
+    footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+    footer .right { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<header>
+  <a href="#top" class="logo" style="text-decoration:none;">
+    <div class="logo-icon">⟷</div>
+    Bridge Bank
+  </a>
+  <span class="badge">EU banks · self-hosted</span>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-tag">Setup Wizard</div>
+  <h1>Connect your <span class="highlight">European bank</span> to Actual Budget — in minutes</h1>
+  <p class="hero-sub">Fill in your details, download two config files, and run one command on your server. That's it.</p>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="startWizard()">Get my config files — €15</button>
+    <a class="btn-secondary" href="https://github.com/DAdjadj/bridge-bank" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      View source on GitHub
+    </a>
+  </div>
+  <div style="display:flex;justify-content:center;">
+    <div class="privacy-note">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Your data never leaves your browser. Files are generated locally — nothing is sent to any server.
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-label">How it works</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Fill the wizard</div>
+      <div class="step-desc">Enter your Enable Banking credentials, Actual Budget details, and pick your bank. Takes about two minutes.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Download your files</div>
+      <div class="step-desc">Get a pre-filled <code style="font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace">.env</code> and <code style="font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace">docker-compose.yml</code> — no manual editing required.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Run on your server</div>
+      <div class="step-desc">Drop the files in a folder on your server and run one command. Transactions sync to Actual Budget automatically from there.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="price-section">
+  <div class="section-label">Pricing</div>
+  <div class="price-card">
+    <div class="price-label">One-time payment</div>
+    <div class="price-amount"><sup>€</sup>15</div>
+    <div class="price-type">One payment. One set of config files.</div>
+    <ul class="price-features">
+      <li>Pre-filled .env and docker-compose.yml</li>
+      <li>All EU banks via Enable Banking</li>
+      <li>Works with self-hosted Actual Budget</li>
+      <li>Email alerts when your session expires</li>
+      <li>Open source — inspect the code anytime</li>
+    </ul>
+  </div>
+</section>
+
+<!-- WIZARD -->
+<section id="wizard">
+  <div class="wizard-header">
+    <h2>Configure your setup</h2>
+    <p>// your data never leaves your browser</p>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-step active" id="p0"></div>
+    <div class="progress-step" id="p1"></div>
+    <div class="progress-step" id="p2"></div>
+    <div class="progress-step" id="p3"></div>
+  </div>
+
+  <div class="wizard-step active" id="step-0">
+    <div class="step-heading">Enable Banking</div>
+    <p class="step-hint">You need a free Enable Banking account with an application created. <a href="https://enablebanking.com/" target="_blank">Sign up here →</a><br>Your <code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)">private.pem</code> key file stays on your server — you won't enter it here.</p>
+
+    <div class="field">
+      <label>Application ID</label>
+      <input type="text" id="eb_app_id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+      <div class="error-msg" id="err_eb_app_id">This field is required</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Bank name</label>
+        <input type="text" id="eb_bank_name" placeholder="e.g. Revolut">
+        <div class="field-note">Exact name from Enable Banking</div>
+        <div class="error-msg" id="err_eb_bank_name">This field is required</div>
+      </div>
+      <div class="field">
+        <label>Bank country</label>
+        <select id="eb_bank_country">
+          <option value="AT">Austria (AT)</option>
+          <option value="BE">Belgium (BE)</option>
+          <option value="HR">Croatia (HR)</option>
+          <option value="CY">Cyprus (CY)</option>
+          <option value="CZ">Czech Republic (CZ)</option>
+          <option value="DK">Denmark (DK)</option>
+          <option value="EE">Estonia (EE)</option>
+          <option value="FI">Finland (FI)</option>
+          <option value="FR">France (FR)</option>
+          <option value="DE">Germany (DE)</option>
+          <option value="GR">Greece (GR)</option>
+          <option value="HU">Hungary (HU)</option>
+          <option value="IE">Ireland (IE)</option>
+          <option value="IT">Italy (IT)</option>
+          <option value="LV">Latvia (LV)</option>
+          <option value="LT">Lithuania (LT)</option>
+          <option value="LU">Luxembourg (LU)</option>
+          <option value="MT">Malta (MT)</option>
+          <option value="NL">Netherlands (NL)</option>
+          <option value="NO">Norway (NO)</option>
+          <option value="PL">Poland (PL)</option>
+          <option value="PT" selected>Portugal (PT)</option>
+          <option value="RO">Romania (RO)</option>
+          <option value="SK">Slovakia (SK)</option>
+          <option value="SI">Slovenia (SI)</option>
+          <option value="ES">Spain (ES)</option>
+          <option value="SE">Sweden (SE)</option>
+          <option value="GB">United Kingdom (GB)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Account type</label>
+      <select id="eb_psu_type">
+        <option value="personal">Personal</option>
+        <option value="business">Business</option>
+      </select>
+    </div>
+
+    <div class="wizard-nav">
+      <span class="step-counter">step 1 / 4</span>
+      <button class="btn-next" onclick="nextStep(0)">Next →</button>
+    </div>
+  </div>
+
+  <div class="wizard-step" id="step-1">
+    <div class="step-heading">Actual Budget</div>
+    <p class="step-hint">Enter the details of your self-hosted Actual Budget instance. Find the Sync ID under <strong>Settings → Show advanced settings</strong> inside Actual Budget.</p>
+
+    <div class="field">
+      <label>Actual Budget URL</label>
+      <input type="text" id="actual_url" placeholder="http://192.168.1.100:5006">
+      <div class="field-note">Local IP or hostname your server uses to reach Actual Budget</div>
+      <div class="error-msg" id="err_actual_url">This field is required</div>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="actual_password" placeholder="your Actual Budget password">
+      <div class="error-msg" id="err_actual_password">This field is required</div>
+    </div>
+
+    <div class="field">
+      <label>Sync ID</label>
+      <input type="text" id="actual_sync_id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+      <div class="field-note">Actual Budget → Settings → Show advanced settings → Sync ID</div>
+      <div class="error-msg" id="err_actual_sync_id">This field is required</div>
+    </div>
+
+    <div class="field">
+      <label>Account name in Actual Budget</label>
+      <input type="text" id="actual_account" placeholder="Revolut">
+      <div class="field-note">Must match exactly the account name in Actual Budget</div>
+      <div class="error-msg" id="err_actual_account">This field is required</div>
+    </div>
+
+    <div class="wizard-nav">
+      <button class="btn-back" onclick="prevStep(1)">← Back</button>
+      <span class="step-counter">step 2 / 4</span>
+      <button class="btn-next" onclick="nextStep(1)">Next →</button>
+    </div>
+  </div>
+
+  <div class="wizard-step" id="step-2">
+    <div class="step-heading">Sync settings</div>
+    <p class="step-hint">Configure how often your transactions sync. Email alerts are optional — useful for when your Enable Banking session needs renewal every ~180 days.</p>
+
+    <div class="field">
+      <label>Sync interval</label>
+      <select id="sync_hours">
+        <option value="1">Every 1 hour</option>
+        <option value="3">Every 3 hours</option>
+        <option value="6" selected>Every 6 hours</option>
+        <option value="12">Every 12 hours</option>
+        <option value="24">Every 24 hours</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Your name on bank transfers <span class="optional-tag">optional</span></label>
+      <input type="text" id="holder_name" placeholder="e.g. John Doe,JOHN DOE">
+      <div class="field-note">As it appears in bank statements. Helps identify payees on incoming transfers. Comma-separate multiple variations.</div>
+    </div>
+
+    <div class="wizard-divider">Email alerts</div>
+
+    <div class="field">
+      <label>Notify email <span class="optional-tag">optional</span></label>
+      <input type="email" id="notify_email" placeholder="you@example.com">
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>SMTP host <span class="optional-tag">optional</span></label>
+        <input type="text" id="smtp_host" placeholder="smtp.gmail.com">
+      </div>
+      <div class="field">
+        <label>SMTP port <span class="optional-tag">optional</span></label>
+        <input type="text" id="smtp_port" value="587">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>SMTP user <span class="optional-tag">optional</span></label>
+        <input type="text" id="smtp_user" placeholder="you@gmail.com">
+      </div>
+      <div class="field">
+        <label>SMTP password <span class="optional-tag">optional</span></label>
+        <input type="password" id="smtp_pass" placeholder="app-specific password">
+      </div>
+    </div>
+
+    <div class="wizard-nav">
+      <button class="btn-back" onclick="prevStep(2)">← Back</button>
+      <span class="step-counter">step 3 / 4</span>
+      <button class="btn-next" onclick="nextStep(2)">Next →</button>
+    </div>
+  </div>
+
+  <div class="wizard-step" id="step-3">
+    <div class="step-heading">Review & generate</div>
+    <p class="step-hint">Double-check everything below. Go back to change anything, then click Generate to download your files.</p>
+    <div id="review-box"></div>
+    <div class="wizard-nav">
+      <button class="btn-back" onclick="prevStep(3)">← Back</button>
+      <span class="step-counter">step 4 / 4</span>
+      <button class="btn-next" onclick="generateFiles()" style="background:linear-gradient(135deg,#10b981,#059669);">Generate files ↓</button>
+    </div>
+  </div>
+</section>
+
+<!-- OUTPUT -->
+<section id="output">
+  <div class="output-header">
+    <div class="success-icon">✓</div>
+    <h2>Your files are ready</h2>
+    <p>Download both files and place them in the same folder on your server.</p>
+  </div>
+
+  <div class="file-block">
+    <div class="file-header">
+      <div class="file-name"><div class="dot"></div>.env</div>
+      <button class="btn-download" onclick="downloadEnv()">↓ Download .env</button>
+    </div>
+    <div class="file-preview" id="env-preview"></div>
+  </div>
+
+  <div class="file-block">
+    <div class="file-header">
+      <div class="file-name"><div class="dot" style="background:var(--accent2)"></div>docker-compose.yml</div>
+      <button class="btn-download" onclick="downloadCompose()">↓ Download docker-compose.yml</button>
+    </div>
+    <div class="file-preview" id="compose-preview"></div>
+  </div>
+
+  <div class="next-steps">
+    <h3>What to do next</h3>
+    <div class="next-step-item">
+      <div class="next-step-num">1</div>
+      <div class="next-step-text">
+        Go to the <a href="https://enablebanking.com/" target="_blank" style="color:var(--accent);text-decoration:none;">Enable Banking developer dashboard</a> &rarr; Applications &rarr; your app. There you'll find a button to download your <code>private.pem</code> key file to your computer.<br><br>
+        Then upload it to your server so it ends up at <code>~/bridge-bank/data/private.pem</code>. From your computer's terminal:<br><br>
+        <code>scp ~/Downloads/private.pem youruser@yourserver:~/bridge-bank/data/private.pem</code><br><br>
+        <span style="color:var(--muted);font-size:11px;font-family:'JetBrains Mono',monospace;">// Replace ~/Downloads/private.pem with wherever it was saved, and youruser@yourserver with your SSH login.</span>
+      </div>
+    </div>
+    <div class="next-step-item">
+      <div class="next-step-num">2</div>
+      <div class="next-step-text">Place both downloaded files in <code>~/bridge-bank/</code> alongside the data folder</div>
+    </div>
+    <div class="next-step-item">
+      <div class="next-step-num">3</div>
+      <div class="next-step-text">Run the one-time bank authorisation:<br><code>docker run --rm -it -v "$(pwd)/data:/data" --env-file .env daalves/bridge-bank:latest python dosetup.py</code></div>
+    </div>
+    <div class="next-step-item">
+      <div class="next-step-num">4</div>
+      <div class="next-step-text">Start the sync: <code>docker compose up -d</code></div>
+    </div>
+    <div class="next-step-item">
+      <div class="next-step-num">5</div>
+      <div class="next-step-text">Confirm it's running: <code>docker compose logs -f</code></div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.3);border-radius:12px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start;">
+    <div style="font-size:22px;line-height:1;flex-shrink:0;margin-top:1px;">&#9888;&#65039;</div>
+    <div>
+      <div style="font-size:14px;font-weight:700;color:#fbbf24;margin-bottom:8px;">Bank sessions expire every ~180 days</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.7;">Enable Banking requires you to re-authorise access roughly every 6 months. When that happens, re-run the bank authorisation command from step 3 above, then restart the container with <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;">docker compose restart</code>.<br><br>If you configured email alerts in the wizard, you'll get a notification before expiry so you're never caught off guard.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="left">© 2025 Bridge Bank · Built by <a href="https://github.com/DAdjadj" target="_blank">DAdjadj</a></div>
+  <div class="right">
+    <a href="https://github.com/DAdjadj/bridge-bank" target="_blank">GitHub</a>
+    <a href="https://enablebanking.com" target="_blank">Enable Banking</a>
+    <a href="https://actualbudget.org" target="_blank">Actual Budget</a>
+  </div>
+</footer>
+
+<script>
+  const totalSteps = 4;
+
+  function startWizard() {
+    ['.hero', '.cta-section', '.how', '.price-section'].forEach(sel => {
+      const el = document.querySelector(sel);
+      if (el) el.style.display = 'none';
+    });
+    const w = document.getElementById('wizard');
+    w.classList.add('visible');
+    w.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function updateProgress(step) {
+    for (let i = 0; i < totalSteps; i++)
+      document.getElementById('p' + i).classList.toggle('active', i <= step);
+  }
+
+  function showStep(step) {
+    document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
+    document.getElementById('step-' + step).classList.add('active');
+    updateProgress(step);
+    if (step === 3) buildReview();
+  }
+
+  function validate(step) {
+    const required = { 0: ['eb_app_id','eb_bank_name'], 1: ['actual_url','actual_password','actual_sync_id','actual_account'], 2: [], 3: [] };
+    let ok = true;
+    (required[step] || []).forEach(id => {
+      const el = document.getElementById(id);
+      const err = document.getElementById('err_' + id);
+      if (!el.value.trim()) { el.classList.add('error'); if (err) err.classList.add('visible'); ok = false; }
+      else { el.classList.remove('error'); if (err) err.classList.remove('visible'); }
+    });
+    return ok;
+  }
+
+  function nextStep(step) { if (validate(step) && step < totalSteps - 1) showStep(step + 1); }
+  function prevStep(step) { if (step > 0) showStep(step - 1); }
+  function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+  function buildReview() {
+    document.getElementById('review-box').innerHTML = `
+      <div style="display:grid;grid-template-columns:160px 1fr;gap:6px 16px;">
+        <span style="color:var(--muted)">EB App ID</span><span>${val('eb_app_id')||'—'}</span>
+        <span style="color:var(--muted)">Bank</span><span>${val('eb_bank_name')||'—'} (${val('eb_bank_country')})</span>
+        <span style="color:var(--muted)">Account type</span><span>${val('eb_psu_type')}</span>
+        <div style="grid-column:1/-1;border-top:1px solid var(--border);margin:6px 0;"></div>
+        <span style="color:var(--muted)">Actual URL</span><span>${val('actual_url')||'—'}</span>
+        <span style="color:var(--muted)">Sync ID</span><span>${val('actual_sync_id')?val('actual_sync_id').substring(0,8)+'...':'—'}</span>
+        <span style="color:var(--muted)">Account</span><span>${val('actual_account')||'—'}</span>
+        <div style="grid-column:1/-1;border-top:1px solid var(--border);margin:6px 0;"></div>
+        <span style="color:var(--muted)">Sync every</span><span>${val('sync_hours')} hours</span>
+        <span style="color:var(--muted)">Email alerts</span><span>${val('notify_email')||'disabled'}</span>
+      </div>`;
+  }
+
+  function getEnvContent() {
+    return `# Bridge Bank — generated by bridgebank.app\n# --- Actual Budget ---\nACTUAL_URL=${val('actual_url')}\nACTUAL_PASSWORD=${val('actual_password')}\nACTUAL_SYNC_ID=${val('actual_sync_id')}\nACTUAL_ACCOUNT=${val('actual_account')}\n\n# --- Enable Banking ---\nEB_APPLICATION_ID=${val('eb_app_id')}\nEB_BANK_NAME=${val('eb_bank_name')}\nEB_BANK_COUNTRY=${val('eb_bank_country')}\nEB_PSU_TYPE=${val('eb_psu_type')}\n\n# --- Sync settings ---\nSYNC_INTERVAL_HOURS=${val('sync_hours')}\nACCOUNT_HOLDER_NAME=${val('holder_name')}\n\n# --- Email notifications (optional) ---\nNOTIFY_EMAIL=${val('notify_email')}\nSMTP_HOST=${val('smtp_host')}\nSMTP_PORT=${val('smtp_port')||'587'}\nSMTP_USER=${val('smtp_user')}\nSMTP_PASS=${val('smtp_pass')}\n`;
+  }
+
+  function getComposeContent() {
+    return `# Bridge Bank — generated by bridgebank.app\nservices:\n  bridge-bank:\n    image: daalves/bridge-bank:latest\n    container_name: bridge-bank\n    restart: unless-stopped\n    env_file:\n      - .env\n    volumes:\n      - ./data:/data\n    # Uncomment if Actual Budget is on a named Docker network:\n    # networks:\n    #   - your_actual_network\n\n# networks:\n#   your_actual_network:\n#     external: true\n`;
+  }
+
+  function generateFiles() {
+    document.getElementById('wizard').classList.remove('visible');
+    document.getElementById('env-preview').textContent = getEnvContent();
+    document.getElementById('compose-preview').textContent = getComposeContent();
+    const output = document.getElementById('output');
+    output.classList.add('visible');
+    output.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function downloadEnv() { download('.env', getEnvContent()); }
+  function downloadCompose() { download('docker-compose.yml', getComposeContent()); }
+
+  function download(filename, content) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([content], { type: 'text/plain' }));
+    a.download = filename; a.click();
+    URL.revokeObjectURL(a.href);
+  }
+</script>
+</body>
+</html>
