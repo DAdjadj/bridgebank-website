@@ -603,9 +603,7 @@
 
   // Auto-start wizard if redirected from Lemon Squeezy after payment
   if (new URLSearchParams(window.location.search).get('paid') === '1') {
-    window.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('success-overlay').classList.add('visible');
-    });
+    document.getElementById('success-overlay').classList.add('visible');
   }
 
   function dismissAndStart() {
