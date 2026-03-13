@@ -621,6 +621,8 @@
     document.getElementById('wizard').classList.remove('visible');
     document.getElementById('output').classList.remove('visible');
   }
+
+  function startWizard() {
     ['.hero', '.cta-section', '.how', '.price-section'].forEach(sel => {
       const el = document.querySelector(sel);
       if (el) el.style.display = 'none';
@@ -628,6 +630,16 @@
     const w = document.getElementById('wizard');
     w.classList.add('visible');
     w.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.event === 'Checkout.Success') {
+      document.getElementById('success-overlay').classList.add('visible');
+    }
+  });
+
+  if (new URLSearchParams(window.location.search).get('paid') === '1') {
+    document.getElementById('success-overlay').classList.add('visible');
   }
 
   function updateProgress(step) {
