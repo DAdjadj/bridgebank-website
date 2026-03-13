@@ -221,7 +221,16 @@
   footer a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
   footer a:hover { color: var(--text); }
 
-  .field input.error { border-color: var(--danger); }
+  /* SUCCESS OVERLAY */
+  #success-overlay { display:none; position:fixed; inset:0; background:rgba(8,11,18,0.92); z-index:1000; align-items:center; justify-content:center; }
+  #success-overlay.visible { display:flex; }
+  .success-card { background:var(--surface); border:1px solid var(--border2); border-radius:16px; padding:48px 40px; text-align:center; max-width:420px; width:90%; position:relative; }
+  .success-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--green),transparent); }
+  .success-icon-big { width:64px; height:64px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:28px; }
+  .success-card h2 { font-size:22px; font-weight:800; letter-spacing:-0.5px; margin-bottom:10px; }
+  .success-card p { font-size:14px; color:var(--text2); line-height:1.6; margin-bottom:28px; }
+  .btn-start { background:linear-gradient(135deg,var(--green),#059669); color:#fff; border:none; padding:14px 32px; font-family:'Inter',sans-serif; font-weight:700; font-size:15px; border-radius:10px; cursor:pointer; transition:all 0.2s; width:100%; }
+  .btn-start:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(16,185,129,0.3); }
   .error-msg { font-size: 11px; color: var(--danger); margin-top: 5px; display: none; }
   .error-msg.visible { display: block; }
 
@@ -567,6 +576,15 @@
   </div>
 </section>
 
+<div id="success-overlay">
+  <div class="success-card">
+    <div class="success-icon-big">✓</div>
+    <h2>Payment confirmed</h2>
+    <p>Your receipt has been sent to your email. Now let's set up your config files — it only takes a couple of minutes.</p>
+    <button class="btn-start" onclick="dismissAndStart()">Continue to wizard →</button>
+  </div>
+</div>
+
 <footer>
   <div class="left">© 2025 Bridge Bank · Built by <a href="https://github.com/DAdjadj" target="_blank">DAdjadj</a></div>
   <div class="right">
@@ -579,9 +597,14 @@
 <script>
   window.addEventListener('message', function(event) {
     if (event.data && event.data.event === 'Checkout.Success') {
-      startWizard();
+      document.getElementById('success-overlay').classList.add('visible');
     }
   });
+
+  function dismissAndStart() {
+    document.getElementById('success-overlay').classList.remove('visible');
+    startWizard();
+  }
 
   const totalSteps = 4;
 
