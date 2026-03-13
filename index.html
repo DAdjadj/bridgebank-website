@@ -222,7 +222,7 @@
   footer a:hover { color: var(--text); }
 
   /* SUCCESS OVERLAY */
-  #success-overlay { display:none; position:fixed; inset:0; background:rgba(8,11,18,0.92); z-index:1000; align-items:center; justify-content:center; }
+  #success-overlay { display:none; position:fixed; inset:0; background:rgba(8,11,18,0.92); z-index:999999; align-items:center; justify-content:center; }
   #success-overlay.visible { display:flex; }
   .success-card { background:var(--surface); border:1px solid var(--border2); border-radius:16px; padding:48px 40px; text-align:center; max-width:420px; width:90%; position:relative; }
   .success-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--green),transparent); }
@@ -253,7 +253,7 @@
 <div class="blob blob-2"></div>
 
 <header>
-  <a href="#top" class="logo" style="text-decoration:none;">
+  <a href="#top" class="logo" style="text-decoration:none;" onclick="restoreHome()">
     <div class="logo-icon">⟷</div>
     Bridge Bank
   </a>
@@ -608,7 +608,14 @@
 
   const totalSteps = 4;
 
-  function startWizard() {
+  function restoreHome() {
+    ['.hero', '.cta-section', '.how', '.price-section'].forEach(sel => {
+      const el = document.querySelector(sel);
+      if (el) el.style.display = '';
+    });
+    document.getElementById('wizard').classList.remove('visible');
+    document.getElementById('output').classList.remove('visible');
+  }
     ['.hero', '.cta-section', '.how', '.price-section'].forEach(sel => {
       const el = document.querySelector(sel);
       if (el) el.style.display = 'none';
