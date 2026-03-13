@@ -581,6 +581,7 @@
     <div class="success-icon-big">✓</div>
     <h2>Payment confirmed</h2>
     <p>Your receipt has been sent to your email. Now let's set up your config files — it only takes a couple of minutes.</p>
+    <p style="font-size:12px;color:var(--muted);margin-top:-16px;">One-time access. Issues? Email <a href="mailto:support@bridgebank.app" style="color:var(--accent);text-decoration:none;">support@bridgebank.app</a></p>
     <button class="btn-start" onclick="dismissAndStart()">Continue to wizard →</button>
   </div>
 </div>
@@ -603,6 +604,7 @@
 
   // Auto-start wizard if redirected from Lemon Squeezy after payment
   if (new URLSearchParams(window.location.search).get('paid') === '1') {
+    window.history.replaceState({}, '', window.location.pathname);
     document.getElementById('success-overlay').classList.add('visible');
   }
 
@@ -639,6 +641,7 @@
   });
 
   if (new URLSearchParams(window.location.search).get('paid') === '1') {
+    window.history.replaceState({}, '', window.location.pathname);
     document.getElementById('success-overlay').classList.add('visible');
   }
 
