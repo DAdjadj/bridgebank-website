@@ -547,11 +547,25 @@
 </section>
 
 <div id="success-overlay">
-  <div class="success-card">
-    <div class="success-icon-big">&#x2713;</div>
-    <h2>Payment confirmed</h2>
-    <p>Your licence key has been sent to your email. Enter it in the wizard to generate your config files.</p>
-    <button class="btn-start" onclick="dismissAndStart()">Continue to wizard &rarr;</button>
+  <div class="success-card" style="max-width:520px;text-align:left;">
+    <div class="success-icon-big" style="margin:0 auto 18px;">&#x2713;</div>
+    <h2 style="text-align:center;margin-bottom:10px;">You're all set!</h2>
+    <p style="text-align:center;margin-bottom:28px;">Your license key has been sent to your email. Follow the steps below to get Bridge Bank running.</p>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:24px;height:24px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#3b82f6;flex-shrink:0;margin-top:1px;">1</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.6;">Create a folder on your server and copy your <code style="background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;font-size:11px;color:#3b82f6;">private.pem</code> key from Enable Banking into a <code style="background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;font-size:11px;color:#3b82f6;">data/</code> subfolder</div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:24px;height:24px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#3b82f6;flex-shrink:0;margin-top:1px;">2</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.6;">Run:<br><code style="background:var(--surface2);border:1px solid var(--border);padding:4px 8px;border-radius:4px;font-size:11px;color:#3b82f6;display:inline-block;margin-top:4px;">curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compose.yml && docker compose up -d</code></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:24px;height:24px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#3b82f6;flex-shrink:0;margin-top:1px;">3</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.6;">Open <code style="background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;font-size:11px;color:#3b82f6;">http://your-server:3002</code> in your browser and enter your license key to complete setup</div>
+      </div>
+    </div>
+    <button class="btn-start" onclick="document.getElementById('success-overlay').classList.remove('visible')">Got it &rarr;</button>
   </div>
 </div>
 
