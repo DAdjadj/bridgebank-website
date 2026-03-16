@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service &mdash; Bridge Bank</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { background: #080b12; color: #e8edf5; font-family: 'Inter', sans-serif; line-height: 1.75; padding: 0 1.5rem; }
+    .page { max-width: 680px; margin: 0 auto; padding: 4rem 0 6rem; }
+    header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4rem; padding-bottom: 1.5rem; border-bottom: 1px solid #1e2a40; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #e8edf5; font-weight: 700; font-size: 17px; }
+    .logo-icon { width: 30px; height: 30px; background: linear-gradient(135deg, #3b82f6, #6366f1); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .back { font-size: 13px; color: #94a3b8; text-decoration: none; }
+    .back:hover { color: #e8edf5; }
+    .meta { margin-bottom: 3rem; }
+    .meta h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem; line-height: 1.2; }
+    .meta .date { font-size: 13px; color: #94a3b8; }
+    .intro { background: #0f1420; border: 1px solid #1e2a40; border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; font-size: 14px; color: #94a3b8; line-height: 1.7; }
+    h2 { font-size: 1.05rem; font-weight: 700; margin: 2.5rem 0 0.75rem; color: #e8edf5; }
+    p { font-size: 15px; color: #94a3b8; margin-bottom: 0.875rem; }
+    ul { margin: 0.5rem 0 0.875rem 1.25rem; font-size: 15px; color: #94a3b8; }
+    ul li { margin-bottom: 0.35rem; }
+    a { color: #3b82f6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    strong { color: #e8edf5; font-weight: 600; }
+    .highlight { background: #0f1420; border-left: 3px solid #3b82f6; padding: 0.875rem 1.25rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-size: 14px; color: #94a3b8; }
+    footer { margin-top: 5rem; padding-top: 2rem; border-top: 1px solid #1e2a40; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    footer a { font-size: 13px; color: #4a5568; text-decoration: none; }
+    footer a:hover { color: #e8edf5; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a class="logo" href="https://bridgebank.app">
+        <div class="logo-icon">&#x27F7;</div>
+        Bridge Bank
+      </a>
+      <a class="back" href="https://bridgebank.app">&larr; Back to bridgebank.app</a>
+    </header>
+
+    <div class="meta">
+      <h1>Terms of Service</h1>
+      <p class="date">Last updated: March 2026</p>
+    </div>
+
+    <div class="intro">
+      These terms govern your use of Bridge Bank, a self-hosted application that syncs bank transactions to Actual Budget. By purchasing or using Bridge Bank, you agree to these terms.
+    </div>
+
+    <h2>Who these terms apply to</h2>
+    <p>These terms are between you (the purchaser and user of Bridge Bank) and David Alves, an independent software developer based in Portugal ("we", "us", "our"). You can contact us at <a href="mailto:support@david-alves.com">support@david-alves.com</a>.</p>
+
+    <h2>What Bridge Bank is</h2>
+    <p>Bridge Bank is a self-hosted application that connects to your bank via Enable Banking's open banking API and writes your transactions to a self-hosted Actual Budget instance you own. It runs on your own hardware. Your data never passes through our servers.</p>
+    <p>Bridge Bank is not a financial service, a bank, or a payment provider. It is a software tool that reads and organises data you already have access to.</p>
+
+    <h2>Licence to use</h2>
+    <p>Bridge Bank's source code is released under the MIT licence with the Commons Clause. This means:</p>
+    <ul>
+      <li>You may use, copy, modify, and self-host Bridge Bank for personal use.</li>
+      <li>You may not sell Bridge Bank, offer it as a hosted or managed service, or use it as the basis for a competing product.</li>
+      <li>Personal self-hosting is always free. A paid licence key is required to activate the application.</li>
+    </ul>
+
+    <h2>Licence keys</h2>
+    <p>Each licence key allows activation on up to 2 machines. Keys are personal and non-transferable. A valid licence key is required to use Bridge Bank &mdash; the application validates your key with Lemon Squeezy's licence API on activation and on each sync run.</p>
+    <p>If you need to move your installation to a new machine, contact us at <a href="mailto:support@david-alves.com">support@david-alves.com</a> to reset your activation count.</p>
+
+    <h2>Payment and refunds</h2>
+    <p>Payments are processed by Lemon Squeezy, our merchant of record. They handle all payment processing, VAT, and invoicing. Their terms of service apply to the purchase transaction.</p>
+    <p>Because Bridge Bank is a software product delivered immediately upon purchase, we do not offer refunds after your licence key has been activated. If you experience a technical issue that prevents you from using the product, contact us at <a href="mailto:support@david-alves.com">support@david-alves.com</a> and we will work to resolve it.</p>
+
+    <h2>Third-party services</h2>
+    <p>Bridge Bank relies on third-party services that are outside our control:</p>
+    <ul>
+      <li><strong>Enable Banking</strong> &mdash; provides open banking access. Their availability and terms govern bank connectivity.</li>
+      <li><strong>Actual Budget</strong> &mdash; your transaction data is written to your self-hosted Actual Budget instance. Their terms apply.</li>
+      <li><strong>Your SMTP provider</strong> &mdash; used to send you sync and session expiry notifications.</li>
+    </ul>
+    <p>We are not responsible for outages, changes, or decisions made by these third parties that affect Bridge Bank's functionality.</p>
+
+    <h2>No warranty</h2>
+    <div class="highlight">
+      Bridge Bank is provided "as is", without warranty of any kind, express or implied. We do not guarantee that Bridge Bank will be error-free, uninterrupted, or that it will accurately capture every transaction from your bank. Bank APIs can change without notice.
+    </div>
+    <p>You are responsible for verifying the accuracy of data written to your Actual Budget instance. Bridge Bank should not be used as your sole source of financial records.</p>
+
+    <h2>Limitation of liability</h2>
+    <p>To the maximum extent permitted by applicable law, David Alves shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of Bridge Bank, including but not limited to loss of data, missed transactions, financial loss, or business interruption.</p>
+    <p>Our total liability to you for any claim arising from these terms or your use of Bridge Bank shall not exceed the amount you paid for your licence key.</p>
+
+    <h2>Acceptable use</h2>
+    <p>You agree to use Bridge Bank only for lawful purposes and only to access bank accounts and Actual Budget instances that you own or have explicit permission to access. You must not attempt to circumvent licence validation or use a single licence key on more machines than permitted.</p>
+
+    <h2>Changes to these terms</h2>
+    <p>We may update these terms from time to time. If we make material changes, we will update the date at the top of this page. Continued use of Bridge Bank after changes constitutes acceptance of the updated terms.</p>
+
+    <h2>Governing law</h2>
+    <p>These terms are governed by the laws of Portugal. Any disputes shall be subject to the exclusive jurisdiction of the courts of Portugal, without prejudice to any mandatory consumer protection rights you may have under the laws of your country of residence.</p>
+
+    <h2>Contact</h2>
+    <p>For any questions about these terms, email <a href="mailto:support@david-alves.com">support@david-alves.com</a>.</p>
+
+    <footer>
+      <a href="https://bridgebank.app">Bridge Bank</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="mailto:support@david-alves.com">Support</a>
+      <a href="https://github.com/DAdjadj/bridge-bank" target="_blank">GitHub</a>
+    </footer>
+  </div>
+</body>
+</html>
