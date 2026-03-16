@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Bridge Bank — Connecting...</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #080b12; color: #e8edf5; }
+    .wrap { text-align: center; }
+    .spinner { width: 32px; height: 32px; border: 2px solid #1e2a40; border-top-color: #3b82f6; border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 1rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    p { font-size: 14px; color: #94a3b8; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="spinner"></div>
+    <p>Completing bank connection...</p>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code  = params.get('code');
+    const state = params.get('state');
+    if (code && state) {
+      const parts = state.split('|');
+      const bridge_bank_url = parts.length > 1 ? parts[1] : 'http://localhost:3002';
+      window.location.href = bridge_bank_url + '/callback?' + window.location.search.slice(1);
+    } else {
+      document.querySelector('.spinner').style.display = 'none';
+      document.querySelector('p').textContent = 'Something went wrong. Please go back to Bridge Bank and try again.';
+    }
+  </script>
+</body>
+</html>
