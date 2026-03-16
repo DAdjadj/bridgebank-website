@@ -562,10 +562,17 @@
       </div>
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <div style="width:24px;height:24px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#3b82f6;flex-shrink:0;margin-top:1px;">3</div>
-        <div style="font-size:13px;color:var(--text2);line-height:1.6;">Open <code style="background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;font-size:11px;color:#3b82f6;">http://your-server:3002</code> in your browser and enter your license key to complete setup</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.6;width:100%;">
+  Open Bridge Bank on your server. Enter your server address below:<br><br>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <input type="text" id="server-url-input" placeholder="e.g. http://192.168.1.100" style="flex:1;background:#080b12;border:1px solid #253450;color:#e8edf5;font-family:JetBrains Mono,monospace;font-size:12px;padding:8px 12px;border-radius:6px;outline:none;" oninput="checkServerUrl()">
+    <span style="font-size:13px;color:#4a5568;white-space:nowrap;">:3002</span>
+  </div>
+  <button id="open-bb-btn" onclick="openBridgeBank()" disabled style="margin-top:10px;width:100%;background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border:none;padding:11px;font-family:Inter,sans-serif;font-weight:700;font-size:14px;border-radius:8px;cursor:pointer;opacity:0.4;transition:opacity 0.2s;">Open Bridge Bank &rarr;</button>
+</div>
       </div>
     </div>
-    <button class="btn-start" onclick="document.getElementById('success-overlay').classList.remove('visible')">Got it &rarr;</button>
+    
   </div>
 </div>
 
@@ -590,6 +597,20 @@
 
   if (new URLSearchParams(window.location.search).get('paid') === '1') {
     document.getElementById('success-overlay').classList.add('visible');
+  }
+
+  function checkServerUrl() {
+    const val = document.getElementById('server-url-input').value.trim();
+    const btn = document.getElementById('open-bb-btn');
+    const valid = val.length > 4;
+    btn.disabled = !valid;
+    btn.style.opacity = valid ? '1' : '0.4';
+    btn.style.cursor = valid ? 'pointer' : 'default';
+  }
+
+  function openBridgeBank() {
+    const val = document.getElementById('server-url-input').value.trim().replace(/\/+$/, '');
+    window.open(val + ':3002', '_blank');
   }
 
   function dismissAndStart() {
