@@ -174,11 +174,13 @@ docker compose up -d</div>
         <p>Enter your server address below to open the Bridge Bank web UI. The setup wizard will guide you through entering your license key, Actual Budget details, and connecting your bank.</p>
         <div class="done-card">
           <label>Your server address</label>
-          <div class="url-row">
-            <input type="text" id="server-url" placeholder="e.g. http://192.168.1.100:3002" oninput="checkUrl()">
-            <button id="open-btn" onclick="openBB()">Open Bridge Bank →</button>
+          <div style="display:flex; gap:4px; align-items:center; flex-wrap:wrap;">
+            <input type="text" id="url-protocol" value="http://" style="width:80px; flex-shrink:0; font-family:'JetBrains Mono',monospace; font-size:13px; background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:10px 10px; outline:none; color:var(--text);" oninput="checkUrl()">
+            <input type="text" id="url-host" value="localhost" placeholder="192.168.1.100" style="flex:1; min-width:120px; font-family:'JetBrains Mono',monospace; font-size:13px; background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:10px 10px; outline:none; color:var(--text);" oninput="checkUrl()">
+            <input type="text" id="url-port" value="3002" style="width:64px; flex-shrink:0; font-family:'JetBrains Mono',monospace; font-size:13px; background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:10px 10px; outline:none; color:var(--text);" oninput="checkUrl()">
+            <button id="open-btn" class="url-row button" onclick="openBB()" style="opacity:1;">Open Bridge Bank →</button>
           </div>
-          <div class="url-hint">The address you use to reach your server, including the port (default: 3002)</div>
+          <div class="url-hint">Enter your server's IP address or hostname. Change the port if you modified it in <code style="font-size:11px;color:var(--accent);background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;">docker-compose.yml</code>.</div>
         </div>
       </div>
     </div>
@@ -187,16 +189,22 @@ docker compose up -d</div>
 </div>
 
 <script>
+function getUrl() {
+  const protocol = document.getElementById('url-protocol').value.trim().replace(/\/+$/, '');
+  const host = document.getElementById('url-host').value.trim().replace(/\/+/g, '');
+  const port = document.getElementById('url-port').value.trim();
+  return protocol + '//' + host + ':' + port;
+}
 function checkUrl() {
-  const val = document.getElementById('server-url').value.trim();
+  const host = document.getElementById('url-host').value.trim();
   const btn = document.getElementById('open-btn');
-  const active = val.length > 6;
+  const active = host.length > 0;
   btn.classList.toggle('active', active);
   btn.disabled = !active;
 }
+document.addEventListener('DOMContentLoaded', function() { checkUrl(); });
 function openBB() {
-  const val = document.getElementById('server-url').value.trim().replace(/\/+$/, '');
-  window.open(val, '_blank');
+  window.open(getUrl(), '_blank');
 }
 </script>
 
