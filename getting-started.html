@@ -157,7 +157,7 @@
         <div class="code-block">mkdir -p ~/bridge-bank/data && cd ~/bridge-bank
 curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compose.yml
 docker compose up -d</div>
-        <p style="margin-top:16px;"><strong style="color:var(--text);">On your local machine</strong> — upload the <code>.pem</code> file to your server. Replace <code>your-app-id.pem</code> with the actual filename from your Downloads folder, and <code>user@your-server</code> with your SSH login:</p>
+        <p style="margin-top:16px;"><strong style="color:var(--text);">On your local machine</strong> — replace <code>your-app-id.pem</code> with your filename and <code>user@your-server</code> with your SSH login:</p>
         <div class="code-block">scp ~/Downloads/your-app-id.pem user@your-server:~/bridge-bank/data/your-app-id.pem</div>
       </div>
     </div>
@@ -178,7 +178,7 @@ docker compose up -d</div>
             <input type="text" id="url-protocol" value="http://" style="width:80px; flex-shrink:0; font-family:'JetBrains Mono',monospace; font-size:13px; background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:10px 10px; outline:none; color:var(--text);" oninput="checkUrl()">
             <input type="text" id="url-host" value="localhost" placeholder="192.168.1.100" style="flex:1; min-width:120px; font-family:'JetBrains Mono',monospace; font-size:13px; background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:10px 10px; outline:none; color:var(--text);" oninput="checkUrl()">
             <input type="text" id="url-port" value="3002" style="width:64px; flex-shrink:0; font-family:'JetBrains Mono',monospace; font-size:13px; background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:10px 10px; outline:none; color:var(--text);" oninput="checkUrl()">
-            <button id="open-btn" class="url-row button" onclick="openBB()" style="opacity:1;">Open Bridge Bank →</button>
+            <button id="open-btn" onclick="openBB()" style="background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border:none;padding:10px 20px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;border-radius:8px;cursor:pointer;white-space:nowrap;">Open Bridge Bank →</button>
           </div>
           <div class="url-hint">Enter your server's IP address or hostname. Change the port if you modified it in <code style="font-size:11px;color:var(--accent);background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;">docker-compose.yml</code>.</div>
         </div>
