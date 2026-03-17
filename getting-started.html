@@ -50,7 +50,7 @@
   .substep-text { font-size: 13px; color: var(--text2); line-height: 1.65; }
 
   code { background: var(--surface2); border: 1px solid var(--border); padding: 2px 7px; border-radius: 4px; font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--accent); }
-  .code-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--text2); line-height: 1.9; margin-top: 12px; white-space: pre; overflow-x: auto; }
+  .code-block { background: var(--surface2); border: 1px solid var(--border2); border-radius: 10px; padding: 16px 18px; font-size: 13px; font-family: 'JetBrains Mono', monospace; color: var(--text); font-weight: 500; line-height: 1.9; margin-top: 12px; white-space: pre; overflow-x: auto; }
   .code-comment { color: var(--muted); }
 
   .note { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--text2); line-height: 1.6; margin-top: 14px; }
@@ -152,13 +152,15 @@
     <div class="step-body">
       <div class="step-title">Install Bridge Bank on your server</div>
       <div class="step-desc">
-        <p>You'll need <a href="https://docs.docker.com/engine/install/" target="_blank" style="color:var(--accent);text-decoration:none;">Docker</a> installed on your server. Then run the following commands.</p>
-        <p style="margin-top:12px;"><strong style="color:var(--text);">On your server</strong> — create the folder and download the compose file:</p>
+        <p>You'll need <a href="https://docs.docker.com/engine/install/" target="_blank" style="color:var(--accent);text-decoration:none;">Docker</a> installed on your server.</p>
+        <p style="margin-top:12px;"><strong style="color:var(--text);font-size:15px;">On your server</strong> — create the folder and download the compose file:</p>
         <div class="code-block">mkdir -p ~/bridge-bank/data && cd ~/bridge-bank
-curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compose.yml
-docker compose up -d</div>
-        <p style="margin-top:16px;"><strong style="color:var(--text);">On your local machine</strong> — replace <code>your-app-id.pem</code> with your filename and <code>user@your-server</code> with your SSH login:</p>
+curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compose.yml</div>
+        <div class="note" style="margin-top:14px;"><strong>Port:</strong> Bridge Bank runs on port <code>3002</code> by default. If that port is already in use, open <code>docker-compose.yml</code> and change <code>3002:3000</code> to any free port number.</div>
+        <p style="margin-top:16px;"><strong style="color:var(--text);font-size:15px;">On your local machine</strong> — replace <code>your-app-id.pem</code> with your filename and <code>user@your-server</code> with your SSH login:</p>
         <div class="code-block">scp ~/Downloads/your-app-id.pem user@your-server:~/bridge-bank/data/your-app-id.pem</div>
+        <p style="margin-top:16px;"><strong style="color:var(--text);font-size:15px;">Back on your server</strong> — start the container:</p>
+        <div class="code-block">docker compose up -d</div>
       </div>
     </div>
   </div>
@@ -171,7 +173,7 @@ docker compose up -d</div>
     <div class="step-body">
       <div class="step-title">Open Bridge Bank and complete setup</div>
       <div class="step-desc">
-        <p>Enter your server address below to open the Bridge Bank web UI. The setup wizard will guide you through entering your license key, Actual Budget details, and connecting your bank.</p>
+        <p>Enter your server address below to open Bridge Bank. The setup wizard will guide you through the rest.</p>
         <div class="done-card">
           <label>Your server address</label>
           <div style="display:flex; gap:4px; align-items:center; flex-wrap:wrap;">
