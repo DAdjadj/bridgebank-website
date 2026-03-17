@@ -538,33 +538,14 @@
 </section>
 
 <div id="success-overlay">
-  <div class="success-card" style="max-width:520px;text-align:left;position:relative;"><button onclick="document.getElementById('success-overlay').classList.remove('visible')" style="position:absolute;top:16px;left:16px;width:32px;height:32px;background:#1e2a40;border:none;border-radius:50%;color:#94a3b8;cursor:pointer;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>
-    <div class="success-icon-big" style="margin:0 auto 18px;">&#x2713;</div>
-    <h2 style="text-align:center;margin-bottom:10px;">You're all set!</h2>
-    <p style="text-align:center;margin-bottom:28px;">Your license key has been sent to your email. Follow the steps below to get Bridge Bank running.</p>
-    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
-      <div style="display:flex;gap:14px;align-items:flex-start;">
-        <div style="width:24px;height:24px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#3b82f6;flex-shrink:0;margin-top:1px;">1</div>
-        <div style="font-size:13px;color:var(--text2);line-height:1.6;">When you registered your Enable Banking application, a <code style="background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;font-size:11px;color:#3b82f6;">.pem</code> file was automatically saved to your Downloads folder. Upload it to your server:<br><code style="background:var(--surface2);border:1px solid var(--border);padding:4px 8px;border-radius:4px;font-size:11px;color:#3b82f6;display:inline-block;margin-top:6px;">scp ~/Downloads/your-app-id.pem user@your-server:~/bridge-bank/data/private.pem</code></div>
-      </div>
-      <div style="display:flex;gap:14px;align-items:flex-start;">
-        <div style="width:24px;height:24px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#3b82f6;flex-shrink:0;margin-top:1px;">2</div>
-        <div style="font-size:13px;color:var(--text2);line-height:1.6;">Run:<br><code style="background:var(--surface2);border:1px solid var(--border);padding:4px 8px;border-radius:4px;font-size:11px;color:#3b82f6;display:inline-block;margin-top:4px;">curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compose.yml && docker compose up -d</code></div>
-      </div>
-      <div style="display:flex;gap:14px;align-items:flex-start;">
-        <div style="width:24px;height:24px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#3b82f6;flex-shrink:0;margin-top:1px;">3</div>
-        <div style="font-size:13px;color:var(--text2);line-height:1.6;width:100%;">
-  Open Bridge Bank on your server. Enter your server address below:<br><br>
-  <div style="display:flex;gap:8px;align-items:center;">
-    <input type="text" id="server-url-input" placeholder="e.g. http://192.168.1.100:3002" style="flex:1;background:#080b12;border:1px solid #253450;color:#e8edf5;font-family:JetBrains Mono,monospace;font-size:12px;padding:8px 12px;border-radius:6px;outline:none;" oninput="checkServerUrl()">
+  <div class="success-card" style="max-width:440px;text-align:center;position:relative;">
+    <button onclick="document.getElementById('success-overlay').classList.remove('visible')" style="position:absolute;top:16px;left:16px;width:32px;height:32px;background:#1e2a40;border:none;border-radius:50%;color:#94a3b8;cursor:pointer;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>
+    <div class="success-icon-big">&#x2713;</div>
+    <h2>Payment confirmed!</h2>
+    <p>Your license key has been sent to your email. Follow our step-by-step guide to get Bridge Bank up and running.</p>
+    <a href="/getting-started.html" class="btn-start" style="display:block;text-decoration:none;">Get started &rarr;</a>
   </div>
-  <button id="open-bb-btn" onclick="openBridgeBank()" disabled style="margin-top:10px;width:100%;background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border:none;padding:11px;font-family:Inter,sans-serif;font-weight:700;font-size:14px;border-radius:8px;cursor:pointer;opacity:0.4;transition:opacity 0.2s;">Open Bridge Bank &rarr;</button>
-</div>
-      </div>
-    </div>
-    
-  </div>
-</div>
+</div></div>
 
 <footer>
   <div class="left">&copy; 2025 Bridge Bank &middot; Built by <a href="https://github.com/DAdjadj" target="_blank">DAdjadj</a></div>

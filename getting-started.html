@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Getting Started — Bridge Bank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080b12;
+    --surface: #0f1420;
+    --surface2: #161d2e;
+    --border: #1e2a40;
+    --border2: #253450;
+    --accent: #3b82f6;
+    --accent2: #6366f1;
+    --green: #10b981;
+    --text: #e8edf5;
+    --text2: #94a3b8;
+    --muted: #4a5568;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+
+  header { position: relative; z-index: 10; padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); background: rgba(8,11,18,0.8); backdrop-filter: blur(12px); }
+  .logo { font-weight: 700; font-size: 17px; color: var(--text); display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-icon { width: 30px; height: 30px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+
+  .container { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 64px 48px 120px; }
+
+  .page-title { font-size: 36px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 8px; }
+  .page-sub { font-size: 16px; color: var(--text2); margin-bottom: 56px; line-height: 1.6; }
+
+  .step { display: flex; gap: 28px; margin-bottom: 48px; }
+  .step-left { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .step-num { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .step-line { width: 2px; flex: 1; background: var(--border); margin-top: 8px; min-height: 40px; }
+  .step:last-child .step-line { display: none; }
+  .step-body { padding-top: 8px; flex: 1; }
+  .step-title { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 10px; }
+  .step-desc { font-size: 14px; color: var(--text2); line-height: 1.75; margin-bottom: 0; }
+  .step-desc p { margin-bottom: 10px; }
+  .step-desc p:last-child { margin-bottom: 0; }
+
+  .substeps { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .substep { display: flex; gap: 12px; align-items: flex-start; }
+  .substep-num { width: 22px; height: 22px; background: var(--surface2); border: 1px solid var(--border2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+  .substep-text { font-size: 13px; color: var(--text2); line-height: 1.65; }
+
+  code { background: var(--surface2); border: 1px solid var(--border); padding: 2px 7px; border-radius: 4px; font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--accent); }
+  .code-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--text2); line-height: 1.9; margin-top: 12px; white-space: pre; overflow-x: auto; }
+  .code-comment { color: var(--muted); }
+
+  .note { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--text2); line-height: 1.6; margin-top: 14px; }
+  .note strong { color: var(--text); }
+
+  .done-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 14px; padding: 28px; margin-top: 16px; }
+  .done-card label { display: block; font-size: 12px; font-weight: 600; color: var(--text2); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .url-row { display: flex; gap: 10px; align-items: center; }
+  .url-row input { flex: 1; background: var(--bg); border: 1px solid var(--border2); color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 10px 14px; border-radius: 8px; outline: none; transition: border-color 0.2s; }
+  .url-row input:focus { border-color: var(--accent); }
+  .url-row button { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; padding: 10px 22px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s; white-space: nowrap; opacity: 0.4; }
+  .url-row button.active { opacity: 1; }
+  .url-hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  .success-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 500; color: #6ee7b7; margin-bottom: 24px; }
+
+  @media (max-width: 640px) {
+    header { padding: 16px 20px; }
+    .container { padding: 40px 20px 80px; }
+    .step { gap: 16px; }
+    .page-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">
+    <div class="logo-icon">⟷</div>
+    Bridge Bank
+  </a>
+</header>
+
+<div class="container">
+  <div class="success-badge">✓ Purchase confirmed</div>
+  <h1 class="page-title">Let's get you set up</h1>
+  <p class="page-sub">Your license key is on its way to your email. Follow these steps to have Bridge Bank running and syncing your bank transactions into Actual Budget.</p>
+
+  <div class="step">
+    <div class="step-left">
+      <div class="step-num">1</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-body">
+      <div class="step-title">Create a free Enable Banking account</div>
+      <div class="step-desc">
+        <p>Enable Banking is the regulated open banking provider that Bridge Bank uses to connect to your bank. You need a free account — no credit card required.</p>
+        <p>Go to <a href="https://enablebanking.com" target="_blank" style="color:var(--accent);text-decoration:none;">enablebanking.com</a> and sign up.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-left">
+      <div class="step-num">2</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-body">
+      <div class="step-title">Register a Bridge Bank application</div>
+      <div class="step-desc">
+        <p>Once logged in, go to <strong style="color:var(--text);">API applications</strong> and click <strong style="color:var(--text);">Register new application</strong>. Fill in the form as follows:</p>
+        <div class="substeps">
+          <div class="substep"><div class="substep-num">1</div><div class="substep-text"><strong style="color:var(--text);">Application name:</strong> Bridge Bank</div></div>
+          <div class="substep"><div class="substep-num">2</div><div class="substep-text"><strong style="color:var(--text);">Allowed redirect URLs:</strong> <code>https://bridgebank.app/callback</code></div></div>
+          <div class="substep"><div class="substep-num">3</div><div class="substep-text"><strong style="color:var(--text);">Application description:</strong> Connect Actual Budget with my bank</div></div>
+          <div class="substep"><div class="substep-num">4</div><div class="substep-text"><strong style="color:var(--text);">Email for data protection matters:</strong> your email address</div></div>
+          <div class="substep"><div class="substep-num">5</div><div class="substep-text"><strong style="color:var(--text);">Privacy URL:</strong> <code>https://bridgebank.app/privacy</code></div></div>
+          <div class="substep"><div class="substep-num">6</div><div class="substep-text"><strong style="color:var(--text);">Terms URL:</strong> <code>https://bridgebank.app/terms</code></div></div>
+          <div class="substep"><div class="substep-num">7</div><div class="substep-text">Click <strong style="color:var(--text);">Register</strong>. A <code>.pem</code> file will be automatically downloaded to your Downloads folder. The filename will match your Application ID (e.g. <code>aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.pem</code>). Keep this file safe — you'll need it in step 4.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-left">
+      <div class="step-num">3</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-body">
+      <div class="step-title">Activate by linking your bank account</div>
+      <div class="step-desc">
+        <p>After registering, click <strong style="color:var(--text);">Activate by linking accounts</strong> on your application page. This is required to activate your Enable Banking app.</p>
+        <div class="substeps">
+          <div class="substep"><div class="substep-num">1</div><div class="substep-text">Select your country and bank from the dropdowns</div></div>
+          <div class="substep"><div class="substep-num">2</div><div class="substep-text">Click <strong style="color:var(--text);">Link</strong></div></div>
+          <div class="substep"><div class="substep-num">3</div><div class="substep-text">Follow the steps to log in to your bank and approve read-only access</div></div>
+        </div>
+        <div class="note"><strong>Note:</strong> This is separate from the bank connection inside Bridge Bank. Both are required — this activates your Enable Banking app, while Bridge Bank handles the ongoing sync.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-left">
+      <div class="step-num">4</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-body">
+      <div class="step-title">Install Bridge Bank on your server</div>
+      <div class="step-desc">
+        <p>You'll need <a href="https://docs.docker.com/engine/install/" target="_blank" style="color:var(--accent);text-decoration:none;">Docker</a> installed on your server. Then run the following commands.</p>
+        <p style="margin-top:12px;"><strong style="color:var(--text);">On your server</strong> — create the folder and download the compose file:</p>
+        <div class="code-block">mkdir -p ~/bridge-bank/data && cd ~/bridge-bank
+curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compose.yml
+docker compose up -d</div>
+        <p style="margin-top:16px;"><strong style="color:var(--text);">On your local machine</strong> — upload the <code>.pem</code> file to your server. Replace <code>your-app-id.pem</code> with the actual filename from your Downloads folder, and <code>user@your-server</code> with your SSH login:</p>
+        <div class="code-block">scp ~/Downloads/your-app-id.pem user@your-server:~/bridge-bank/data/private.pem</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-left">
+      <div class="step-num">5</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-body">
+      <div class="step-title">Open Bridge Bank and complete setup</div>
+      <div class="step-desc">
+        <p>Enter your server address below to open the Bridge Bank web UI. The setup wizard will guide you through entering your license key, Actual Budget details, and connecting your bank.</p>
+        <div class="done-card">
+          <label>Your server address</label>
+          <div class="url-row">
+            <input type="text" id="server-url" placeholder="e.g. http://192.168.1.100:3002" oninput="checkUrl()">
+            <button id="open-btn" onclick="openBB()">Open Bridge Bank →</button>
+          </div>
+          <div class="url-hint">The address you use to reach your server, including the port (default: 3002)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function checkUrl() {
+  const val = document.getElementById('server-url').value.trim();
+  const btn = document.getElementById('open-btn');
+  const active = val.length > 6;
+  btn.classList.toggle('active', active);
+  btn.disabled = !active;
+}
+function openBB() {
+  const val = document.getElementById('server-url').value.trim().replace(/\/+$/, '');
+  window.open(val, '_blank');
+}
+</script>
+
+</body>
+</html>
