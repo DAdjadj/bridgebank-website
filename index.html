@@ -319,7 +319,7 @@
     _load(function(){
       var m=_banks.filter(function(b){return b.name.toLowerCase().includes(q);}).slice(0,8);
       st.textContent='';
-      if(!m.length){res.innerHTML='';st.innerHTML='<span style="color:var(--muted)">No match for <strong style="color:var(--text2)">'+q+'</strong>. Try a different spelling or check <a href="https://enablebanking.com" target="_blank" style="color:var(--accent);text-decoration:none;">Enable Banking</a>.</span>';return;}
+      if(!m.length){res.innerHTML='';st.innerHTML='<span style="color:var(--muted)">No match for <strong style="color:var(--text2)">'+q+'</strong>. Try a different spelling or check <a href="https://enablebanking.com/open-banking-apis" target="_blank" style="color:var(--accent);text-decoration:none;">Enable Banking</a>.</span>';return;}
       res.innerHTML=m.map(function(b){return'<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:6px;"><span style="font-size:13px;font-weight:500;color:var(--text);">'+b.name+'</span><span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:var(--accent);background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);padding:3px 8px;border-radius:20px;">'+b.country+'</span></div>';}).join('');
       if(m.length===8)st.innerHTML='<span style="color:var(--muted);font-size:12px;">Showing first 8 results \u2014 type more to narrow down.</span>';
     });
@@ -607,7 +607,7 @@
     <a href="/terms">Terms</a>
     <a href="mailto:support@david-alves.com">Support</a>
     <a href="https://github.com/DAdjadj/bridge-bank" target="_blank">GitHub</a>
-    <a href="https://enablebanking.com" target="_blank">Enable Banking</a>
+    <a href="https://enablebanking.com/open-banking-apis" target="_blank">Enable Banking</a>
     <a href="https://actualbudget.org" target="_blank">Actual Budget</a>
   </div>
 </footer>
