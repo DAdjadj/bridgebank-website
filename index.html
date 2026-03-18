@@ -374,7 +374,7 @@
 
   <div class="wizard-step" id="step-1">
     <div class="step-heading">Enable Banking</div>
-    <p class="step-hint">You need a free Enable Banking account with an application created. <a href="https://enablebanking.com/" target="_blank">Sign up here &rarr;</a><br>Your <code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)">private.pem</code> key file stays on your server &mdash; you won't enter it here.</p>
+    <p class="step-hint">You need a free Enable Banking account with an application created. <a href="https://enablebanking.com/" target="_blank">Sign up here &rarr;</a><br>Your <code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)">private.pem</code> key file will be uploaded directly in the Bridge Bank setup wizard — no terminal commands needed.</p>
     <div class="field">
       <label>Application ID</label>
       <input type="text" id="eb_app_id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
@@ -558,25 +558,18 @@
     <h3>What to do next</h3>
     <div class="next-step-item">
       <div class="next-step-num">1</div>
-      <div class="next-step-text">
-        Go to the <a href="https://enablebanking.com/" target="_blank" style="color:var(--accent);text-decoration:none;">Enable Banking developer dashboard</a> &rarr; Applications &rarr; your app. Download your <code>private.pem</code> key file, then upload it to your server:<br><br>
-        <code>scp ~/Downloads/private.pem youruser@yourserver:~/bridge-bank/data/private.pem</code>
-      </div>
+      <div class="next-step-text">Place the downloaded <code>docker-compose.yml</code> in <code>~/bridge-bank/</code> on your server</div>
     </div>
     <div class="next-step-item">
       <div class="next-step-num">2</div>
-      <div class="next-step-text">Place both downloaded files in <code>~/bridge-bank/</code> alongside the data folder</div>
+      <div class="next-step-text">Start the container: <code>docker compose up -d</code></div>
     </div>
     <div class="next-step-item">
       <div class="next-step-num">3</div>
-      <div class="next-step-text">Run the one-time bank authorisation:<br><code>docker run --rm -it -v "$(pwd)/data:/data" --env-file .env daalves/bridge-bank:latest python dosetup.py</code></div>
+      <div class="next-step-text">Open Bridge Bank in your browser and follow the setup wizard. You will upload your <code>.pem</code> file directly in the wizard — no terminal commands needed.</div>
     </div>
     <div class="next-step-item">
       <div class="next-step-num">4</div>
-      <div class="next-step-text">Start the sync: <code>docker compose up -d</code></div>
-    </div>
-    <div class="next-step-item">
-      <div class="next-step-num">5</div>
       <div class="next-step-text">Confirm it's running: <code>docker compose logs -f</code></div>
     </div>
   </div>
