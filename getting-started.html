@@ -153,14 +153,13 @@
       <div class="step-title">Install Bridge Bank on your server</div>
       <div class="step-desc">
         <p>You'll need <a href="https://docs.docker.com/engine/install/" target="_blank" style="color:var(--accent);text-decoration:none;">Docker</a> installed on your server.</p>
-        <p style="margin-top:12px;"><strong style="color:var(--text);font-size:15px;">On your server</strong> — create the folder and download the compose file:</p>
+        <p style="margin-top:12px;">Create the folder and download the compose file:</p>
         <div class="code-block">mkdir -p ~/bridge-bank/data && cd ~/bridge-bank
 curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compose.yml</div>
         <div class="note" style="margin-top:14px;"><strong>Port:</strong> Bridge Bank runs on port <code>3002</code> by default. If that port is already in use, open <code>docker-compose.yml</code> and change <code>3002:3000</code> to any free port number.</div>
-        <p style="margin-top:16px;"><strong style="color:var(--text);font-size:15px;">On your local machine</strong> — replace <code>your-app-id.pem</code> with your filename and <code>user@your-server</code> with your SSH login:</p>
-        <div class="code-block">scp ~/Downloads/your-app-id.pem user@your-server:~/bridge-bank/data/your-app-id.pem</div>
-        <p style="margin-top:16px;"><strong style="color:var(--text);font-size:15px;">Back on your server</strong> — start the container:</p>
+        <p style="margin-top:16px;">Start the container:</p>
         <div class="code-block">docker compose up -d</div>
+        <div class="note" style="margin-top:14px;">No need to copy your <code>.pem</code> file manually — you will upload it directly in the setup wizard in the next step.</div>
       </div>
     </div>
   </div>
