@@ -306,7 +306,7 @@
     fetch('https://api.bridgebank.app/banks')
       .then(function(r){return r.json();})
       .then(function(d){
-        _banks=(d.aspsps||[]).map(function(b){return{name:b.name,country:b.country};});
+        _banks=d.map(function(b){return{name:b.name,country:b.country};});
         _loading=false;cb();
       })
       .catch(function(){_loading=false;document.getElementById('bb-bank-status').textContent='Could not load bank list. Try again later.';});
