@@ -303,7 +303,7 @@
     if(_loading){setTimeout(function(){_load(cb);},100);return;}
     _loading=true;
     document.getElementById('bb-bank-status').textContent='Loading bank list\u2026';
-    fetch('https://api.enablebanking.com/aspsps')
+    fetch('https://bridgebank.app/banks')
       .then(function(r){return r.json();})
       .then(function(d){
         _banks=(d.aspsps||[]).map(function(b){return{name:b.name,country:b.country};});
