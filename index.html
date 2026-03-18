@@ -273,6 +273,59 @@
   </div>
 </section>
 
+
+<section class="bank-search-section" style="position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 48px 72px;">
+  <div class="section-label">Supported banks</div>
+  <div style="background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:36px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);"></div>
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="font-size:20px;font-weight:700;letter-spacing:-0.5px;margin-bottom:6px;">Is your bank supported?</div>
+      <div style="font-size:13px;color:var(--text2);">Search across 2,500+ European banks powered by Enable Banking.</div>
+    </div>
+    <div style="position:relative;max-width:480px;margin:0 auto 20px;">
+      <input type="text" id="bb-bank-search" placeholder="Search your bank... e.g. Revolut, N26, Santander" oninput="bbSearchBanks()"
+        style="width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;padding:13px 18px 13px 42px;border-radius:10px;outline:none;transition:border-color 0.2s;"
+        onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='0 0 0 3px rgba(59,130,246,0.1)'"
+        onblur="this.style.borderColor='var(--border2)';this.style.boxShadow='none'">
+      <svg style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </div>
+    <div id="bb-bank-results" style="max-width:480px;margin:0 auto;"></div>
+    <div id="bb-bank-status" style="text-align:center;font-size:13px;color:var(--text2);max-width:480px;margin:0 auto;min-height:24px;"></div>
+  </div>
+</section>
+<script>
+(function(){
+  var _banks=null,_loading=false;
+  function _load(cb){
+    if(_banks!==null){cb();return;}
+    if(_loading){setTimeout(function(){_load(cb);},100);return;}
+    _loading=true;
+    document.getElementById('bb-bank-status').textContent='Loading bank list\u2026';
+    fetch('https://api.enablebanking.com/aspsps')
+      .then(function(r){return r.json();})
+      .then(function(d){
+        _banks=(d.aspsps||[]).map(function(b){return{name:b.name,country:b.country};});
+        _loading=false;cb();
+      })
+      .catch(function(){_loading=false;document.getElementById('bb-bank-status').textContent='Could not load bank list. Try again later.';});
+  }
+  window.bbSearchBanks=function(){
+    var q=document.getElementById('bb-bank-search').value.trim().toLowerCase();
+    var res=document.getElementById('bb-bank-results');
+    var st=document.getElementById('bb-bank-status');
+    if(!q){res.innerHTML='';st.textContent='';return;}
+    _load(function(){
+      var m=_banks.filter(function(b){return b.name.toLowerCase().includes(q);}).slice(0,8);
+      st.textContent='';
+      if(!m.length){res.innerHTML='';st.innerHTML='<span style="color:var(--muted)">No match for <strong style="color:var(--text2)">'+q+'</strong>. Try a different spelling or check <a href="https://enablebanking.com" target="_blank" style="color:var(--accent);text-decoration:none;">Enable Banking</a>.</span>';return;}
+      res.innerHTML=m.map(function(b){return'<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:6px;"><span style="font-size:13px;font-weight:500;color:var(--text);">'+b.name+'</span><span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:var(--accent);background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);padding:3px 8px;border-radius:20px;">'+b.country+'</span></div>';}).join('');
+      if(m.length===8)st.innerHTML='<span style="color:var(--muted);font-size:12px;">Showing first 8 results \u2014 type more to narrow down.</span>';
+    });
+  };
+})();
+</script>
 <section class="price-section">
   <div class="section-label">Pricing</div>
   <div class="price-card">
