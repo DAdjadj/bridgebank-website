@@ -50,6 +50,8 @@
   .substep-text { font-size: 13px; color: var(--text2); line-height: 1.65; }
 
   code { background: var(--surface2); border: 1px solid var(--border); padding: 2px 7px; border-radius: 4px; font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--accent); }
+  .copy-btn { padding: 2px 8px; font-size: 11px; font-weight: 600; font-family: 'Inter', sans-serif; background: var(--surface2); border: 1px solid var(--border2); border-radius: 4px; cursor: pointer; color: var(--text2); transition: border-color 0.15s, color 0.15s; vertical-align: middle; }
+  .copy-btn:hover { border-color: var(--accent); color: var(--text); }
   .code-block { background: var(--surface2); border: 1px solid var(--border2); border-radius: 10px; padding: 16px 18px; font-size: 13px; font-family: 'JetBrains Mono', monospace; color: var(--text); font-weight: 500; line-height: 1.9; margin-top: 12px; white-space: pre; overflow-x: auto; }
   .code-comment { color: var(--muted); }
 
@@ -114,11 +116,11 @@
         <p>Once logged in, go to <strong style="color:var(--text);">API applications</strong> and click <strong style="color:var(--text);">Register new application</strong>. Fill in the form as follows:</p>
         <div class="substeps">
           <div class="substep"><div class="substep-num">1</div><div class="substep-text"><strong style="color:var(--text);">Application name:</strong> Bridge Bank</div></div>
-          <div class="substep"><div class="substep-num">2</div><div class="substep-text"><strong style="color:var(--text);">Allowed redirect URLs:</strong> <code>https://bridgebank.app/callback</code></div></div>
+          <div class="substep"><div class="substep-num">2</div><div class="substep-text"><strong style="color:var(--text);">Allowed redirect URLs:</strong> <code>https://bridgebank.app/callback</code> <button class="copy-btn" onclick="copyText('https://bridgebank.app/callback', this)">Copy</button></div></div>
           <div class="substep"><div class="substep-num">3</div><div class="substep-text"><strong style="color:var(--text);">Application description:</strong> Connect Actual Budget with my bank</div></div>
           <div class="substep"><div class="substep-num">4</div><div class="substep-text"><strong style="color:var(--text);">Email for data protection matters:</strong> your email address</div></div>
-          <div class="substep"><div class="substep-num">5</div><div class="substep-text"><strong style="color:var(--text);">Privacy URL:</strong> <code>https://bridgebank.app/privacy</code></div></div>
-          <div class="substep"><div class="substep-num">6</div><div class="substep-text"><strong style="color:var(--text);">Terms URL:</strong> <code>https://bridgebank.app/terms</code></div></div>
+          <div class="substep"><div class="substep-num">5</div><div class="substep-text"><strong style="color:var(--text);">Privacy URL:</strong> <code>https://bridgebank.app/privacy</code> <button class="copy-btn" onclick="copyText('https://bridgebank.app/privacy', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">6</div><div class="substep-text"><strong style="color:var(--text);">Terms URL:</strong> <code>https://bridgebank.app/terms</code> <button class="copy-btn" onclick="copyText('https://bridgebank.app/terms', this)">Copy</button></div></div>
           <div class="substep"><div class="substep-num">7</div><div class="substep-text">Click <strong style="color:var(--text);">Register</strong>. A <code>.pem</code> file will be automatically downloaded to your Downloads folder. The filename will match your Application ID (e.g. <code>aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.pem</code>). Keep this file safe — you'll need it in step 4.</div></div>
         </div>
       </div>
@@ -190,6 +192,12 @@ curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compos
 </div>
 
 <script>
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied';
+    setTimeout(function() { btn.textContent = 'Copy'; }, 1500);
+  });
+}
 function getUrl() {
   const protocol = document.getElementById('url-protocol').value.trim().replace(/\/+$/, '');
   const host = document.getElementById('url-host').value.trim().replace(/\/+/g, '');
