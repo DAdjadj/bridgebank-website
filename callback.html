@@ -23,7 +23,14 @@
     if (code && state) {
       const parts = state.split('|');
       const bridge_bank_url = parts.length > 1 ? parts[1] : 'http://localhost:3002';
-      window.location.href = bridge_bank_url + '/callback?' + window.location.search.slice(1);
+      const callbackUrl = bridge_bank_url + '/callback?' + window.location.search.slice(1);
+      // Try JS redirect first
+      window.location.href = callbackUrl;
+      // If blocked (Safari HTTPS-Only), show a clickable link after 2 seconds
+      setTimeout(function() {
+        document.querySelector('.spinner').style.display = 'none';
+        document.querySelector('p').innerHTML = 'Click below to complete the connection:<br><br><a href="' + callbackUrl + '" style="background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Complete connection →</a><br><br><span style="font-size:12px;color:#4a5568;">If your browser blocks this, paste this URL in a new tab:</span><br><code style="font-size:11px;color:#6366f1;word-break:break-all;">' + callbackUrl + '</code>';
+      }, 2000);
     } else {
       document.querySelector('.spinner').style.display = 'none';
       document.querySelector('p').textContent = 'Something went wrong. Please go back to Bridge Bank and try again.';
