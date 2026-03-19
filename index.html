@@ -249,6 +249,14 @@
       style="text-decoration:none;display:inline-block;font-size:18px;padding:20px 48px;"
     >Get a license key &mdash; &euro;29</a>
     <a href="#" onclick="document.getElementById('success-overlay').classList.add('visible');return false;" style="font-size:13px;color:#94a3b8;text-decoration:none;">Already purchased? Get started &rarr;</a>
+    <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);">
+      <div style="font-size:14px;color:var(--text2);margin-bottom:12px;">Or try free for 7 days — no credit card needed</div>
+      <div style="display:flex;gap:8px;max-width:420px;margin:0 auto;">
+        <input type="email" id="trial-email" placeholder="you@example.com" style="flex:1;padding:12px 16px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;">
+        <button onclick="startTrial()" id="trial-btn" style="padding:12px 24px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;">Start free trial</button>
+      </div>
+      <div id="trial-msg" style="font-size:13px;margin-top:8px;min-height:20px;"></div>
+    </div>
   </div>
 </section>
 
@@ -783,6 +791,38 @@ document.getElementById('wl-email').addEventListener('keydown', function(e) { if
     a.download = filename; a.click();
     URL.revokeObjectURL(a.href);
   }
+
+async function startTrial() {
+  var email = document.getElementById('trial-email').value.trim();
+  var msg = document.getElementById('trial-msg');
+  var btn = document.getElementById('trial-btn');
+  msg.style.color = '#94a3b8';
+  if (!email || email.indexOf('@') === -1) { msg.textContent = 'Please enter a valid email.'; msg.style.color = '#ef4444'; return; }
+  btn.textContent = 'Starting...';
+  btn.disabled = true;
+  try {
+    var res = await fetch('https://api.bridgebank.app/trial', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: email})
+    });
+    var data = await res.json();
+    if (res.ok) {
+      msg.innerHTML = '✓ Check your email — your trial licence key has been sent!';
+      msg.style.color = '#10b981';
+    } else {
+      msg.textContent = data.error || 'Something went wrong. Try again.';
+      msg.style.color = '#ef4444';
+      btn.textContent = 'Start free trial';
+      btn.disabled = false;
+    }
+  } catch(e) {
+    msg.textContent = 'Something went wrong. Try again.';
+    msg.style.color = '#ef4444';
+    btn.textContent = 'Start free trial';
+    btn.disabled = false;
+  }
+}
 </script>
 </body>
 </html>
