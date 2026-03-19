@@ -158,9 +158,33 @@
         <p style="margin-top:12px;">Create the folder and download the compose file:</p>
         <div class="code-block">mkdir -p ~/bridge-bank/data && cd ~/bridge-bank
 curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compose.yml</div>
-        <div class="note" style="margin-top:14px;"><strong>Port:</strong> Bridge Bank runs on port <code>3002</code> by default. If that port is already in use, open <code>docker-compose.yml</code> and change <code>3002:3000</code> to any free port number.</div>
+        <div style="margin-top:14px;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">Port</div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">Bridge Bank runs on port <code>3002</code> by default. Change it below if that port is already in use.</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="text" id="port-input" value="3002" style="width:80px;font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:8px 10px;outline:none;color:var(--text);text-align:center;" oninput="updatePort()">
+            <span id="port-status" style="font-size:11px;color:var(--text2);"></span>
+          </div>
+        </div>
         <p style="margin-top:16px;">Start the container:</p>
-        <div class="code-block">docker compose up -d</div>
+        <div class="code-block" id="start-cmd">docker compose up -d</div>
+        <script>
+        function updatePort() {
+          var port = document.getElementById('port-input').value.trim();
+          var status = document.getElementById('port-status');
+          var cmd = document.getElementById('start-cmd');
+          if (port && port !== '3002') {
+            cmd.textContent = "sed -i 's/3002:3000/" + port + ":3000/' docker-compose.yml && docker compose up -d";
+            status.textContent = 'Port ' + port + ' — the command below will update your compose file automatically.';
+          } else {
+            cmd.textContent = 'docker compose up -d';
+            status.textContent = '';
+          }
+          // Also update step 5 port field if it exists
+          var urlPort = document.getElementById('url-port');
+          if (urlPort) urlPort.value = port || '3002';
+        }
+        </script>
       </div>
     </div>
   </div>
