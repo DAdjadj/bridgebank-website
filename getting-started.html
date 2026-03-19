@@ -197,7 +197,7 @@ curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compos
     <div class="step-body">
       <div class="step-title">Open Bridge Bank and complete setup</div>
       <div class="step-desc">
-        <p>Enter your server address below to open Bridge Bank. The setup wizard will guide you through the rest. You can connect up to 2 bank accounts — each one syncs to a different Actual Budget account.</p>
+        <p>Enter your server address below to open Bridge Bank. The setup wizard will guide you through the rest.</p>
         <div class="done-card">
           <label>Your server address</label>
           <div style="display:flex; gap:4px; align-items:center; flex-wrap:wrap;">
@@ -209,6 +209,15 @@ curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compos
           <div class="url-hint">Enter your server's IP address or hostname. Change the port if you modified it in <code style="font-size:11px;color:var(--accent);background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;">docker-compose.yml</code>.</div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div style="margin-top:48px;background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:28px;">
+    <div style="font-size:18px;font-weight:700;letter-spacing:-0.3px;margin-bottom:8px;">Multiple bank accounts</div>
+    <div style="font-size:14px;color:var(--text2);line-height:1.7;">
+      <p>Bridge Bank supports connecting <strong style="color:var(--text);">up to 2 bank accounts</strong> by default. Each bank syncs to a different Actual Budget account (e.g. Revolut → "Revolut", N26 → "N26").</p>
+      <p style="margin-top:10px;">To add a second bank, go to the <strong style="color:var(--text);">Bank</strong> tab in the setup wizard after connecting your first bank.</p>
+      <p style="margin-top:10px;">Need more than 2? You can purchase additional bank account slots for <strong style="color:var(--text);">€10 each</strong> from the Status page inside the app.</p>
     </div>
   </div>
 
