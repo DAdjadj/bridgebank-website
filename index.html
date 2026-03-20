@@ -388,8 +388,99 @@
     padding: 4px 8px; border-radius: 4px; background: none; border: none;
     font-family: 'Inter', sans-serif; white-space: nowrap;
   }
-  .mock-nav-item:hover { color: var(--text2); }
+  .mock-nav-item:hover { color: var(--text2); background: rgba(59,130,246,0.06); }
   .mock-nav-item.active { color: var(--text); }
+
+  /* Clickable elements inside mockup */
+  .preview-frame .mock-btn-primary,
+  .preview-frame .mock-btn,
+  .preview-frame .mock-btn-disabled,
+  .preview-frame .mock-nav-item { cursor: pointer; }
+  .preview-frame .mock-btn-primary:hover { filter: brightness(1.1); }
+
+  /* Floating hint label */
+  .mockup-hint-label {
+    text-align: center; margin-top: 12px;
+    font-size: 12px; color: var(--text2);
+    animation: hint-pulse 2.5s ease-in-out infinite;
+    transition: opacity 0.5s;
+  }
+  .mockup-hint-label.hidden { opacity: 0; pointer-events: none; }
+  @keyframes hint-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* Social proof row */
+  .social-proof-row {
+    display: flex; flex-wrap: wrap; gap: 20px; margin-top: 14px;
+    font-size: 11px; color: var(--muted);
+  }
+  .social-proof-row span {
+    display: inline-flex; align-items: center; gap: 5px;
+    white-space: nowrap;
+  }
+  .social-proof-row a {
+    color: var(--muted); text-decoration: none; transition: color 0.2s;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .social-proof-row a:hover { color: var(--text2); }
+
+  /* Data flow diagram */
+  .data-flow-section { padding-top: 80px; padding-bottom: 80px; }
+  .data-flow {
+    display: flex; align-items: flex-start; justify-content: center;
+    gap: 0; flex-wrap: wrap;
+    max-width: 700px; margin: 0 auto;
+  }
+  .data-flow-node {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 6px; min-width: 100px;
+  }
+  .data-flow-node-label {
+    font-size: 14px; font-weight: 600; color: var(--text);
+    text-align: center; letter-spacing: -0.2px;
+  }
+  .data-flow-node-sub {
+    font-size: 10px; color: var(--muted); text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .data-flow-arrow {
+    display: flex; align-items: center; padding-top: 4px;
+    color: var(--border2); font-size: 20px; margin: 0 8px;
+  }
+  @media (max-width: 640px) {
+    .data-flow { gap: 8px; }
+    .data-flow-node { min-width: 70px; }
+    .data-flow-node-label { font-size: 12px; }
+    .data-flow-arrow { font-size: 16px; margin: 0 4px; }
+  }
+
+  /* Getting started card */
+  .getting-started-card {
+    max-width: 600px; margin: 40px auto 0;
+    padding: 24px 32px;
+    background: rgba(16,185,129,0.04);
+    border: 1px solid rgba(16,185,129,0.15);
+    border-radius: 12px;
+    text-align: center;
+  }
+  .getting-started-card h4 {
+    font-size: 16px; font-weight: 700; color: var(--text);
+    margin-bottom: 6px; letter-spacing: -0.3px;
+  }
+  .getting-started-card p {
+    font-size: 13px; color: var(--text2); line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .getting-started-card a {
+    font-size: 14px; font-weight: 700; color: var(--green);
+    text-decoration: none; transition: color 0.2s;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .getting-started-card a:hover { color: #6ee7b7; }
+  .getting-started-card a span { transition: transform 0.2s; display: inline-block; }
+  .getting-started-card a:hover span { transform: translateX(3px); }
 
   .mock-field-row { margin-bottom: 8px; }
   .mock-field-label {
@@ -926,16 +1017,10 @@
       <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03" class="btn-primary">
         Get Bridge Bank &mdash; &euro;29
       </a>
-      <a href="#" onclick="document.getElementById('trial-email').focus();document.getElementById('trial-email').scrollIntoView({behavior:'smooth',block:'center'});return false;" class="btn-ghost">
-        Start free trial
-      </a>
-    </div>
-    <div style="margin-top:-12px;margin-bottom:16px;" class="fade-up fade-up-delay-3">
-      <a href="/getting-started.html" class="setup-guide-link" style="font-size:13px;color:var(--text2);text-decoration:none;transition:color 0.2s;display:inline-flex;align-items:center;gap:4px;">Already bought? Follow the setup guide <span style="transition:transform 0.2s;display:inline-block;">&rarr;</span></a>
     </div>
 
     <div class="trial-block fade-up fade-up-delay-4">
-      <div class="trial-label">7-day free trial &mdash; no credit card needed</div>
+      <div class="trial-label">Free 7-day trial &mdash; no credit card</div>
       <div class="trial-row">
         <input type="email" id="trial-email" placeholder="you@example.com">
         <button onclick="startTrial()" id="trial-btn">Start trial</button>
@@ -947,6 +1032,13 @@
       <span><span class="check">&#10003;</span> Read-only bank access</span>
       <span><span class="check">&#10003;</span> Your data stays on your machine</span>
       <span><span class="check">&#10003;</span> 2,500+ EU banks</span>
+    </div>
+
+    <div class="social-proof-row fade-up fade-up-delay-4">
+      <a href="https://github.com/DAdjadj/bridge-bank" target="_blank"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Open source</a>
+      <span>2,500+ banks</span>
+      <span>29 countries &nbsp;&#127465;&#127466; &#127467;&#127479; &#127466;&#127480; &#127477;&#127481; &#127475;&#127473; &#127470;&#127481;</span>
+      <span>Read-only access</span>
     </div>
   </div>
 
@@ -975,7 +1067,7 @@
             <div class="mock-field-value" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.3px;">a1b2c3d4-****-****-****-************</div>
           </div>
           <div class="mock-field-hint">Don't have one? Purchase at bridgebank.app or start a free trial.</div>
-          <div class="mock-btn-primary">Continue &rarr;</div>
+          <div class="mock-btn-primary" onclick="switchMockup('actual')">Continue &rarr;</div>
         </div>
         <div class="mock-nav">
           <button class="mock-nav-item active" onclick="switchMockup('license')">License</button>
@@ -1021,7 +1113,7 @@
             <div class="mock-field-value" style="font-size:10px;">Revolut</div>
           </div>
           <div class="mock-field-hint">Must match exactly the account name in Actual Budget.</div>
-          <div class="mock-btn-primary">Continue &rarr;</div>
+          <div class="mock-btn-primary" onclick="switchMockup('notifications')">Continue &rarr;</div>
         </div>
         <div class="mock-nav">
           <button class="mock-nav-item" onclick="switchMockup('license')">License</button>
@@ -1069,7 +1161,7 @@
             <div class="mock-btn" style="font-size:9px;padding:4px 10px;">Send test email</div>
             <span class="mock-check-inline">&#10003; Sent</span>
           </div>
-          <div class="mock-btn-primary">Continue &rarr;</div>
+          <div class="mock-btn-primary" onclick="switchMockup('bank')">Continue &rarr;</div>
         </div>
         <div class="mock-nav">
           <button class="mock-nav-item" onclick="switchMockup('license')">License</button>
@@ -1130,7 +1222,7 @@
           </div>
           <div class="mock-hint">2,500+ banks across 29 European countries.</div>
 
-          <div class="mock-btn-disabled">Add bank &#8594;</div>
+          <div class="mock-btn-primary" onclick="switchMockup('status')" style="cursor:pointer;">Save &amp; continue &#8594;</div>
         </div>
         <div class="mock-nav">
           <button class="mock-nav-item" onclick="switchMockup('license')">License</button>
@@ -1161,7 +1253,7 @@
               <div class="mock-card-title">Status</div>
               <div class="mock-card-sub">All systems nominal. Keep on budgeting.</div>
             </div>
-            <div class="mock-btn">Sync now</div>
+            <div class="mock-btn" id="sync-now-btn" onclick="mockSyncNow()" style="cursor:pointer;">Sync now</div>
           </div>
           <div class="mock-stat">
             <span class="mock-stat-label">Last sync</span>
@@ -1181,6 +1273,9 @@
           </div>
         </div>
 
+        <div style="text-align:center;margin-bottom:8px;">
+          <span class="mock-btn" onclick="switchMockup('bank')" style="cursor:pointer;font-size:9px;padding:4px 10px;">&larr; Manage banks</span>
+        </div>
         <div class="mock-card" style="padding:12px 16px;">
           <div style="font-size:12px;font-weight:700;margin-bottom:8px;letter-spacing:-0.2px;">Sync log</div>
           <table class="mock-table">
@@ -1206,6 +1301,7 @@
       </div>
 
     </div>
+    <div class="mockup-hint-label" id="mockup-hint">Click to explore the app &#8595;</div>
   </div>
 </div>
 
@@ -1258,6 +1354,37 @@
   };
 })();
 </script>
+
+<!-- ====== DATA FLOW ====== -->
+<div class="section-divider"></div>
+<section class="section data-flow-section fade-up">
+  <div style="text-align:center;margin-bottom:32px;">
+    <div class="section-label">Architecture</div>
+    <div class="section-heading">How your data flows</div>
+    <p class="section-desc-center">Your bank data passes through regulated, read-only channels and never leaves your server.</p>
+  </div>
+  <div class="data-flow">
+    <div class="data-flow-node">
+      <div class="data-flow-node-label">&#127974; Your Bank</div>
+      <div class="data-flow-node-sub">Read-only access</div>
+    </div>
+    <div class="data-flow-arrow">&rarr;</div>
+    <div class="data-flow-node">
+      <div class="data-flow-node-label">Enable Banking</div>
+      <div class="data-flow-node-sub">Regulated API</div>
+    </div>
+    <div class="data-flow-arrow">&rarr;</div>
+    <div class="data-flow-node">
+      <div class="data-flow-node-label">Bridge Bank</div>
+      <div class="data-flow-node-sub">Your server</div>
+    </div>
+    <div class="data-flow-arrow">&rarr;</div>
+    <div class="data-flow-node">
+      <div class="data-flow-node-label">Actual Budget</div>
+      <div class="data-flow-node-sub">Your budget</div>
+    </div>
+  </div>
+</section>
 
 <!-- ====== WHAT IT LOOKS LIKE ====== -->
 <div class="section-divider"></div>
@@ -1366,13 +1493,15 @@
   <div class="price-layout fade-up fade-up-delay-1">
     <div class="price-left">
       <div class="price-label">One-time payment</div>
+      <div style="display:inline-block;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:#6ee7b7;font-size:11px;font-weight:600;padding:3px 10px;border-radius:12px;margin-bottom:14px;">7-day free trial included</div>
       <div class="price-amount"><sup>&euro;</sup>29</div>
       <div class="price-type">No subscription. No recurring fees. Use on up to 2 machines.</div>
       <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03" class="price-buy">Get your license key</a>
-      <div class="price-trial-link">or <a href="#" onclick="document.getElementById('trial-email').focus();document.getElementById('trial-email').scrollIntoView({behavior:'smooth',block:'center'});return false;">start a 7-day free trial</a></div>
+      <div style="font-size:11px;color:var(--muted);margin-top:10px;text-align:center;">or <a href="#" onclick="document.getElementById('trial-email').focus();document.getElementById('trial-email').scrollIntoView({behavior:'smooth',block:'center'});return false;" style="color:var(--accent);text-decoration:none;">try free for 7 days</a> &mdash; cancel anytime</div>
     </div>
     <div class="price-right">
       <ul class="price-features">
+        <li>7-day free trial &mdash; no credit card needed</li>
         <li>Licence key delivered instantly by email</li>
         <li>All EU banks via Enable Banking</li>
         <li>Works with self-hosted &amp; PikaPods Actual Budget</li>
@@ -1384,8 +1513,10 @@
       </ul>
     </div>
   </div>
-  <div class="price-already fade-up fade-up-delay-2">
-    <a href="/getting-started.html">Already purchased? Follow the setup guide &rarr;</a>
+  <div class="getting-started-card fade-up fade-up-delay-2">
+    <h4>Already a customer?</h4>
+    <p>Follow our step-by-step setup guide to get running in 15 minutes.</p>
+    <a href="/getting-started.html">Go to setup guide <span>&rarr;</span></a>
   </div>
 </section>
 
@@ -1483,6 +1614,10 @@
 
   // ====== Mockup screen switching ======
   function switchMockup(id) {
+    // Hide the hint label on first interaction
+    var hint = document.getElementById('mockup-hint');
+    if (hint) hint.classList.add('hidden');
+
     document.querySelectorAll('.preview-pane').forEach(function(p) { p.classList.remove('active'); });
     document.querySelectorAll('.mock-nav-item').forEach(function(n) { n.classList.remove('active'); });
     document.getElementById('preview-' + id).classList.add('active');
@@ -1493,6 +1628,22 @@
     navItems.forEach(function(n) {
       if (n.textContent.trim() === labels[id]) n.classList.add('active');
     });
+  }
+
+  // ====== Sync now button feedback ======
+  function mockSyncNow() {
+    var btn = document.getElementById('sync-now-btn');
+    if (btn.dataset.syncing) return;
+    btn.dataset.syncing = '1';
+    btn.textContent = 'Syncing\u2026';
+    btn.style.color = 'var(--accent)';
+    btn.style.borderColor = 'var(--accent)';
+    setTimeout(function() {
+      btn.textContent = 'Sync now';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+      delete btn.dataset.syncing;
+    }, 1000);
   }
 
   // ====== Stripe success listener ======
