@@ -585,6 +585,13 @@
       Bridge Bank connects to your bank via open banking, pulls your transactions, and pushes them into Actual Budget automatically. Runs on your own server. One-time payment, no subscription.
     </p>
 
+    <div style="display:flex;flex-wrap:wrap;gap:16px 24px;margin-bottom:32px;font-size:12px;color:var(--text2);">
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="color:var(--green);font-size:14px;">&#x1f512;</span> <strong style="color:var(--text);font-weight:500;">Read-only access</strong> &mdash; Bridge Bank can never move money</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="color:var(--green);font-size:14px;">&#10003;</span> <strong style="color:var(--text);font-weight:500;">Regulated provider</strong> &mdash; via Enable Banking, a licensed open banking provider</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="color:var(--green);font-size:14px;">&#10003;</span> <strong style="color:var(--text);font-weight:500;">Open source</strong> &mdash; full source code on GitHub</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="color:var(--green);font-size:14px;">&#10003;</span> <strong style="color:var(--text);font-weight:500;">Self-hosted</strong> &mdash; your data never leaves your machine</span>
+    </div>
+
     <div class="intro-actions">
       <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03" class="btn-primary">
         Get a license key &mdash; &euro;29
@@ -594,10 +601,10 @@
       </a>
     </div>
 
-    <div class="trial-label">Or try free for 7 days &mdash; no credit card needed</div>
+    <div class="trial-label" style="font-size:14px;font-weight:600;color:var(--text2);">Or try free for 7 days &mdash; no credit card needed</div>
     <div class="trial-row">
       <input type="email" id="trial-email" placeholder="you@example.com">
-      <button onclick="startTrial()" id="trial-btn">Start trial</button>
+      <button onclick="startTrial()" id="trial-btn" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;font-weight:700;">Start trial</button>
     </div>
     <div id="trial-msg"></div>
   </div>
@@ -739,49 +746,8 @@
   </div>
 </div>
 
-<!-- ====== HOW IT WORKS ====== -->
-<section class="content-section how-section" id="how">
-  <div class="section-label">How it works</div>
-  <div class="how-grid">
-    <div class="how-aside">
-      <h2>Up and running in minutes</h2>
-      <p>Everything runs through a browser-based wizard. No config files to edit, no terminal commands beyond <code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);">docker compose up</code>.</p>
-    </div>
-    <div class="steps-list">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <div>
-          <div class="step-title">Get a licence key</div>
-          <div class="step-desc">One-time &euro;29 payment. Your key arrives by email instantly. Or start a free 7-day trial.</div>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <div>
-          <div class="step-title">Run the Docker container</div>
-          <div class="step-desc">One <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);">docker compose up -d</code> command. That's it for the terminal.</div>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">3</div>
-        <div>
-          <div class="step-title">Walk through the setup wizard</div>
-          <div class="step-desc">Enter your key, Actual Budget details, upload your Enable Banking key, and configure notifications &mdash; all in the browser.</div>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">4</div>
-        <div>
-          <div class="step-title">Connect your bank</div>
-          <div class="step-desc">Search for your bank, approve read-only access, and Bridge Bank syncs transactions on your schedule.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ====== SUPPORTED BANKS ====== -->
-<section class="content-section bank-section" id="banks">
+<section class="content-section bank-section" id="banks" style="padding-top:80px;">
   <div class="section-label">Supported banks</div>
   <div class="bank-card">
     <div class="bank-card-info">
@@ -835,6 +801,47 @@
 })();
 </script>
 
+<!-- ====== HOW IT WORKS ====== -->
+<section class="content-section how-section" id="how">
+  <div class="section-label">How it works</div>
+  <div class="how-grid">
+    <div class="how-aside">
+      <h2>Up and running in minutes</h2>
+      <p>A few minutes of setup, then it runs on its own. No config files, no cron jobs, no scripts.</p>
+    </div>
+    <div class="steps-list">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Create a free Enable Banking account</div>
+          <div class="step-desc">Register at enablebanking.com and create an application. This is the regulated open banking provider that gives Bridge Bank read-only access to your bank. Free, takes 5 minutes.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Install Bridge Bank</div>
+          <div class="step-desc">Download the <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);">docker-compose.yml</code> file and run <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);">docker compose up -d</code> on your server. Works on any machine with Docker &mdash; Linux, Mac, Raspberry Pi, NAS.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Follow the setup wizard</div>
+          <div class="step-desc">Open Bridge Bank in your browser. The setup wizard walks you through entering your licence key, connecting to Actual Budget, uploading your Enable Banking key, and configuring notifications.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Connect your bank</div>
+          <div class="step-desc">Search for your bank, approve read-only access, and choose a sync schedule. Bridge Bank handles everything from here &mdash; transactions sync automatically.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ====== PRICING ====== -->
 <section class="content-section price-section" id="pricing">
   <div class="section-label">Pricing</div>
@@ -873,246 +880,6 @@
   </div>
 </section>
 
-<!-- ====== WIZARD ====== -->
-<section id="wizard">
-  <div class="wizard-header">
-    <h2>Configure your setup</h2>
-    <p>// your data never leaves your browser</p>
-  </div>
-
-  <div class="progress-bar">
-    <div class="progress-step active" id="p0"></div>
-    <div class="progress-step" id="p1"></div>
-    <div class="progress-step" id="p2"></div>
-    <div class="progress-step" id="p3"></div>
-    <div class="progress-step" id="p4"></div>
-  </div>
-
-  <div class="wizard-step active" id="step-0">
-    <div class="step-heading">Licence key</div>
-    <p class="step-hint">Enter the licence key from your purchase confirmation email. No key yet? <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03">Buy one here &rarr;</a></p>
-    <div class="field">
-      <label>Licence key</label>
-      <input type="text" id="licence_key" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
-      <div class="field-note">From your purchase confirmation email.</div>
-      <div class="error-msg" id="err_licence_key">This field is required</div>
-    </div>
-    <div class="wizard-nav">
-      <span class="step-counter">step 1 / 5</span>
-      <button class="btn-next" onclick="nextStep(0)">Next &rarr;</button>
-    </div>
-  </div>
-
-  <div class="wizard-step" id="step-1">
-    <div class="step-heading">Enable Banking</div>
-    <p class="step-hint">You need a free Enable Banking account with an application created. <a href="https://enablebanking.com/" target="_blank">Sign up here &rarr;</a><br>Your <code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)">private.pem</code> key file will be uploaded directly in the Bridge Bank setup wizard &mdash; no terminal commands needed.</p>
-    <div class="field">
-      <label>Application ID</label>
-      <input type="text" id="eb_app_id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
-      <div class="error-msg" id="err_eb_app_id">This field is required</div>
-    </div>
-    <div class="field-row">
-      <div class="field">
-        <label>Bank name</label>
-        <input type="text" id="eb_bank_name" placeholder="e.g. Revolut">
-        <div class="field-note">Exact name from Enable Banking</div>
-        <div class="error-msg" id="err_eb_bank_name">This field is required</div>
-      </div>
-      <div class="field">
-        <label>Bank country</label>
-        <select id="eb_bank_country">
-          <option value="AT">Austria (AT)</option>
-          <option value="BE">Belgium (BE)</option>
-          <option value="HR">Croatia (HR)</option>
-          <option value="CY">Cyprus (CY)</option>
-          <option value="CZ">Czech Republic (CZ)</option>
-          <option value="DK">Denmark (DK)</option>
-          <option value="EE">Estonia (EE)</option>
-          <option value="FI">Finland (FI)</option>
-          <option value="FR">France (FR)</option>
-          <option value="DE">Germany (DE)</option>
-          <option value="GR">Greece (GR)</option>
-          <option value="HU">Hungary (HU)</option>
-          <option value="IE">Ireland (IE)</option>
-          <option value="IT">Italy (IT)</option>
-          <option value="LV">Latvia (LV)</option>
-          <option value="LT">Lithuania (LT)</option>
-          <option value="LU">Luxembourg (LU)</option>
-          <option value="MT">Malta (MT)</option>
-          <option value="NL">Netherlands (NL)</option>
-          <option value="NO">Norway (NO)</option>
-          <option value="PL">Poland (PL)</option>
-          <option value="PT" selected>Portugal (PT)</option>
-          <option value="RO">Romania (RO)</option>
-          <option value="SK">Slovakia (SK)</option>
-          <option value="SI">Slovenia (SI)</option>
-          <option value="ES">Spain (ES)</option>
-          <option value="SE">Sweden (SE)</option>
-          <option value="GB">United Kingdom (GB)</option>
-        </select>
-      </div>
-    </div>
-    <div class="field">
-      <label>Account type</label>
-      <select id="eb_psu_type">
-        <option value="personal">Personal</option>
-        <option value="business">Business</option>
-      </select>
-    </div>
-    <div class="wizard-nav">
-      <button class="btn-back" onclick="prevStep(1)">&larr; Back</button>
-      <span class="step-counter">step 2 / 5</span>
-      <button class="btn-next" onclick="nextStep(1)">Next &rarr;</button>
-    </div>
-  </div>
-
-  <div class="wizard-step" id="step-2">
-    <div class="step-heading">Actual Budget</div>
-    <p class="step-hint">Enter the details of your self-hosted Actual Budget instance. Find the Sync ID under <strong>Settings &rarr; Show advanced settings</strong> inside Actual Budget.</p>
-    <div class="field">
-      <label>Actual Budget URL</label>
-      <input type="text" id="actual_url" placeholder="http://192.168.1.100:5006">
-      <div class="field-note">Local IP, hostname, or your PikaPods URL</div>
-      <div class="error-msg" id="err_actual_url">This field is required</div>
-    </div>
-    <div class="field">
-      <label>Password</label>
-      <input type="password" id="actual_password" placeholder="your Actual Budget password">
-      <div class="error-msg" id="err_actual_password">This field is required</div>
-    </div>
-    <div class="field">
-      <label>Sync ID</label>
-      <input type="text" id="actual_sync_id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
-      <div class="field-note">Actual Budget &rarr; Settings &rarr; Show advanced settings &rarr; Sync ID</div>
-      <div class="error-msg" id="err_actual_sync_id">This field is required</div>
-    </div>
-    <div class="field">
-      <label>Account name in Actual Budget</label>
-      <input type="text" id="actual_account" placeholder="Revolut">
-      <div class="field-note">Must match exactly the account name in Actual Budget</div>
-      <div class="error-msg" id="err_actual_account">This field is required</div>
-    </div>
-    <div class="wizard-nav">
-      <button class="btn-back" onclick="prevStep(2)">&larr; Back</button>
-      <span class="step-counter">step 3 / 5</span>
-      <button class="btn-next" onclick="nextStep(2)">Next &rarr;</button>
-    </div>
-  </div>
-
-  <div class="wizard-step" id="step-3">
-    <div class="step-heading">Sync settings</div>
-    <p class="step-hint">Configure how often your transactions sync. Email alerts are optional &mdash; useful for when your Enable Banking session needs renewal every ~180 days.</p>
-    <div class="field">
-      <label>Sync interval</label>
-      <select id="sync_hours">
-        <option value="1">Every 1 hour</option>
-        <option value="3">Every 3 hours</option>
-        <option value="6" selected>Every 6 hours</option>
-        <option value="12">Every 12 hours</option>
-        <option value="24">Every 24 hours</option>
-      </select>
-    </div>
-    <div class="field">
-      <label>Your name on bank transfers <span class="optional-tag">optional</span></label>
-      <input type="text" id="holder_name" placeholder="e.g. John Doe,JOHN DOE">
-      <div class="field-note">As it appears in bank statements. Helps identify payees on incoming transfers. Comma-separate multiple variations.</div>
-    </div>
-    <div class="wizard-divider">Email alerts</div>
-    <div class="field">
-      <label>Notify email <span class="optional-tag">optional</span></label>
-      <input type="email" id="notify_email" placeholder="you@example.com">
-    </div>
-    <div class="field-row">
-      <div class="field">
-        <label>SMTP host <span class="optional-tag">optional</span></label>
-        <input type="text" id="smtp_host" placeholder="smtp.gmail.com">
-      </div>
-      <div class="field">
-        <label>SMTP port <span class="optional-tag">optional</span></label>
-        <input type="text" id="smtp_port" value="587">
-      </div>
-    </div>
-    <div class="field-row">
-      <div class="field">
-        <label>SMTP user <span class="optional-tag">optional</span></label>
-        <input type="text" id="smtp_user" placeholder="you@gmail.com">
-      </div>
-      <div class="field">
-        <label>SMTP password <span class="optional-tag">optional</span></label>
-        <input type="password" id="smtp_pass" placeholder="app-specific password">
-      </div>
-    </div>
-    <div class="wizard-nav">
-      <button class="btn-back" onclick="prevStep(3)">&larr; Back</button>
-      <span class="step-counter">step 4 / 5</span>
-      <button class="btn-next" onclick="nextStep(3)">Next &rarr;</button>
-    </div>
-  </div>
-
-  <div class="wizard-step" id="step-4">
-    <div class="step-heading">Review &amp; generate</div>
-    <p class="step-hint">Double-check everything below. Go back to change anything, then click Generate to download your files.</p>
-    <div id="review-box"></div>
-    <div class="wizard-nav">
-      <button class="btn-back" onclick="prevStep(4)">&larr; Back</button>
-      <span class="step-counter">step 5 / 5</span>
-      <button class="btn-next" onclick="generateFiles()" style="background:linear-gradient(135deg,#10b981,#059669);">Generate files &darr;</button>
-    </div>
-  </div>
-</section>
-
-<!-- ====== OUTPUT ====== -->
-<section id="output">
-  <div class="output-header">
-    <div class="success-icon">&#x2713;</div>
-    <h2>Your files are ready</h2>
-    <p>Download both files and place them in the same folder on your server.</p>
-  </div>
-
-  <div class="file-block">
-    <div class="file-header">
-      <div class="file-name"><div class="dot"></div>.env</div>
-      <button class="btn-download" onclick="downloadEnv()">&darr; Download .env</button>
-    </div>
-    <div class="file-preview" id="env-preview"></div>
-  </div>
-
-  <div class="file-block">
-    <div class="file-header">
-      <div class="file-name"><div class="dot" style="background:var(--accent2)"></div>docker-compose.yml</div>
-      <button class="btn-download" onclick="downloadCompose()">&darr; Download docker-compose.yml</button>
-    </div>
-    <div class="file-preview" id="compose-preview"></div>
-  </div>
-
-  <div class="next-steps">
-    <h3>What to do next</h3>
-    <div class="next-step-item">
-      <div class="next-step-num">1</div>
-      <div class="next-step-text">Place the downloaded <code>docker-compose.yml</code> in <code>~/bridge-bank/</code> on your server</div>
-    </div>
-    <div class="next-step-item">
-      <div class="next-step-num">2</div>
-      <div class="next-step-text">Start the container: <code>docker compose up -d</code></div>
-    </div>
-    <div class="next-step-item">
-      <div class="next-step-num">3</div>
-      <div class="next-step-text">Open Bridge Bank in your browser and follow the setup wizard. You will upload your <code>.pem</code> file directly in the wizard &mdash; no terminal commands needed.</div>
-    </div>
-    <div class="next-step-item">
-      <div class="next-step-num">4</div>
-      <div class="next-step-text">Confirm it's running: <code>docker compose logs -f</code></div>
-    </div>
-  </div>
-
-  <div style="margin-top:16px;background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.3);border-radius:12px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start;">
-    <div style="font-size:22px;line-height:1;flex-shrink:0;margin-top:1px;">&#9888;&#65039;</div>
-    <div>
-      <div style="font-size:14px;font-weight:700;color:#fbbf24;margin-bottom:8px;">Bank sessions expire every ~180 days</div>
-      <div style="font-size:13px;color:var(--text2);line-height:1.7;">Enable Banking requires you to re-authorise access roughly every 6 months. Re-run the bank authorisation command from step 3 above, then restart with <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;">docker compose restart</code>. If you configured email alerts, you'll get a notification before expiry.</div>
-    </div>
-  </div>
-</section>
 
 <!-- ====== SUCCESS OVERLAY ====== -->
 <div id="success-overlay">
@@ -1224,132 +991,8 @@
     }
   }
 
-  // Wizard
-  function checkServerUrl() {
-    const val = document.getElementById('server-url-input').value.trim();
-    const btn = document.getElementById('open-bb-btn');
-    const valid = val.length > 4;
-    btn.disabled = !valid;
-    btn.style.opacity = valid ? '1' : '0.4';
-    btn.style.cursor = valid ? 'pointer' : 'default';
-  }
-
-  function openBridgeBank() {
-    const val = document.getElementById('server-url-input').value.trim().replace(/\/+$/, '');
-    window.open(val, '_blank');
-  }
-
-  function dismissAndStart() {
-    document.getElementById('success-overlay').classList.remove('visible');
-    startWizard();
-  }
-
-  const totalSteps = 5;
-
   function restoreHome() {
-    var introCol = document.getElementById('intro-col');
-    var previewCol = document.getElementById('preview-col');
-    var pageGrid = document.querySelector('.page-grid');
-    if (introCol) introCol.style.display = '';
-    if (previewCol) previewCol.style.display = '';
-    if (pageGrid) pageGrid.style.display = '';
-    document.querySelectorAll('.content-section').forEach(function(s) { s.style.display = ''; });
-    document.getElementById('wizard').classList.remove('visible');
-    document.getElementById('output').classList.remove('visible');
-  }
-
-  function startWizard() {
-    var introCol = document.getElementById('intro-col');
-    var previewCol = document.getElementById('preview-col');
-    var pageGrid = document.querySelector('.page-grid');
-    if (introCol) introCol.style.display = 'none';
-    if (previewCol) previewCol.style.display = 'none';
-    if (pageGrid) pageGrid.style.display = 'none';
-    document.querySelectorAll('.content-section').forEach(function(s) { s.style.display = 'none'; });
-    var w = document.getElementById('wizard');
-    w.classList.add('visible');
-    w.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  function updateProgress(step) {
-    for (let i = 0; i < totalSteps; i++)
-      document.getElementById('p' + i).classList.toggle('active', i <= step);
-  }
-
-  function showStep(step) {
-    document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
-    document.getElementById('step-' + step).classList.add('active');
-    updateProgress(step);
-    if (step === 4) buildReview();
-  }
-
-  function validate(step) {
-    const required = {
-      0: ['licence_key'],
-      1: ['eb_app_id','eb_bank_name'],
-      2: ['actual_url','actual_password','actual_sync_id','actual_account'],
-      3: [],
-      4: []
-    };
-    let ok = true;
-    (required[step] || []).forEach(id => {
-      const el = document.getElementById(id);
-      const err = document.getElementById('err_' + id);
-      if (!el.value.trim()) { el.classList.add('error'); if (err) err.classList.add('visible'); ok = false; }
-      else { el.classList.remove('error'); if (err) err.classList.remove('visible'); }
-    });
-    return ok;
-  }
-
-  function nextStep(step) { if (validate(step) && step < totalSteps - 1) showStep(step + 1); }
-  function prevStep(step) { if (step > 0) showStep(step - 1); }
-  function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
-
-  function buildReview() {
-    const lk = val('licence_key');
-    const masked = lk ? lk.substring(0, 8) + '...' : 'not set';
-    document.getElementById('review-box').innerHTML = `
-      <div style="display:grid;grid-template-columns:160px 1fr;gap:6px 16px;">
-        <span style="color:var(--muted)">Licence key</span><span>${masked}</span>
-        <div style="grid-column:1/-1;border-top:1px solid var(--border);margin:6px 0;"></div>
-        <span style="color:var(--muted)">EB App ID</span><span>${val('eb_app_id')||'not set'}</span>
-        <span style="color:var(--muted)">Bank</span><span>${val('eb_bank_name')||'not set'} (${val('eb_bank_country')})</span>
-        <span style="color:var(--muted)">Account type</span><span>${val('eb_psu_type')}</span>
-        <div style="grid-column:1/-1;border-top:1px solid var(--border);margin:6px 0;"></div>
-        <span style="color:var(--muted)">Actual URL</span><span>${val('actual_url')||'not set'}</span>
-        <span style="color:var(--muted)">Sync ID</span><span>${val('actual_sync_id')?val('actual_sync_id').substring(0,8)+'...':'not set'}</span>
-        <span style="color:var(--muted)">Account</span><span>${val('actual_account')||'not set'}</span>
-        <div style="grid-column:1/-1;border-top:1px solid var(--border);margin:6px 0;"></div>
-        <span style="color:var(--muted)">Sync every</span><span>${val('sync_hours')} hours</span>
-        <span style="color:var(--muted)">Email alerts</span><span>${val('notify_email')||'disabled'}</span>
-      </div>`;
-  }
-
-  function getEnvContent() {
-    return `# Bridge Bank -- generated by bridgebank.app\n# --- Licence ---\nLICENCE_KEY=${val('licence_key')}\n\n# --- Actual Budget ---\nACTUAL_URL=${val('actual_url')}\nACTUAL_PASSWORD=${val('actual_password')}\nACTUAL_SYNC_ID=${val('actual_sync_id')}\nACTUAL_ACCOUNT=${val('actual_account')}\n\n# --- Enable Banking ---\nEB_APPLICATION_ID=${val('eb_app_id')}\nEB_BANK_NAME=${val('eb_bank_name')}\nEB_BANK_COUNTRY=${val('eb_bank_country')}\nEB_PSU_TYPE=${val('eb_psu_type')}\n\n# --- Sync settings ---\nSYNC_INTERVAL_HOURS=${val('sync_hours')}\nACCOUNT_HOLDER_NAME=${val('holder_name')}\n\n# --- Email notifications (optional) ---\nNOTIFY_EMAIL=${val('notify_email')}\nSMTP_HOST=${val('smtp_host')}\nSMTP_PORT=${val('smtp_port')||'587'}\nSMTP_USER=${val('smtp_user')}\nSMTP_PASS=${val('smtp_pass')}\n`;
-  }
-
-  function getComposeContent() {
-    return `# Bridge Bank -- generated by bridgebank.app\nservices:\n  bridge-bank:\n    image: daalves/bridge-bank:latest\n    container_name: bridge-bank\n    restart: unless-stopped\n    env_file:\n      - .env\n    volumes:\n      - ./data:/data\n    # Uncomment if Actual Budget is on a named Docker network:\n    # networks:\n    #   - your_actual_network\n\n# networks:\n#   your_actual_network:\n#     external: true\n`;
-  }
-
-  function generateFiles() {
-    document.getElementById('wizard').classList.remove('visible');
-    document.getElementById('env-preview').textContent = getEnvContent();
-    document.getElementById('compose-preview').textContent = getComposeContent();
-    const output = document.getElementById('output');
-    output.classList.add('visible');
-    output.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  function downloadEnv() { download('.env', getEnvContent()); }
-  function downloadCompose() { download('docker-compose.yml', getComposeContent()); }
-
-  function download(filename, content) {
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([content], { type: 'text/plain' }));
-    a.download = filename; a.click();
-    URL.revokeObjectURL(a.href);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
 </body>
