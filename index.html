@@ -379,12 +379,35 @@
   .mock-table tr:last-child td { border-bottom: none; }
 
   .mock-nav {
-    display: flex; gap: 12px; justify-content: center; margin-top: 14px;
+    display: flex; gap: 0; justify-content: center; margin-top: 14px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
   }
-  .mock-nav span {
-    font-size: 10px; color: var(--muted); transition: color 0.2s; cursor: default;
+  .mock-nav-item {
+    font-size: 10px; color: var(--muted); transition: color 0.2s; cursor: pointer;
+    padding: 4px 8px; border-radius: 4px; background: none; border: none;
+    font-family: 'Inter', sans-serif; white-space: nowrap;
   }
-  .mock-nav span.active { color: var(--text); }
+  .mock-nav-item:hover { color: var(--text2); }
+  .mock-nav-item.active { color: var(--text); }
+
+  .mock-field-row { margin-bottom: 8px; }
+  .mock-field-label {
+    font-size: 9px; font-weight: 600; color: var(--text2);
+    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 3px;
+  }
+  .mock-field-value {
+    width: 100%; background: var(--bg); border: 1px solid var(--border2);
+    border-radius: 6px; padding: 6px 10px; font-size: 11px;
+    color: var(--text); font-family: 'Inter', sans-serif;
+  }
+  .mock-field-hint {
+    font-size: 8px; color: var(--muted); margin-top: 2px; line-height: 1.3;
+  }
+  .mock-check-inline {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; color: var(--green); font-weight: 600;
+  }
 
   .mock-connected-pill {
     background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25);
@@ -660,6 +683,9 @@
     font-size: 10px;
   }
 
+  .setup-guide-link:hover { color: var(--text) !important; }
+  .setup-guide-link:hover span { transform: translateX(3px); }
+
   .price-already {
     text-align: center; margin-top: 20px;
   }
@@ -874,6 +900,7 @@
     <a href="#how" class="nav-hide-mobile">How it works</a>
     <a href="#pricing">Pricing</a>
     <a href="/help">Help</a>
+    <a href="/getting-started.html">Get started</a>
     <a href="https://github.com/DAdjadj/bridge-bank" target="_blank">GitHub</a>
     <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03" class="nav-cta">Get license</a>
   </div>
@@ -903,6 +930,9 @@
         Start free trial
       </a>
     </div>
+    <div style="margin-top:-12px;margin-bottom:16px;" class="fade-up fade-up-delay-3">
+      <a href="/getting-started.html" class="setup-guide-link" style="font-size:13px;color:var(--text2);text-decoration:none;transition:color 0.2s;display:inline-flex;align-items:center;gap:4px;">Already bought? Follow the setup guide <span style="transition:transform 0.2s;display:inline-block;">&rarr;</span></a>
+    </div>
 
     <div class="trial-block fade-up fade-up-delay-4">
       <div class="trial-label">7-day free trial &mdash; no credit card needed</div>
@@ -922,78 +952,136 @@
 
   <!-- RIGHT: App preview -->
   <div class="hero-right">
-    <div class="preview-tabs fade-up">
-      <button class="preview-tab active" onclick="switchPreview('status', this)">Status</button>
-      <button class="preview-tab" onclick="switchPreview('connect', this)">Bank connection</button>
-    </div>
     <div class="preview-frame fade-up fade-up-delay-1">
 
-      <!-- STATUS PAGE MOCKUP -->
-      <div class="preview-pane active" id="preview-status">
+      <!-- 1. LICENSE SCREEN -->
+      <div class="preview-pane active" id="preview-license">
         <div class="mock-logo">
           <div class="mock-logo-mark">&#x27F7;</div>
           <div class="mock-logo-text">Bridge Bank</div>
         </div>
         <div class="mock-steps">
-          <div class="mock-step done"></div>
-          <div class="mock-step done"></div>
-          <div class="mock-step done"></div>
-          <div class="mock-step done"></div>
-          <div class="mock-step done"></div>
+          <div class="mock-step active"></div>
+          <div class="mock-step empty"></div>
+          <div class="mock-step empty"></div>
+          <div class="mock-step empty"></div>
+          <div class="mock-step empty"></div>
         </div>
-
         <div class="mock-card">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
-            <div>
-              <div class="mock-card-title">Status</div>
-              <div class="mock-card-sub">All systems nominal. Keep on budgeting.</div>
-            </div>
-            <div class="mock-btn">Sync now</div>
+          <div class="mock-card-title">Welcome to Bridge Bank</div>
+          <div class="mock-card-sub">Step 1 of 5 &mdash; enter your license key to get started</div>
+          <div class="mock-field-row">
+            <div class="mock-field-label">License key</div>
+            <div class="mock-field-value" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.3px;">a1b2c3d4-****-****-****-************</div>
           </div>
-          <div class="mock-stat">
-            <span class="mock-stat-label">Last sync</span>
-            <span class="mock-stat-value">Today, 08:15</span>
-          </div>
-          <div class="mock-stat">
-            <span class="mock-stat-label">Notifications</span>
-            <span class="mock-stat-value">you@email.com</span>
-          </div>
-          <div class="mock-stat">
-            <span class="mock-stat-label">Transactions synced</span>
-            <span class="mock-stat-value">1,247</span>
-          </div>
-          <div class="mock-stat">
-            <span class="mock-stat-label">Sync streak</span>
-            <span class="mock-stat-value">42 in a row</span>
-          </div>
+          <div class="mock-field-hint">Don't have one? Purchase at bridgebank.app or start a free trial.</div>
+          <div class="mock-btn-primary">Continue &rarr;</div>
         </div>
-
-        <div class="mock-card" style="padding:12px 16px;">
-          <div style="font-size:12px;font-weight:700;margin-bottom:8px;letter-spacing:-0.2px;">Sync log</div>
-          <table class="mock-table">
-            <thead>
-              <tr><th>Time</th><th>Status</th><th>Tx</th><th>Note</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>08:15</td><td><span class="mock-badge mock-badge-ok">success</span></td><td>3</td><td>&#8212;</td></tr>
-              <tr><td>02:15</td><td><span class="mock-badge mock-badge-ok">success</span></td><td>0</td><td>&#8212;</td></tr>
-              <tr><td>Yesterday</td><td><span class="mock-badge mock-badge-ok">success</span></td><td>5</td><td>&#8212;</td></tr>
-              <tr><td>Mar 17</td><td><span class="mock-badge mock-badge-fail">error</span></td><td>0</td><td>Timeout</td></tr>
-            </tbody>
-          </table>
-        </div>
-
         <div class="mock-nav">
-          <span>License</span>
-          <span>Actual Budget</span>
-          <span>Notifications</span>
-          <span>Bank</span>
-          <span class="active">Status</span>
+          <button class="mock-nav-item active" onclick="switchMockup('license')">License</button>
+          <button class="mock-nav-item" onclick="switchMockup('actual')">Actual Budget</button>
+          <button class="mock-nav-item" onclick="switchMockup('notifications')">Notifications</button>
+          <button class="mock-nav-item" onclick="switchMockup('bank')">Bank</button>
+          <button class="mock-nav-item" onclick="switchMockup('status')">Status</button>
         </div>
       </div>
 
-      <!-- BANK CONNECTION PAGE MOCKUP -->
-      <div class="preview-pane" id="preview-connect">
+      <!-- 2. ACTUAL BUDGET SCREEN -->
+      <div class="preview-pane" id="preview-actual">
+        <div class="mock-logo">
+          <div class="mock-logo-mark">&#x27F7;</div>
+          <div class="mock-logo-text">Bridge Bank</div>
+        </div>
+        <div class="mock-steps">
+          <div class="mock-step done"></div>
+          <div class="mock-step active"></div>
+          <div class="mock-step empty"></div>
+          <div class="mock-step empty"></div>
+          <div class="mock-step empty"></div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-card-title">Actual Budget</div>
+          <div class="mock-card-sub">Step 2 of 5 &mdash; your self-hosted Actual Budget instance</div>
+          <div class="mock-field-row">
+            <div class="mock-field-label">Actual Budget URL</div>
+            <div class="mock-field-value" style="font-size:10px;">http://192.168.1.50:5006</div>
+          </div>
+          <div class="mock-field-hint">The address your server uses to reach Actual Budget.</div>
+          <div class="mock-field-row" style="margin-top:8px;">
+            <div class="mock-field-label">Password</div>
+            <div class="mock-field-value" style="font-size:10px;letter-spacing:2px;">&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;</div>
+          </div>
+          <div class="mock-field-row" style="margin-top:8px;">
+            <div class="mock-field-label">Sync ID</div>
+            <div class="mock-field-value" style="font-family:'JetBrains Mono',monospace;font-size:10px;">e7f3a1b2-****-****-****-************</div>
+          </div>
+          <div class="mock-field-hint">Settings &rarr; Show advanced settings &rarr; Sync ID inside Actual Budget.</div>
+          <div class="mock-field-row" style="margin-top:8px;">
+            <div class="mock-field-label">Account name</div>
+            <div class="mock-field-value" style="font-size:10px;">Revolut</div>
+          </div>
+          <div class="mock-field-hint">Must match exactly the account name in Actual Budget.</div>
+          <div class="mock-btn-primary">Continue &rarr;</div>
+        </div>
+        <div class="mock-nav">
+          <button class="mock-nav-item" onclick="switchMockup('license')">License</button>
+          <button class="mock-nav-item active" onclick="switchMockup('actual')">Actual Budget</button>
+          <button class="mock-nav-item" onclick="switchMockup('notifications')">Notifications</button>
+          <button class="mock-nav-item" onclick="switchMockup('bank')">Bank</button>
+          <button class="mock-nav-item" onclick="switchMockup('status')">Status</button>
+        </div>
+      </div>
+
+      <!-- 3. NOTIFICATIONS SCREEN -->
+      <div class="preview-pane" id="preview-notifications">
+        <div class="mock-logo">
+          <div class="mock-logo-mark">&#x27F7;</div>
+          <div class="mock-logo-text">Bridge Bank</div>
+        </div>
+        <div class="mock-steps">
+          <div class="mock-step done"></div>
+          <div class="mock-step done"></div>
+          <div class="mock-step active"></div>
+          <div class="mock-step empty"></div>
+          <div class="mock-step empty"></div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-card-title">Notifications</div>
+          <div class="mock-card-sub">Step 3 of 5 &mdash; how should Bridge Bank notify you?</div>
+          <div class="mock-field-row">
+            <div class="mock-field-label">Send notifications to</div>
+            <div class="mock-field-value" style="font-size:10px;">you@gmail.com</div>
+          </div>
+          <div class="mock-field-row" style="margin-top:8px;">
+            <div class="mock-field-label">When to notify</div>
+            <div class="mock-field-value" style="font-size:10px;">All syncs</div>
+          </div>
+          <div class="mock-field-row" style="margin-top:8px;">
+            <div class="mock-field-label">Email address to send from</div>
+            <div class="mock-field-value" style="font-size:10px;">you@icloud.com</div>
+          </div>
+          <div class="mock-field-row" style="margin-top:8px;">
+            <div class="mock-field-label">App-specific password</div>
+            <div class="mock-field-value" style="font-size:10px;letter-spacing:2px;">&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;</div>
+          </div>
+          <div class="mock-field-hint">For iCloud: use an app-specific password from appleid.apple.com.</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:10px;">
+            <div class="mock-btn" style="font-size:9px;padding:4px 10px;">Send test email</div>
+            <span class="mock-check-inline">&#10003; Sent</span>
+          </div>
+          <div class="mock-btn-primary">Continue &rarr;</div>
+        </div>
+        <div class="mock-nav">
+          <button class="mock-nav-item" onclick="switchMockup('license')">License</button>
+          <button class="mock-nav-item" onclick="switchMockup('actual')">Actual Budget</button>
+          <button class="mock-nav-item active" onclick="switchMockup('notifications')">Notifications</button>
+          <button class="mock-nav-item" onclick="switchMockup('bank')">Bank</button>
+          <button class="mock-nav-item" onclick="switchMockup('status')">Status</button>
+        </div>
+      </div>
+
+      <!-- 4. BANK CONNECTION SCREEN -->
+      <div class="preview-pane" id="preview-bank">
         <div class="mock-logo">
           <div class="mock-logo-mark">&#x27F7;</div>
           <div class="mock-logo-text">Bridge Bank</div>
@@ -1002,10 +1090,9 @@
           <div class="mock-step done"></div>
           <div class="mock-step done"></div>
           <div class="mock-step done"></div>
-          <div class="mock-step done"></div>
+          <div class="mock-step active"></div>
           <div class="mock-step empty"></div>
         </div>
-
         <div class="mock-card">
           <div class="mock-card-title">Connect your bank</div>
           <div class="mock-card-sub">Step 4 of 5 &mdash; search for your bank and authorise read-only access.</div>
@@ -1045,13 +1132,76 @@
 
           <div class="mock-btn-disabled">Add bank &#8594;</div>
         </div>
+        <div class="mock-nav">
+          <button class="mock-nav-item" onclick="switchMockup('license')">License</button>
+          <button class="mock-nav-item" onclick="switchMockup('actual')">Actual Budget</button>
+          <button class="mock-nav-item" onclick="switchMockup('notifications')">Notifications</button>
+          <button class="mock-nav-item active" onclick="switchMockup('bank')">Bank</button>
+          <button class="mock-nav-item" onclick="switchMockup('status')">Status</button>
+        </div>
+      </div>
+
+      <!-- 5. STATUS SCREEN -->
+      <div class="preview-pane" id="preview-status">
+        <div class="mock-logo">
+          <div class="mock-logo-mark">&#x27F7;</div>
+          <div class="mock-logo-text">Bridge Bank</div>
+        </div>
+        <div class="mock-steps">
+          <div class="mock-step done"></div>
+          <div class="mock-step done"></div>
+          <div class="mock-step done"></div>
+          <div class="mock-step done"></div>
+          <div class="mock-step done"></div>
+        </div>
+
+        <div class="mock-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div>
+              <div class="mock-card-title">Status</div>
+              <div class="mock-card-sub">All systems nominal. Keep on budgeting.</div>
+            </div>
+            <div class="mock-btn">Sync now</div>
+          </div>
+          <div class="mock-stat">
+            <span class="mock-stat-label">Last sync</span>
+            <span class="mock-stat-value">Today, 08:15</span>
+          </div>
+          <div class="mock-stat">
+            <span class="mock-stat-label">Notifications</span>
+            <span class="mock-stat-value">you@gmail.com</span>
+          </div>
+          <div class="mock-stat">
+            <span class="mock-stat-label">Transactions synced</span>
+            <span class="mock-stat-value">1,247</span>
+          </div>
+          <div class="mock-stat">
+            <span class="mock-stat-label">Sync streak</span>
+            <span class="mock-stat-value">42 in a row</span>
+          </div>
+        </div>
+
+        <div class="mock-card" style="padding:12px 16px;">
+          <div style="font-size:12px;font-weight:700;margin-bottom:8px;letter-spacing:-0.2px;">Sync log</div>
+          <table class="mock-table">
+            <thead>
+              <tr><th>Time</th><th>Status</th><th>Tx</th><th>Note</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>08:15</td><td><span class="mock-badge mock-badge-ok">success</span></td><td>3</td><td>&#8212;</td></tr>
+              <tr><td>02:15</td><td><span class="mock-badge mock-badge-ok">success</span></td><td>0</td><td>&#8212;</td></tr>
+              <tr><td>Yesterday</td><td><span class="mock-badge mock-badge-ok">success</span></td><td>5</td><td>&#8212;</td></tr>
+              <tr><td>Mar 17</td><td><span class="mock-badge mock-badge-fail">error</span></td><td>0</td><td>Timeout</td></tr>
+            </tbody>
+          </table>
+        </div>
 
         <div class="mock-nav">
-          <span>License</span>
-          <span>Actual Budget</span>
-          <span>Notifications</span>
-          <span class="active">Bank</span>
-          <span>Status</span>
+          <button class="mock-nav-item" onclick="switchMockup('license')">License</button>
+          <button class="mock-nav-item" onclick="switchMockup('actual')">Actual Budget</button>
+          <button class="mock-nav-item" onclick="switchMockup('notifications')">Notifications</button>
+          <button class="mock-nav-item" onclick="switchMockup('bank')">Bank</button>
+          <button class="mock-nav-item active" onclick="switchMockup('status')">Status</button>
         </div>
       </div>
 
@@ -1235,7 +1385,7 @@
     </div>
   </div>
   <div class="price-already fade-up fade-up-delay-2">
-    <a href="#" onclick="document.getElementById('success-overlay').classList.add('visible');return false;">Already purchased?</a>
+    <a href="/getting-started.html">Already purchased? Follow the setup guide &rarr;</a>
   </div>
 </section>
 
@@ -1331,12 +1481,18 @@
     }, { passive: true });
   })();
 
-  // ====== Preview tab switching ======
-  function switchPreview(id, tab) {
+  // ====== Mockup screen switching ======
+  function switchMockup(id) {
     document.querySelectorAll('.preview-pane').forEach(function(p) { p.classList.remove('active'); });
-    document.querySelectorAll('.preview-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.mock-nav-item').forEach(function(n) { n.classList.remove('active'); });
     document.getElementById('preview-' + id).classList.add('active');
-    tab.classList.add('active');
+    // Highlight the correct nav item in the now-active pane
+    var activePane = document.getElementById('preview-' + id);
+    var navItems = activePane.querySelectorAll('.mock-nav-item');
+    var labels = { license: 'License', actual: 'Actual Budget', notifications: 'Notifications', bank: 'Bank', status: 'Status' };
+    navItems.forEach(function(n) {
+      if (n.textContent.trim() === labels[id]) n.classList.add('active');
+    });
   }
 
   // ====== Stripe success listener ======
