@@ -26,10 +26,14 @@
       const callbackUrl = bridge_bank_url + '/callback?' + window.location.search.slice(1);
       // Try JS redirect first
       window.location.href = callbackUrl;
-      // If blocked (Safari HTTPS-Only), show a clickable link after 2 seconds
+      // If blocked (Safari HTTPS-Only), show manual instructions after 2 seconds
       setTimeout(function() {
         document.querySelector('.spinner').style.display = 'none';
-        document.querySelector('p').innerHTML = 'Click below to complete the connection:<br><br><a href="' + callbackUrl + '" style="background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Complete connection →</a><br><br><span style="font-size:12px;color:#4a5568;">If your browser blocks this, paste this URL in a new tab:</span><br><code style="font-size:11px;color:#6366f1;word-break:break-all;">' + callbackUrl + '</code>';
+        var isHttp = callbackUrl.startsWith('http://');
+        var hint = isHttp
+          ? '<br><br><span style="font-size:13px;color:#ef4444;">⚠ Your browser may block this because the URL is HTTP.<br>In Safari, go to <b>Settings → Privacy</b> and uncheck <b>"Upgrade to HTTPS"</b>, then click the button above.</span>'
+          : '';
+        document.querySelector('p').innerHTML = 'Click below to complete the connection:<br><br><a href="' + callbackUrl + '" style="background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Complete connection →</a>' + hint + '<br><br><span style="font-size:12px;color:#4a5568;">Or paste this URL in a new tab:</span><br><code style="font-size:11px;color:#6366f1;word-break:break-all;cursor:pointer;" onclick="navigator.clipboard.writeText(\'' + callbackUrl + '\');this.style.color=\'#10b981\';this.textContent=\'Copied!\';setTimeout(function(){}.bind(this),1500)">' + callbackUrl + '</code>';
       }, 2000);
     } else {
       document.querySelector('.spinner').style.display = 'none';
