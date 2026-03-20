@@ -185,6 +185,21 @@ curl -O https://raw.githubusercontent.com/DAdjadj/bridge-bank/main/docker-compos
           if (urlPort) urlPort.value = port || '3002';
         }
         </script>
+        <div style="margin-top:20px;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">Using Portainer?</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.65;">Go to <strong style="color:var(--text);">Stacks</strong> → <strong style="color:var(--text);">Add stack</strong>, name it <code>bridge-bank</code>, select <strong style="color:var(--text);">Web editor</strong> and paste:</div>
+          <div class="code-block" style="font-size:12px;line-height:1.7;">services:
+  bridge-bank:
+    image: daalves/bridge-bank:latest
+    container_name: bridge-bank
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "3002:3000"</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Click <strong style="color:var(--text);">Deploy the stack</strong>, then continue to the next step.</div>
+        </div>
       </div>
     </div>
   </div>
