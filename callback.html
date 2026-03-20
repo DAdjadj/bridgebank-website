@@ -20,11 +20,19 @@
     const params = new URLSearchParams(window.location.search);
     const code  = params.get('code');
     const state = params.get('state');
-    if (code && state) {
-      const parts = state.split('|');
-      const bridge_bank_url = parts.length > 1 ? parts[1] : 'http://localhost:3002';
+    const error = params.get('error');
+
+    // Extract Bridge Bank URL from state (format: "bridge-bank-auth|https://bb.example.com|uuid")
+    function getBridgeBankUrl() {
+      if (!state) return '';
+      var parts = state.split('|');
+      return parts.length > 1 ? parts[1] : '';
+    }
+
+    if (code && state && !error) {
+      // Success — redirect to Bridge Bank's /callback
+      const bridge_bank_url = getBridgeBankUrl() || 'http://localhost:3002';
       const callbackUrl = bridge_bank_url + '/callback?' + window.location.search.slice(1);
-      // Try JS redirect first
       window.location.href = callbackUrl;
       // If blocked (Safari HTTPS-Only), show manual instructions after 2 seconds
       setTimeout(function() {
@@ -36,8 +44,15 @@
         document.querySelector('p').innerHTML = 'Click below to complete the connection:<br><br><a href="' + callbackUrl + '" style="background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Complete connection →</a>' + hint + '<br><br><span style="font-size:12px;color:#4a5568;">Or paste this URL in a new tab:</span><br><code style="font-size:11px;color:#6366f1;word-break:break-all;cursor:pointer;" onclick="navigator.clipboard.writeText(\'' + callbackUrl + '\');this.style.color=\'#10b981\';this.textContent=\'Copied!\';setTimeout(function(){}.bind(this),1500)">' + callbackUrl + '</code>';
       }, 2000);
     } else {
-      document.querySelector('.spinner').style.display = 'none';
-      document.querySelector('p').textContent = 'Something went wrong. Please go back to Bridge Bank and try again.';
+      // Cancelled or error — redirect back to Bridge Bank
+      var bbUrl = getBridgeBankUrl();
+      if (bbUrl) {
+        window.location.href = bbUrl + '/connect?error=auth_cancelled';
+      } else {
+        // No state available — show link back with fallback
+        document.querySelector('.spinner').style.display = 'none';
+        document.querySelector('p').innerHTML = 'Bank connection was cancelled or failed.<br><br><span style="font-size:13px;color:#94a3b8;">Use your browser\'s back button or return to Bridge Bank to try again.</span>';
+      }
     }
   </script>
 </body>
