@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bridge Bank — Connect your bank to Actual Budget</title>
-<meta name="description" content="Bridge Bank connects your EU bank via open banking and syncs transactions into Actual Budget automatically. Self-hosted. Your data stays on your machine.">
+<title>Bridge Bank — Sync your EU bank to Actual Budget</title>
+<meta name="description" content="Bridge Bank connects your EU bank via open banking and syncs transactions into Actual Budget automatically. Self-hosted Docker app. €29 one-time. Open source.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -50,26 +50,24 @@
   .nav-links { display: flex; align-items: center; gap: 28px; }
   .nav-links a { font-size: 13px; color: var(--text2); text-decoration: none; transition: color 0.15s; }
   .nav-links a:hover { color: var(--text); }
-  .nav-pill { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text2); background: var(--surface2); border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; }
 
-  /* --- LAYOUT --- */
-  .page-grid {
+  /* --- HERO SPLIT --- */
+  .hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
     min-height: 100vh;
     padding-top: 56px;
   }
 
-  /* --- LEFT COLUMN: INTRO --- */
-  .intro-col {
-    padding: 80px 64px 80px 64px;
+  .hero-left {
+    padding: 80px 64px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
   }
 
-  .intro-col::after {
+  .hero-left::after {
     content: '';
     position: absolute;
     top: 0; right: 0; bottom: 0;
@@ -77,30 +75,29 @@
     background: linear-gradient(to bottom, transparent, var(--border), transparent);
   }
 
-  .open-source-tag {
-    display: inline-flex; align-items: center; gap: 7px;
-    font-size: 12px; font-weight: 500; color: var(--green);
-    margin-bottom: 28px;
-    letter-spacing: 0.3px;
+  .tag {
+    font-size: 12px; font-weight: 500; color: var(--text2);
+    margin-bottom: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.2px;
   }
-  .open-source-tag svg { flex-shrink: 0; }
+  .tag strong { color: var(--green); font-weight: 600; }
 
   h1 {
-    font-size: 44px; font-weight: 800; line-height: 1.12;
-    letter-spacing: -2px; margin-bottom: 20px;
-    color: var(--text);
+    font-size: 42px; font-weight: 800; line-height: 1.1;
+    letter-spacing: -2px; margin-bottom: 16px;
   }
 
-  .intro-desc {
+  .hero-desc {
     font-size: 16px; color: var(--text2); line-height: 1.7;
-    margin-bottom: 36px; max-width: 460px;
+    margin-bottom: 32px; max-width: 480px;
   }
 
-  .intro-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 32px; }
+  .hero-ctas { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 24px; }
 
   .btn-primary {
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: #fff; border: none; padding: 14px 30px;
+    color: #fff; border: none; padding: 14px 28px;
     font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px;
     border-radius: 8px; cursor: pointer; transition: all 0.15s;
     letter-spacing: -0.2px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
@@ -116,10 +113,12 @@
   }
   .btn-ghost:hover { border-color: var(--accent); color: var(--text); }
 
-  .trial-row {
-    display: flex; gap: 8px; max-width: 400px;
+  .trial-block {
     padding-top: 20px; border-top: 1px solid var(--border);
+    max-width: 420px;
   }
+  .trial-label { font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 8px; }
+  .trial-row { display: flex; gap: 8px; }
   .trial-row input {
     flex: 1; padding: 11px 14px; background: var(--surface);
     border: 1px solid var(--border2); border-radius: 8px;
@@ -129,19 +128,25 @@
   .trial-row input:focus { border-color: var(--accent); }
   .trial-row input::placeholder { color: var(--muted); }
   .trial-row button {
-    padding: 11px 20px; background: var(--surface2);
-    border: 1px solid var(--border2); border-radius: 8px;
-    color: var(--text); font-family: 'Inter', sans-serif;
-    font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;
+    padding: 11px 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none; border-radius: 8px;
+    color: #fff; font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
     transition: all 0.15s;
   }
-  .trial-row button:hover { border-color: var(--accent); color: var(--text); }
-
-  .trial-label { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .trial-row button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(59,130,246,0.25); }
   #trial-msg { font-size: 12px; margin-top: 6px; min-height: 18px; }
 
-  /* --- RIGHT COLUMN: APP PREVIEW --- */
-  .preview-col {
+  .trust-line {
+    display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px;
+    font-size: 12px; color: var(--muted);
+  }
+  .trust-line span { display: inline-flex; align-items: center; gap: 5px; }
+  .trust-line .check { color: var(--green); font-weight: 700; font-size: 13px; }
+
+  /* --- HERO RIGHT: APP PREVIEW --- */
+  .hero-right {
     padding: 80px 64px;
     display: flex; flex-direction: column; justify-content: center;
     background: var(--surface);
@@ -149,8 +154,7 @@
     overflow: hidden;
   }
 
-  /* Subtle grid pattern on preview col */
-  .preview-col::before {
+  .hero-right::before {
     content: '';
     position: absolute; inset: 0;
     background-image:
@@ -188,7 +192,7 @@
   .preview-pane { display: none; }
   .preview-pane.active { display: block; }
 
-  /* --- MOCKUP: Status page --- */
+  /* --- MOCKUP STYLES --- */
   .mock-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
   .mock-logo-mark { width: 22px; height: 22px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 10px; }
   .mock-logo-text { font-weight: 700; font-size: 14px; color: var(--text); letter-spacing: -0.3px; }
@@ -245,7 +249,6 @@
   }
   .mock-nav span.active { color: var(--text); }
 
-  /* --- MOCKUP: Bank connect page --- */
   .mock-connected-pill {
     background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25);
     color: #6ee7b7; font-size: 9px; font-weight: 600;
@@ -284,9 +287,8 @@
     margin-bottom: 10px;
   }
 
-  /* --- SECTIONS BELOW FOLD --- */
-  .content-section {
-    position: relative; z-index: 1;
+  /* --- SECTIONS --- */
+  .section {
     max-width: 960px; margin: 0 auto;
     padding: 0 48px;
   }
@@ -298,68 +300,81 @@
   }
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  /* How it works */
-  .how-section { padding-top: 80px; padding-bottom: 72px; }
-  .how-grid {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 48px;
-    align-items: start;
+  /* --- BANK SEARCH --- */
+  .bank-section { padding-top: 80px; padding-bottom: 72px; }
+  .bank-header { text-align: center; margin-bottom: 32px; }
+  .bank-header h2 { font-size: 28px; font-weight: 800; letter-spacing: -1.2px; margin-bottom: 8px; }
+  .bank-header p { font-size: 15px; color: var(--text2); max-width: 500px; margin: 0 auto; }
+
+  .bank-search-wrap { position: relative; max-width: 560px; margin: 0 auto; }
+  .bank-search-wrap input {
+    width: 100%; background: var(--surface); border: 1px solid var(--border2);
+    color: var(--text); font-family: 'Inter', sans-serif; font-size: 16px;
+    padding: 16px 20px 16px 48px; border-radius: 10px; outline: none;
+    transition: border-color 0.15s;
   }
-  .how-aside h2 {
-    font-size: 28px; font-weight: 800; letter-spacing: -1.2px;
-    line-height: 1.2; margin-bottom: 12px;
+  .bank-search-wrap input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.08); }
+  .bank-search-wrap input::placeholder { color: var(--muted); }
+  .bank-search-wrap svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+
+  #bb-bank-results { margin-top: 8px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  #bb-bank-status { font-size: 12px; color: var(--text2); margin-top: 6px; min-height: 20px; text-align: center; }
+
+  /* --- PRODUCT SHOWCASE --- */
+  .showcase-section { padding-bottom: 80px; }
+  .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .showcase-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 24px; position: relative; overflow: hidden;
   }
-  .how-aside p {
-    font-size: 14px; color: var(--text2); line-height: 1.7;
+  .showcase-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 1px; background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+  }
+  .showcase-card h4 {
+    font-size: 14px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 6px;
+  }
+  .showcase-card p {
+    font-size: 13px; color: var(--text2); line-height: 1.55;
   }
 
-  .steps-list { display: flex; flex-direction: column; gap: 10px; }
+  /* Mini mockup inside showcase */
+  .mini-mock {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+    padding: 12px; margin-bottom: 14px; font-size: 10px;
+  }
+
+  /* --- HOW IT WORKS --- */
+  .how-section { padding-top: 80px; padding-bottom: 72px; }
+  .how-header { margin-bottom: 32px; }
+  .how-header h2 { font-size: 28px; font-weight: 800; letter-spacing: -1.2px; margin-bottom: 6px; }
+  .how-header p { font-size: 14px; color: var(--text2); line-height: 1.6; }
+
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 
   .step-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 10px; padding: 22px 20px;
-    display: grid; grid-template-columns: 36px 1fr; gap: 14px;
     transition: border-color 0.15s;
   }
   .step-card:hover { border-color: var(--border2); }
 
   .step-num {
-    width: 36px; height: 36px;
+    width: 32px; height: 32px;
     background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15);
-    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    border-radius: 7px; display: flex; align-items: center; justify-content: center;
     font-size: 13px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
-    color: var(--accent);
+    color: var(--accent); margin-bottom: 12px;
   }
-  .step-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.2px; }
-  .step-desc { font-size: 13px; color: var(--text2); line-height: 1.55; }
-
-  /* Banks */
-  .bank-section { padding-bottom: 72px; }
-  .bank-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; padding: 32px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
-    align-items: center;
+  .step-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.2px; }
+  .step-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
+  .step-desc code {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent);
+    background: rgba(59,130,246,0.06); padding: 1px 5px; border-radius: 3px;
   }
-  .bank-card-info h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.8px; margin-bottom: 8px; }
-  .bank-card-info p { font-size: 14px; color: var(--text2); line-height: 1.65; }
+  .step-time { font-size: 11px; color: var(--muted); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
 
-  .bank-search-wrap { position: relative; }
-  .bank-search-wrap input {
-    width: 100%; background: var(--bg); border: 1px solid var(--border2);
-    color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px;
-    padding: 12px 16px 12px 38px; border-radius: 8px; outline: none;
-    transition: border-color 0.15s;
-  }
-  .bank-search-wrap input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.08); }
-  .bank-search-wrap input::placeholder { color: var(--muted); }
-  .bank-search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
-
-  #bb-bank-results { margin-top: 8px; }
-  #bb-bank-status { font-size: 12px; color: var(--text2); margin-top: 6px; min-height: 20px; }
-
-  /* Pricing */
+  /* --- PRICING --- */
   .price-section { padding-bottom: 80px; }
   .price-layout {
     display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
@@ -384,6 +399,11 @@
     text-decoration: none; display: inline-block; text-align: center;
   }
   .price-buy:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(59,130,246,0.3); }
+  .price-trial-link {
+    font-size: 12px; color: var(--text2); margin-top: 12px; text-align: center;
+  }
+  .price-trial-link a { color: var(--accent); text-decoration: none; }
+  .price-trial-link a:hover { text-decoration: underline; }
 
   .price-features { list-style: none; }
   .price-features li {
@@ -394,7 +414,15 @@
   .price-features li:last-child { border-bottom: none; }
   .price-features li::before { content: '\2713'; color: var(--green); font-size: 13px; font-weight: 700; flex-shrink: 0; }
 
-  /* PikaPods section */
+  .price-already {
+    text-align: center; margin-top: 16px;
+  }
+  .price-already a {
+    font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.15s;
+  }
+  .price-already a:hover { color: var(--text2); }
+
+  /* --- PIKAPODS --- */
   .pikapods-section {
     border-top: 1px solid var(--border);
     padding-top: 56px; padding-bottom: 56px;
@@ -423,77 +451,6 @@
   }
   #wl-msg { font-size: 12px; color: var(--text2); margin-top: 8px; display: none; }
 
-  /* --- WIZARD (unchanged structure) --- */
-  #wizard { position: relative; z-index: 1; max-width: 660px; margin: 0 auto; padding: 0 48px 120px; display: none; }
-  #wizard.visible { display: block; }
-
-  .wizard-header { text-align: center; margin-bottom: 40px; }
-  .wizard-header h2 { font-size: 26px; font-weight: 800; letter-spacing: -1px; margin-bottom: 6px; }
-  .wizard-header p { font-size: 13px; color: var(--text2); font-family: 'JetBrains Mono', monospace; }
-
-  .progress-bar { display: flex; gap: 4px; margin-bottom: 40px; }
-  .progress-step { flex: 1; height: 2px; background: var(--border); border-radius: 2px; transition: background 0.3s; }
-  .progress-step.active { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-
-  .wizard-step { display: none; animation: fadeIn 0.25s ease; }
-  .wizard-step.active { display: block; }
-
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-  .step-heading { font-size: 19px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
-  .step-hint { font-size: 13px; color: var(--text2); margin-bottom: 28px; line-height: 1.65; }
-  .step-hint a { color: var(--accent); text-decoration: none; }
-  .step-hint a:hover { text-decoration: underline; }
-
-  .field { margin-bottom: 18px; }
-  .field label { display: block; font-size: 11px; font-weight: 600; color: var(--text2); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 7px; }
-  .field input, .field select { width: 100%; background: var(--surface); border: 1px solid var(--border2); color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 11px 14px; border-radius: 8px; outline: none; transition: border-color 0.2s; appearance: none; }
-  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
-  .field input::placeholder { color: var(--muted); }
-
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .field-note { font-size: 11px; color: var(--muted); margin-top: 5px; line-height: 1.5; font-family: 'JetBrains Mono', monospace; }
-  .optional-tag { font-size: 10px; font-weight: 500; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); padding: 2px 7px; border-radius: 10px; vertical-align: middle; margin-left: 4px; text-transform: none; letter-spacing: 0; }
-
-  .wizard-divider { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin: 28px 0 20px; display: flex; align-items: center; gap: 12px; }
-  .wizard-divider::before, .wizard-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-  .wizard-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
-
-  .btn-back { background: transparent; color: var(--text2); border: 1px solid var(--border2); padding: 11px 22px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-  .btn-back:hover { color: var(--text); border-color: var(--accent); }
-
-  .btn-next { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; padding: 11px 26px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-  .btn-next:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.3); }
-
-  .step-counter { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
-
-  #review-box { background: var(--surface); border: 1px solid var(--border2); border-radius: 10px; padding: 20px; font-size: 12px; font-family: 'JetBrains Mono', monospace; line-height: 2; color: var(--text2); }
-
-  /* --- OUTPUT --- */
-  #output { display: none; position: relative; z-index: 1; max-width: 660px; margin: 0 auto; padding: 0 48px 120px; animation: fadeIn 0.4s ease; }
-  #output.visible { display: block; }
-
-  .output-header { text-align: center; margin-bottom: 36px; }
-  .success-icon { width: 52px; height: 52px; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; font-size: 22px; }
-  .output-header h2 { font-size: 26px; font-weight: 800; letter-spacing: -1px; margin-bottom: 6px; }
-  .output-header p { font-size: 13px; color: var(--text2); }
-
-  .file-block { background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; margin-bottom: 14px; overflow: hidden; }
-  .file-header { display: flex; align-items: center; justify-content: space-between; padding: 13px 18px; border-bottom: 1px solid var(--border); background: var(--surface2); }
-  .file-name { font-size: 13px; font-weight: 600; font-family: 'JetBrains Mono', monospace; color: var(--text); display: flex; align-items: center; gap: 8px; }
-  .file-name .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
-  .btn-download { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; padding: 7px 16px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
-  .btn-download:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(59,130,246,0.35); }
-  .file-preview { padding: 18px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text2); line-height: 1.9; max-height: 160px; overflow-y: auto; white-space: pre; }
-
-  .next-steps { background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; padding: 26px; margin-top: 24px; }
-  .next-steps h3 { font-size: 15px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.3px; }
-  .next-step-item { display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
-  .next-step-num { width: 22px; height: 22px; background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
-  .next-step-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
-  .next-step-text code { background: var(--surface2); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--accent); }
-
   /* --- SUCCESS OVERLAY --- */
   #success-overlay { display:none; position:fixed; inset:0; background:rgba(8,11,18,0.92); z-index:999999; align-items:center; justify-content:center; }
   #success-overlay.visible { display:flex; }
@@ -504,8 +461,6 @@
   .success-card p { font-size:14px; color:var(--text2); line-height:1.6; margin-bottom:28px; }
   .btn-start { background:linear-gradient(135deg,var(--green),#059669); color:#fff; border:none; padding:14px 32px; font-family:'Inter',sans-serif; font-weight:700; font-size:15px; border-radius:10px; cursor:pointer; transition:all 0.2s; width:100%; }
   .btn-start:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(16,185,129,0.3); }
-  .error-msg { font-size: 11px; color: var(--danger); margin-top: 5px; display: none; }
-  .error-msg.visible { display: block; }
 
   /* --- FOOTER --- */
   footer {
@@ -521,37 +476,36 @@
 
   /* --- RESPONSIVE --- */
   @media (max-width: 900px) {
-    .page-grid { grid-template-columns: 1fr; }
-    .intro-col { padding: 60px 28px 48px; }
-    .intro-col::after { display: none; }
-    .preview-col { padding: 32px 28px 48px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 60px 28px 48px; }
+    .hero-left::after { display: none; }
+    .hero-right { padding: 32px 28px 48px; }
     .preview-frame { min-height: auto; }
-    .how-grid { grid-template-columns: 1fr; gap: 24px; }
-    .bank-card { grid-template-columns: 1fr; gap: 24px; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .showcase-grid { grid-template-columns: 1fr; }
     .price-layout { grid-template-columns: 1fr; }
-    .content-section { padding-left: 28px; padding-right: 28px; }
+    .section { padding-left: 28px; padding-right: 28px; }
     header { padding: 0 20px; }
     h1 { font-size: 34px; letter-spacing: -1.5px; }
   }
 
   @media (max-width: 640px) {
-    .intro-col { padding: 48px 20px 36px; }
-    .preview-col { padding: 24px 20px 36px; }
-    .content-section { padding-left: 20px; padding-right: 20px; }
+    .hero-left { padding: 48px 20px 36px; }
+    .hero-right { padding: 24px 20px 36px; }
+    .section { padding-left: 20px; padding-right: 20px; }
     header { padding: 0 16px; }
     .nav-links { gap: 16px; }
-    .nav-pill { display: none; }
     h1 { font-size: 28px; }
-    .field-row { grid-template-columns: 1fr; }
-    #wizard, #output { padding-left: 20px; padding-right: 20px; }
+    .steps-grid { grid-template-columns: 1fr; }
     footer { padding: 24px 20px; flex-direction: column; text-align: center; }
     footer .right { justify-content: center; flex-wrap: wrap; }
     .how-section { padding-top: 56px; }
     .price-left, .price-right { padding: 24px; }
-    .bank-card { padding: 24px; }
-    .intro-actions { flex-direction: column; align-items: stretch; }
-    .intro-actions .btn-primary, .intro-actions .btn-ghost { text-align: center; justify-content: center; }
+    .hero-ctas { flex-direction: column; align-items: stretch; }
+    .hero-ctas .btn-primary, .hero-ctas .btn-ghost { text-align: center; justify-content: center; }
   }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
@@ -566,51 +520,49 @@
     <a href="#pricing">Pricing</a>
     <a href="/help">Help</a>
     <a href="https://github.com/DAdjadj/bridge-bank" target="_blank">GitHub</a>
-    <span class="nav-pill">EU banks &middot; self-hosted</span>
   </div>
 </header>
 
-<!-- ====== HERO: SPLIT LAYOUT ====== -->
-<div class="page-grid" id="top">
-  <!-- LEFT: Copy -->
-  <div class="intro-col" id="intro-col">
-    <div class="open-source-tag">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M12 8V12L15 15"/></svg>
-      Open source &middot; Self-hosted &middot; Your data stays yours
-    </div>
+<!-- ====== HERO ====== -->
+<div class="hero" id="top">
 
-    <h1>Sync your European bank to Actual&nbsp;Budget</h1>
+  <!-- LEFT -->
+  <div class="hero-left">
+    <div class="tag">Open source &middot; Self-hosted &middot; <strong>&euro;29 one-time</strong></div>
 
-    <p class="intro-desc">
-      Bridge Bank connects to your bank via open banking, pulls your transactions, and pushes them into Actual Budget automatically. Runs on your own server. One-time payment, no subscription.
+    <h1>Your bank transactions in Actual&nbsp;Budget, automatically</h1>
+
+    <p class="hero-desc">
+      Bridge Bank pulls transactions from your EU bank account and syncs them into Actual Budget. Runs as a Docker container on your own server. No cloud, no subscription.
     </p>
 
-    <div style="display:flex;flex-wrap:wrap;gap:16px 24px;margin-bottom:32px;font-size:12px;color:var(--text2);">
-      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="color:var(--green);font-size:14px;">&#x1f512;</span> <strong style="color:var(--text);font-weight:500;">Read-only access</strong> &mdash; Bridge Bank can never move money</span>
-      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="color:var(--green);font-size:14px;">&#10003;</span> <strong style="color:var(--text);font-weight:500;">Regulated provider</strong> &mdash; via Enable Banking, a licensed open banking provider</span>
-      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="color:var(--green);font-size:14px;">&#10003;</span> <strong style="color:var(--text);font-weight:500;">Open source</strong> &mdash; full source code on GitHub</span>
-      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="color:var(--green);font-size:14px;">&#10003;</span> <strong style="color:var(--text);font-weight:500;">Self-hosted</strong> &mdash; your data never leaves your machine</span>
-    </div>
-
-    <div class="intro-actions">
+    <div class="hero-ctas">
       <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03" class="btn-primary">
-        Get a license key &mdash; &euro;29
+        Get Bridge Bank &mdash; &euro;29
       </a>
-      <a href="#" onclick="document.getElementById('success-overlay').classList.add('visible');return false;" class="btn-ghost">
-        Already purchased?
+      <a href="#" onclick="document.getElementById('trial-email').focus();document.getElementById('trial-email').scrollIntoView({behavior:'smooth',block:'center'});return false;" class="btn-ghost">
+        Start free trial
       </a>
     </div>
 
-    <div class="trial-label" style="font-size:14px;font-weight:600;color:var(--text2);">Or try free for 7 days &mdash; no credit card needed</div>
-    <div class="trial-row">
-      <input type="email" id="trial-email" placeholder="you@example.com">
-      <button onclick="startTrial()" id="trial-btn" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;font-weight:700;">Start trial</button>
+    <div class="trial-block">
+      <div class="trial-label">7-day free trial &mdash; no credit card</div>
+      <div class="trial-row">
+        <input type="email" id="trial-email" placeholder="you@example.com">
+        <button onclick="startTrial()" id="trial-btn">Start trial</button>
+      </div>
+      <div id="trial-msg"></div>
     </div>
-    <div id="trial-msg"></div>
+
+    <div class="trust-line">
+      <span><span class="check">&#10003;</span> Read-only bank access</span>
+      <span><span class="check">&#10003;</span> Your data stays on your machine</span>
+      <span><span class="check">&#10003;</span> 2,500+ EU banks</span>
+    </div>
   </div>
 
-  <!-- RIGHT: App preview mockups -->
-  <div class="preview-col" id="preview-col">
+  <!-- RIGHT: App preview -->
+  <div class="hero-right">
     <div class="preview-tabs">
       <button class="preview-tab active" onclick="switchPreview('status', this)">Status</button>
       <button class="preview-tab" onclick="switchPreview('connect', this)">Bank connection</button>
@@ -746,27 +698,21 @@
   </div>
 </div>
 
-<!-- ====== SUPPORTED BANKS ====== -->
-<section class="content-section bank-section" id="banks" style="padding-top:80px;">
+<!-- ====== BANK SEARCH ====== -->
+<section class="section bank-section" id="banks">
   <div class="section-label">Supported banks</div>
-  <div class="bank-card">
-    <div class="bank-card-info">
-      <h3>2,500+ European banks</h3>
-      <p>Powered by Enable Banking. Covers 29 countries &mdash; from Revolut and N26 to traditional banks like Santander, BNP Paribas, and Deutsche Bank.</p>
-    </div>
-    <div>
-      <div class="bank-search-wrap">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input type="text" id="bb-bank-search" placeholder="Search your bank..." oninput="bbSearchBanks()"
-          onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='0 0 0 3px rgba(59,130,246,0.08)'"
-          onblur="this.style.borderColor='var(--border2)';this.style.boxShadow='none'">
-      </div>
-      <div id="bb-bank-results"></div>
-      <div id="bb-bank-status"></div>
-    </div>
+  <div class="bank-header">
+    <h2>Is your bank supported?</h2>
+    <p>2,500+ banks across 29 European countries, via Enable Banking. Search below to check.</p>
   </div>
+  <div class="bank-search-wrap">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" id="bb-bank-search" placeholder="Search for your bank..." oninput="bbSearchBanks()">
+  </div>
+  <div id="bb-bank-results"></div>
+  <div id="bb-bank-status"></div>
 </section>
 
 <script>
@@ -794,63 +740,114 @@
       var m=_banks.filter(function(b){return b.name.toLowerCase().includes(q);}).slice(0,8);
       st.textContent='';
       if(!m.length){res.innerHTML='';st.innerHTML='<span style="color:var(--muted)">No match for <strong style="color:var(--text2)">'+q+'</strong>. Try a different spelling or check <a href="https://enablebanking.com/open-banking-apis" target="_blank" style="color:var(--accent);text-decoration:none;">Enable Banking</a>.</span>';return;}
-      res.innerHTML=m.map(function(b){return'<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;margin-bottom:4px;"><span style="font-size:13px;font-weight:500;color:var(--text);">'+b.name+'</span><span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:var(--accent);background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);padding:2px 8px;border-radius:12px;">'+b.country+'</span></div>';}).join('');
+      res.innerHTML=m.map(function(b){return'<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:4px;"><span style="font-size:14px;font-weight:500;color:var(--text);">'+b.name+'</span><span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:var(--accent);background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);padding:2px 8px;border-radius:12px;">'+b.country+'</span></div>';}).join('');
       if(m.length===8)st.innerHTML='<span style="color:var(--muted);font-size:11px;">Showing first 8 results &mdash; type more to narrow down.</span>';
     });
   };
 })();
 </script>
 
-<!-- ====== HOW IT WORKS ====== -->
-<section class="content-section how-section" id="how">
-  <div class="section-label">How it works</div>
-  <div class="how-grid">
-    <div class="how-aside">
-      <h2>Up and running in minutes</h2>
-      <p>A few minutes of setup, then it runs on its own. No config files, no cron jobs, no scripts.</p>
+<!-- ====== WHAT IT LOOKS LIKE ====== -->
+<section class="section showcase-section">
+  <div class="section-label">What it looks like</div>
+  <div class="showcase-grid">
+
+    <div class="showcase-card">
+      <div class="mini-mock">
+        <table style="width:100%;border-collapse:collapse;">
+          <tr style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">
+            <td style="padding:0 0 4px;">Time</td><td style="padding:0 0 4px;">Status</td><td style="padding:0 0 4px;">Tx</td>
+          </tr>
+          <tr style="font-size:10px;color:var(--text2);"><td style="padding:3px 0;border-top:1px solid var(--border);">08:15</td><td style="padding:3px 0;border-top:1px solid var(--border);"><span style="color:#6ee7b7;font-size:9px;font-weight:600;background:rgba(16,185,129,0.1);padding:1px 5px;border-radius:8px;">success</span></td><td style="padding:3px 0;border-top:1px solid var(--border);">3</td></tr>
+          <tr style="font-size:10px;color:var(--text2);"><td style="padding:3px 0;border-top:1px solid var(--border);">02:15</td><td style="padding:3px 0;border-top:1px solid var(--border);"><span style="color:#6ee7b7;font-size:9px;font-weight:600;background:rgba(16,185,129,0.1);padding:1px 5px;border-radius:8px;">success</span></td><td style="padding:3px 0;border-top:1px solid var(--border);">0</td></tr>
+          <tr style="font-size:10px;color:var(--text2);"><td style="padding:3px 0;border-top:1px solid var(--border);">Yesterday</td><td style="padding:3px 0;border-top:1px solid var(--border);"><span style="color:#6ee7b7;font-size:9px;font-weight:600;background:rgba(16,185,129,0.1);padding:1px 5px;border-radius:8px;">success</span></td><td style="padding:3px 0;border-top:1px solid var(--border);">5</td></tr>
+        </table>
+      </div>
+      <h4>Sync log shows every transaction</h4>
+      <p>See exactly what synced, when, and how many transactions came through. Errors surface immediately.</p>
     </div>
-    <div class="steps-list">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <div>
-          <div class="step-title">Create a free Enable Banking account</div>
-          <div class="step-desc">Register at enablebanking.com and create an application. This is the regulated open banking provider that gives Bridge Bank read-only access to your bank. Free, takes 5 minutes.</div>
+
+    <div class="showcase-card">
+      <div class="mini-mock">
+        <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Connected accounts</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);">
+          <span style="font-size:10px;color:var(--text2);">Revolut (LT)</span>
+          <span style="font-size:10px;color:var(--text2);">&#8594; Revolut</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0;">
+          <span style="font-size:10px;color:var(--text2);">N26 (DE)</span>
+          <span style="font-size:10px;color:var(--text2);">&#8594; Checking</span>
         </div>
       </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <div>
-          <div class="step-title">Install Bridge Bank</div>
-          <div class="step-desc">Download the <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);">docker-compose.yml</code> file and run <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);">docker compose up -d</code> on your server. Works on any machine with Docker &mdash; Linux, Mac, Raspberry Pi, NAS.</div>
+      <h4>Multiple banks, different accounts</h4>
+      <p>Connect up to two bank accounts, each mapped to a different Actual Budget account. One container, all your banks.</p>
+    </div>
+
+    <div class="showcase-card">
+      <div class="mini-mock">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span style="font-size:10px;font-weight:600;color:var(--text);">Sync schedule</span>
         </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">3</div>
-        <div>
-          <div class="step-title">Follow the setup wizard</div>
-          <div class="step-desc">Open Bridge Bank in your browser. The setup wizard walks you through entering your licence key, connecting to Actual Budget, uploading your Enable Banking key, and configuring notifications.</div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap;">
+          <span style="font-size:9px;padding:2px 6px;border-radius:4px;border:1px solid var(--border2);color:var(--muted);">Manual</span>
+          <span style="font-size:9px;padding:2px 6px;border-radius:4px;border:1px solid var(--border2);color:var(--muted);">6h</span>
+          <span style="font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);color:var(--accent);">12h</span>
+          <span style="font-size:9px;padding:2px 6px;border-radius:4px;border:1px solid var(--border2);color:var(--muted);">24h</span>
         </div>
+        <div style="font-size:9px;color:var(--muted);margin-top:6px;">Syncs at 06:00, 18:00</div>
       </div>
-      <div class="step-card">
-        <div class="step-num">4</div>
-        <div>
-          <div class="step-title">Connect your bank</div>
-          <div class="step-desc">Search for your bank, approve read-only access, and choose a sync schedule. Bridge Bank handles everything from here &mdash; transactions sync automatically.</div>
-        </div>
-      </div>
+      <h4>Automatic syncs, email alerts</h4>
+      <p>Set a sync schedule and forget about it. Get an email when your bank session expires and needs re-authorization.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====== HOW IT WORKS ====== -->
+<section class="section how-section" id="how">
+  <div class="section-label">How it works</div>
+  <div class="how-header">
+    <h2>Setup takes about 15 minutes</h2>
+    <p>Not one-click, but straightforward. You need Docker and 15 minutes.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-title">Create an Enable Banking account</div>
+      <div class="step-desc">Register at enablebanking.com and create an application. This is the regulated open banking provider that connects Bridge Bank to your bank.</div>
+      <div class="step-time">~5 min</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-title">Run the Docker container</div>
+      <div class="step-desc">Download the <code>docker-compose.yml</code> and run <code>docker compose up -d</code>. Works on Linux, Mac, Raspberry Pi, NAS.</div>
+      <div class="step-time">~2 min</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-title">Follow the setup wizard</div>
+      <div class="step-desc">Open Bridge Bank in your browser. The wizard walks you through entering your licence key, connecting to Actual Budget, and uploading your Enable Banking key.</div>
+      <div class="step-time">~5 min</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div class="step-title">Connect your bank</div>
+      <div class="step-desc">Search for your bank, approve read-only access, pick an Actual Budget account. Transactions sync automatically from here.</div>
+      <div class="step-time">~3 min</div>
     </div>
   </div>
 </section>
 
 <!-- ====== PRICING ====== -->
-<section class="content-section price-section" id="pricing">
+<section class="section price-section" id="pricing">
   <div class="section-label">Pricing</div>
   <div class="price-layout">
     <div class="price-left">
       <div style="font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;">One-time payment</div>
       <div class="price-amount"><sup>&euro;</sup>29</div>
-      <div class="price-type">Use on up to 2 machines. No subscription. No recurring fees.</div>
+      <div class="price-type">No subscription. No recurring fees. Use on up to 2 machines.</div>
       <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03" class="price-buy">Get your license key</a>
+      <div class="price-trial-link">or <a href="#" onclick="document.getElementById('trial-email').focus();document.getElementById('trial-email').scrollIntoView({behavior:'smooth',block:'center'});return false;">start a 7-day free trial</a></div>
     </div>
     <div class="price-right">
       <ul class="price-features">
@@ -861,17 +858,21 @@
         <li>Open source &mdash; inspect the code anytime</li>
         <li>Browser-based setup wizard &mdash; no config files</li>
         <li>Sync schedule: manual, 6h, 12h, or 24h</li>
+        <li>Free updates</li>
       </ul>
     </div>
+  </div>
+  <div class="price-already">
+    <a href="#" onclick="document.getElementById('success-overlay').classList.add('visible');return false;">Already purchased?</a>
   </div>
 </section>
 
 <!-- ====== PIKAPODS ====== -->
-<section class="content-section pikapods-section">
+<section class="section pikapods-section">
   <div class="pikapods-inner">
     <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px;">PikaPods</div>
-    <h3>Run Bridge Bank on PikaPods</h3>
-    <p>No server needed. One-click hosting &mdash; coming soon. Join the waitlist to be first in line.</p>
+    <h3>No server? Run Bridge Bank on PikaPods</h3>
+    <p>One-click managed hosting &mdash; coming soon. Join the waitlist to be first in line.</p>
     <div class="pikapods-row">
       <input type="email" id="wl-email" placeholder="you@example.com">
       <button onclick="joinWaitlist()">Join</button>
@@ -879,7 +880,6 @@
     <div id="wl-msg"></div>
   </div>
 </section>
-
 
 <!-- ====== SUCCESS OVERLAY ====== -->
 <div id="success-overlay">
