@@ -1404,12 +1404,11 @@
   fetch('https://api.bridgebank.app/reviews?product=bridge-bank')
     .then(function(r){return r.json();})
     .then(function(reviews){
-      var approved = reviews.filter(function(r){return r.approved;});
-      if(!approved.length) return;
+      if(!reviews.length) return;
       var section = document.getElementById('reviews-section');
       section.style.display = 'block';
       var grid = document.getElementById('reviews-grid');
-      grid.innerHTML = approved.map(function(r){
+      grid.innerHTML = reviews.map(function(r){
         var stars = '';
         for(var i=0;i<5;i++) stars += i < r.rating ? '\u2605' : '\u2606';
         var name = r.name || 'Anonymous';
