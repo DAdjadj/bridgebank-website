@@ -741,9 +741,24 @@
     .data-flow-node { min-width: 80px; }
     .data-flow-node-label { font-size: 16px; }
     .data-flow-arrow { font-size: 18px; margin: 0 6px; }
+    #reviews-grid { grid-template-columns: 1fr !important; }
   }
 
+  /* Reviews */
+  .review-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+  .review-card:hover { border-color: var(--border2); }
+  .review-stars { color: #f59e0b; font-size: 16px; letter-spacing: 1px; margin-bottom: 12px; }
+  .review-text { font-size: 16px; color: var(--text2); line-height: 1.65; margin-bottom: 16px; }
+  .review-author { font-size: 14px; color: var(--muted); font-weight: 500; }
+
   @media (max-width: 640px) {
+    #reviews-grid { grid-template-columns: 1fr !important; }
     .hero-left { padding: 80px 20px 36px; }
     .hero-right { padding: 24px 20px 36px; }
     .section { padding-left: 20px; padding-right: 20px; }
@@ -1129,6 +1144,15 @@
   </div>
 </section>
 
+<!-- ====== REVIEWS ====== -->
+<section class="section" id="reviews-section" style="padding-top:80px;padding-bottom:80px;display:none;">
+  <div class="bank-header fade-up">
+    <div class="section-heading">What users say</div>
+    <p class="section-desc-center">From the community</p>
+  </div>
+  <div id="reviews-grid" class="fade-up fade-up-delay-1" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px;"></div>
+</section>
+
 <!-- ====== SETUP + PRICING ====== -->
 <section class="section setup-pricing-section" id="setup">
   <div class="setup-pricing-grid">
@@ -1372,6 +1396,39 @@
   function restoreHome() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+</script>
+
+<!-- Reviews -->
+<script>
+(function(){
+  fetch('https://api.bridgebank.app/reviews?product=bridge-bank')
+    .then(function(r){return r.json();})
+    .then(function(reviews){
+      var approved = reviews.filter(function(r){return r.approved;});
+      if(!approved.length) return;
+      var section = document.getElementById('reviews-section');
+      section.style.display = 'block';
+      var grid = document.getElementById('reviews-grid');
+      grid.innerHTML = approved.map(function(r){
+        var stars = '';
+        for(var i=0;i<5;i++) stars += i < r.rating ? '\u2605' : '\u2606';
+        var name = r.name || 'Anonymous';
+        return '<div class="review-card">'
+          + '<div class="review-stars">' + stars + '</div>'
+          + '<div class="review-text">' + r.review.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>'
+          + '<div class="review-author">' + name.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>'
+          + '</div>';
+      }).join('');
+      // Re-observe new fade-up elements
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+      section.querySelectorAll('.fade-up').forEach(function(el){ observer.observe(el); });
+    })
+    .catch(function(){});
+})();
 </script>
 
 <!-- Bank search (separate script block) -->
