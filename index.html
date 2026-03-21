@@ -451,13 +451,22 @@
   }
 
   .mockup-hint-label {
-    text-align: center; margin-top: 14px;
-    font-size: 16px; color: var(--text2);
+    text-align: center; margin-bottom: 14px;
+    font-size: 14px; color: var(--muted);
     animation: hint-pulse 2.5s ease-in-out infinite;
     transition: opacity 0.5s;
     position: relative; z-index: 1;
   }
   .mockup-hint-label.hidden { opacity: 0; pointer-events: none; }
+
+  .hero-already {
+    margin-top: 16px;
+  }
+  .hero-already a {
+    font-size: 16px; color: var(--muted); text-decoration: none;
+    transition: color 0.15s;
+  }
+  .hero-already a:hover { color: var(--text); }
   @keyframes hint-pulse {
     0%, 100% { opacity: 0.5; }
     50% { opacity: 1; }
@@ -800,6 +809,10 @@
     </div>
     <div id="trial-msg" class="fade-up"></div>
 
+    <div class="hero-already fade-up fade-up-delay-3">
+      <a href="/getting-started.html">Already a customer? Follow the setup guide &rarr;</a>
+    </div>
+
     <div class="trust-line fade-up fade-up-delay-4">
       <span>&#128274; Read-only access</span>
       <span>&#127466;&#127482; 2,500+ banks across 29 countries</span>
@@ -809,6 +822,7 @@
 
   <!-- RIGHT 55% -->
   <div class="hero-right">
+    <div class="mockup-hint-label" id="mockup-hint">&#8595; Click to explore the app</div>
     <div class="browser-frame fade-up fade-up-delay-1">
       <div class="browser-bar">
         <div class="browser-dot red"></div>
@@ -1073,7 +1087,6 @@
 
       </div>
     </div>
-    <div class="mockup-hint-label" id="mockup-hint">Click to explore the app &#8595;</div>
   </div>
 </div>
 
@@ -1160,7 +1173,6 @@
         </div>
       </div>
 
-      <div class="already-customer">Already a customer? <a href="/getting-started.html">Go to setup guide &rarr;</a></div>
     </div>
 
     <!-- Right: Pricing card -->
