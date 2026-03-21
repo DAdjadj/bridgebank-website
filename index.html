@@ -1453,11 +1453,13 @@
     var st=document.getElementById('bb-bank-status');
     if(!q){res.innerHTML='';st.textContent='';return;}
     _load(function(){
-      var m=_banks.filter(function(b){return b.name.toLowerCase().includes(q);}).slice(0,8);
+      var words=q.split(/\s+/).filter(function(w){return w;});
+      var m=_banks.filter(function(b){var h=(b.name+' '+b.country).toLowerCase();return words.every(function(w){return h.includes(w);});});
       st.textContent='';
       if(!m.length){res.innerHTML='';st.innerHTML='<span style="color:var(--muted)">No match for <strong style="color:var(--text2)">'+q+'</strong>. Try a different spelling or check <a href="https://enablebanking.com/open-banking-apis" target="_blank" style="color:var(--accent);text-decoration:none;">Enable Banking</a>.</span>';return;}
+      res.style.maxHeight='400px';res.style.overflowY='auto';
       res.innerHTML=m.map(function(b){return'<div class="bank-result-item"><span style="font-size:18px;font-weight:500;color:#fff;">'+b.name+'</span><span style="font-size:14px;font-family:\'JetBrains Mono\',monospace;color:var(--accent);background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);padding:3px 10px;border-radius:12px;">'+b.country+'</span></div>';}).join('');
-      if(m.length===8)st.innerHTML='<span style="color:var(--muted);font-size:14px;">Showing first 8 results &mdash; type more to narrow down.</span>';
+      st.innerHTML='<span style="color:var(--muted);font-size:14px;">'+m.length+' bank'+(m.length!==1?'s':'')+' found</span>';
     });
   };
 })();
