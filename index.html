@@ -1377,6 +1377,7 @@
       if (res.ok) {
         msg.innerHTML = 'Check your email — your trial licence key has been sent!';
         msg.style.color = '#10b981';
+        btn.textContent = 'Sent';
       } else {
         msg.textContent = data.error || 'Something went wrong. Try again.';
         msg.style.color = '#ef4444';
