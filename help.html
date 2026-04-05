@@ -166,6 +166,17 @@
     </div>
   </div>
 
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">Watchtower keeps restarting with "client version 1.25 is too old"</div>
+    <div class="faq-a">
+      <p>The original watchtower project is no longer maintained. Run these commands one at a time in the folder where your <code>docker-compose.yml</code> is:</p>
+      <p><code>docker compose down watchtower</code></p>
+      <p><code>sed -i '' 's|containrrr/watchtower|nickfedor/watchtower|' docker-compose.yml</code></p>
+      <p><code>docker compose up -d</code></p>
+      <p>If you're on Linux instead of Mac, use <code>sed -i</code> (without the <code>''</code>).</p>
+    </div>
+  </div>
+
   <div class="section-label">License</div>
 
   <div class="faq-item">
