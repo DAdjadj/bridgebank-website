@@ -744,6 +744,29 @@
     #reviews-grid { grid-template-columns: 1fr !important; }
   }
 
+  @media (max-width: 720px) {
+    .data-flow {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      max-width: 320px;
+    }
+    .data-flow-node {
+      min-width: 0;
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .data-flow-arrow {
+      transform: rotate(90deg);
+      font-size: 18px;
+      margin: 2px 0;
+      align-self: center;
+    }
+  }
+
   /* Reviews */
   .review-card {
     background: var(--surface);
@@ -762,9 +785,12 @@
     .hero-left { padding: 80px 20px 36px; }
     .hero-right { padding: 24px 20px 36px; }
     .section { padding-left: 20px; padding-right: 20px; }
-    header { padding: 0 16px; }
-    .nav-links { gap: 14px; }
+    header { padding: 0 16px; height: 60px; }
+    .logo { font-size: 16px; gap: 8px; }
+    .logo-icon { width: 36px !important; }
+    .nav-links { gap: 12px; }
     .nav-links .nav-hide-mobile { display: none; }
+    .nav-cta { padding: 7px 14px; font-size: 13px !important; }
     h1 { font-size: 40px; letter-spacing: -2px; }
     .section-heading { font-size: 30px; letter-spacing: -1px; }
     .setup-pricing-grid { gap: 32px; }
@@ -776,8 +802,11 @@
     footer .right { justify-content: center; flex-wrap: wrap; }
     .trial-inline { flex-direction: column; align-items: stretch; }
     .trial-inline input { width: 100%; }
+    .trial-inline button { width: 100%; }
     .hero-ctas { text-align: center; }
     .hero-ctas .btn-primary { width: 100%; justify-content: center; }
+    .pikapods-row { flex-direction: column; max-width: 320px; }
+    .pikapods-row button { width: 100%; }
   }
 </style>
 </head>
@@ -791,9 +820,9 @@
   <div class="nav-links">
     <a href="#banks" class="nav-hide-mobile">Banks</a>
     <a href="#setup" class="nav-hide-mobile">How it works</a>
-    <a href="#pricing">Pricing</a>
-    <a href="/getting-started.html">Get started</a>
-    <a href="https://github.com/DAdjadj/bridge-bank" target="_blank">GitHub</a>
+    <a href="#pricing" class="nav-hide-mobile">Pricing</a>
+    <a href="/getting-started.html" class="nav-hide-mobile">Get started</a>
+    <a href="https://github.com/DAdjadj/bridge-bank" class="nav-hide-mobile" target="_blank">GitHub</a>
     <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03" class="nav-cta">Get license</a>
   </div>
 </header>
