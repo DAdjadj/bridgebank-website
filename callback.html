@@ -1,59 +1,340 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bridge Bank — Connecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bridge Bank: Completing connection</title>
   <style>
     body { font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #080b12; color: #e8edf5; }
-    .wrap { text-align: center; }
+    .wrap { text-align: center; max-width: 560px; padding: 24px; }
     .spinner { width: 32px; height: 32px; border: 2px solid #1e2a40; border-top-color: #3b82f6; border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 1rem; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    p { font-size: 14px; color: #94a3b8; margin: 0; }
+    .check { display: none; width: 44px; height: 44px; border-radius: 50%; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.45); color: #10b981; font-size: 22px; line-height: 44px; margin: 0 auto 1.25rem; }
+    .title { font-size: 17px; font-weight: 600; color: #e8edf5; margin: 0 0 0.5rem; }
+    .detail { display: none; font-size: 14px; color: #94a3b8; margin: 0 0 1.25rem; line-height: 1.6; }
+    .actions { display: none; margin: 0 0 1.5rem; }
+    .btn { background: linear-gradient(135deg, #3b82f6, #6366f1); color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block; }
+    #urlwrap { display: none; }
+    .url-label { font-size: 12px; color: #4a5568; margin: 0 0 0.5rem; }
+    .url { display: inline-block; background: #0f1420; border: 1px solid #1e2a40; border-radius: 8px; padding: 10px 14px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: #6366f1; word-break: break-all; cursor: pointer; max-width: 100%; }
+    .url.big { font-size: 17px; font-weight: 600; color: #e8edf5; padding: 14px 18px; }
+    .url.copied { color: #10b981; border-color: rgba(16,185,129,0.45); }
+    .hint { display: none; font-size: 13px; color: #94a3b8; margin: 1.5rem 0 0; line-height: 1.6; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="spinner"></div>
-    <p>Completing bank connection...</p>
+    <div class="spinner" id="spinner"></div>
+    <div class="check" id="check">&#10003;</div>
+    <p class="title" id="title">Completing bank connection...</p>
+    <p class="detail" id="detail"></p>
+    <div class="actions" id="actions"><a class="btn" id="btn" href="#">Complete connection</a></div>
+    <div id="urlwrap">
+      <p class="url-label" id="urlLabel"></p>
+      <code class="url" id="urlBox" title="Click to copy"></code>
+    </div>
+    <p class="hint" id="hint"></p>
   </div>
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const code  = params.get('code');
-    const state = params.get('state');
-    const error = params.get('error');
+  (function () {
+    'use strict';
 
-    // Extract Bridge Bank URL from state (format: "bridge-bank-auth|https://bb.example.com|uuid")
-    function getBridgeBankUrl() {
-      if (!state) return '';
-      var parts = state.split('|');
-      return parts.length > 1 ? parts[1] : '';
+    var API = 'https://api.bridgebank.app';
+    var params = new URLSearchParams(window.location.search);
+    var code = params.get('code');
+    var state = params.get('state');
+    var error = params.get('error');
+
+    // State format: "bridge-bank-auth|<instance_url>|<state_id>" (v1)
+    //            or "bridge-bank-auth2|<instance_url>|<state_id>" (v2, relay-capable)
+    var parts = state ? state.split('|') : [];
+    var rawInstance = parts.length > 1 ? parts[1] : '';
+    var instanceUrl = /^https?:\/\//i.test(rawInstance) ? rawInstance.replace(/\/+$/, '') : '';
+    var stateId = parts.length > 1 ? parts[parts.length - 1] : '';
+    var validStateId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(stateId);
+    var isV2 = parts[0] === 'bridge-bank-auth2' && validStateId;
+
+    var ua = navigator.userAgent;
+    var isSafari = /safari/i.test(ua) && !/chrome|chromium|crios|edg|opr|fxios|android/i.test(ua);
+
+    var bridgeUrl = instanceUrl || 'http://localhost:3002';
+    var callbackUrl = bridgeUrl + '/callback?' + window.location.search.slice(1);
+    var cancelUrl = instanceUrl ? instanceUrl + '/callback?error=auth_cancelled' : '';
+
+    // 'loading' | 'manual-v2' | 'manual-v1' | 'success' | 'cancel'
+    var view = 'loading';
+
+    function $(id) { return document.getElementById(id); }
+
+    function setDetail(text) {
+      $('detail').textContent = text || '';
+      $('detail').style.display = text ? 'block' : 'none';
     }
+
+    function setView(v) {
+      $('spinner').style.display = v.spinner ? 'block' : 'none';
+      $('check').style.display = v.check ? 'block' : 'none';
+      $('title').textContent = v.title || '';
+      setDetail(v.detail);
+      if (v.button) {
+        $('btn').textContent = v.button.label;
+        $('btn').setAttribute('href', v.button.url);
+        $('actions').style.display = 'block';
+      } else {
+        $('actions').style.display = 'none';
+      }
+      if (v.url) {
+        $('urlLabel').textContent = v.url.label || '';
+        $('urlLabel').removeAttribute('data-label');
+        $('urlBox').textContent = v.url.text;
+        $('urlBox').className = v.url.big ? 'url big' : 'url';
+        $('urlwrap').style.display = 'block';
+      } else {
+        $('urlwrap').style.display = 'none';
+      }
+      $('hint').textContent = v.hint || '';
+      $('hint').style.display = v.hint ? 'block' : 'none';
+    }
+
+    // Click-to-copy on the URL box.
+    var copyTimer = null;
+    $('urlBox').addEventListener('click', function () {
+      var box = $('urlBox');
+      var label = $('urlLabel');
+      var text = box.textContent;
+      function flash() {
+        box.classList.add('copied');
+        if (!label.getAttribute('data-label')) {
+          label.setAttribute('data-label', label.textContent);
+        }
+        label.textContent = 'Copied to clipboard.';
+        clearTimeout(copyTimer);
+        copyTimer = setTimeout(function () {
+          box.classList.remove('copied');
+          label.textContent = label.getAttribute('data-label') || '';
+        }, 1600);
+      }
+      function selectFallback() {
+        var range = document.createRange();
+        range.selectNodeContents(box);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(flash, selectFallback);
+      } else {
+        selectFallback();
+      }
+    });
+
+    // ---------- base64url helpers (URL-safe alphabet, no padding) ----------
+
+    function b64urlEncode(buf) {
+      var bytes = new Uint8Array(buf);
+      var bin = '';
+      for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+      return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+    }
+
+    function b64urlDecode(str) {
+      var b64 = String(str).replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4 !== 0) b64 += '=';
+      var bin = atob(b64);
+      var bytes = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      return bytes;
+    }
+
+    // ---------- ECIES encryption (must match the instance byte-for-byte) ----------
+    // P-256 ECDH with a fresh ephemeral key, HKDF-SHA256 (empty salt,
+    // info "bridge-bank-relay-v1") to a 256-bit AES-GCM key, 12-byte IV,
+    // GCM tag appended to the ciphertext (WebCrypto default).
+
+    async function encryptCode(plaintext, pubkeyB64url) {
+      var instRaw = b64urlDecode(pubkeyB64url); // 65-byte uncompressed EC point
+      var instKey = await crypto.subtle.importKey(
+        'raw', instRaw, { name: 'ECDH', namedCurve: 'P-256' }, false, []);
+      var eph = await crypto.subtle.generateKey(
+        { name: 'ECDH', namedCurve: 'P-256' }, false, ['deriveBits']);
+      var shared = await crypto.subtle.deriveBits(
+        { name: 'ECDH', public: instKey }, eph.privateKey, 256);
+      var hkdfKey = await crypto.subtle.importKey('raw', shared, 'HKDF', false, ['deriveKey']);
+      var aesKey = await crypto.subtle.deriveKey(
+        { name: 'HKDF', hash: 'SHA-256', salt: new Uint8Array(0), info: new TextEncoder().encode('bridge-bank-relay-v1') },
+        hkdfKey,
+        { name: 'AES-GCM', length: 256 },
+        false,
+        ['encrypt']);
+      var iv = crypto.getRandomValues(new Uint8Array(12));
+      var ct = await crypto.subtle.encrypt(
+        { name: 'AES-GCM', iv: iv }, aesKey, new TextEncoder().encode(plaintext));
+      var epkRaw = await crypto.subtle.exportKey('raw', eph.publicKey);
+      return { epk: b64urlEncode(epkRaw), iv: b64urlEncode(iv), ct: b64urlEncode(ct) };
+    }
+
+    // ---------- relay API ----------
+
+    function relayStatus() {
+      return fetch(API + '/auth-relay/status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ state_id: stateId })
+      }).then(function (r) { return r.json(); });
+    }
+
+    function postComplete(payload) {
+      return fetch(API + '/auth-relay/complete', {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }
+
+    function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+    async function pollClaimed() {
+      var deadline = Date.now() + 30000;
+      while (Date.now() < deadline) {
+        await sleep(2000);
+        try {
+          var s = await relayStatus();
+          if (s && s.claimed) return true;
+        } catch (e) { /* transient network error, keep polling */ }
+      }
+      return false;
+    }
+
+    async function runRelay() {
+      var st = null;
+      try { st = await relayStatus(); } catch (e) { st = null; }
+      if (st && st.claimed) { showRelaySuccess(); return; }
+      if (st && st.delivered) {
+        // Code already delivered (for example after a reload); just wait for pickup.
+        onDelivered();
+        if (await pollClaimed()) { showRelaySuccess(); } else { onClaimTimeout(); }
+        return;
+      }
+      if (!st || !st.pubkey) { relayUnavailable(); return; }
+      var enc = null;
+      try { enc = await encryptCode(code, st.pubkey); } catch (e) { enc = null; }
+      if (!enc) { relayUnavailable(); return; }
+      try {
+        await postComplete({ state_id: stateId, ct: enc.ct, iv: enc.iv, epk: enc.epk });
+      } catch (e) { relayUnavailable(); return; }
+      onDelivered();
+      if (await pollClaimed()) { showRelaySuccess(); } else { onClaimTimeout(); }
+    }
+
+    // ---------- views ----------
+
+    function httpHint(url) {
+      return url.indexOf('http://') === 0
+        ? 'If nothing happens, your browser may block this address because it starts with http. Copy the link and open it in Chrome or Firefox to finish.'
+        : 'If nothing happens, copy the link and open it in a new tab.';
+    }
+
+    function showManual(tag, title) {
+      view = tag;
+      setView({
+        title: title,
+        detail: 'Click the button below to finish connecting in Bridge Bank.',
+        button: { label: 'Complete connection', url: callbackUrl },
+        url: { label: 'Or open this link in a new tab (click to copy):', text: callbackUrl },
+        hint: httpHint(callbackUrl)
+      });
+    }
+
+    function showV2Manual() { showManual('manual-v2', 'Bank sign-in complete.'); }
+    function showV1Manual() { showManual('manual-v1', 'One more step to finish connecting.'); }
+
+    function showRelaySuccess() {
+      view = 'success';
+      setView({
+        check: true,
+        title: 'Connected. Your Bridge Bank server picked up the code.',
+        detail: 'Return to Bridge Bank to finish. You can close this tab afterwards.',
+        button: { label: 'Open Bridge Bank', url: instanceUrl || bridgeUrl },
+        url: { label: 'Your Bridge Bank address (click to copy):', text: instanceUrl || bridgeUrl, big: true }
+      });
+    }
+
+    function relayUnavailable() {
+      // Relay disabled or registration failed: fall back to the v1 flow.
+      if (view === 'success') return;
+      showV1Manual();
+    }
+
+    function onDelivered() {
+      if (view === 'success') return;
+      if (view === 'loading') showV2Manual();
+      setDetail('The code was also sent to your Bridge Bank server through an encrypted relay. Checking if it was picked up...');
+    }
+
+    function onClaimTimeout() {
+      if (view === 'success') return;
+      if (view === 'loading') showV2Manual();
+      setDetail('Your Bridge Bank server has not picked up the code yet. Use the button below to finish in this browser, or return to Bridge Bank and try again.');
+    }
+
+    function showCancelManual() {
+      view = 'cancel';
+      setView({
+        title: 'Bank connection cancelled.',
+        detail: 'The bank denied the request or the sign-in was cancelled. Return to Bridge Bank to try again.',
+        button: { label: 'Return to Bridge Bank', url: cancelUrl },
+        url: { label: 'Or open this link in a new tab (click to copy):', text: cancelUrl },
+        hint: cancelUrl.indexOf('http://') === 0 ? 'If nothing happens, copy the link and open it in Chrome or Firefox.' : ''
+      });
+    }
+
+    function showStaticCancelled() {
+      view = 'cancel';
+      setView({
+        title: 'Bank connection was cancelled or failed.',
+        detail: "Use your browser's back button or return to Bridge Bank to try again."
+      });
+    }
+
+    // ---------- main ----------
 
     if (code && state && !error) {
-      // Success — redirect to Bridge Bank's /callback
-      const bridge_bank_url = getBridgeBankUrl() || 'http://localhost:3002';
-      const callbackUrl = bridge_bank_url + '/callback?' + window.location.search.slice(1);
-      window.location.href = callbackUrl;
-      // If blocked (Safari HTTPS-Only), show manual instructions after 2 seconds
-      setTimeout(function() {
-        document.querySelector('.spinner').style.display = 'none';
-        var isHttp = callbackUrl.startsWith('http://');
-        var hint = isHttp
-          ? '<br><br><span style="font-size:13px;color:#ef4444;">⚠ Your browser may block this because the URL is HTTP.<br>In Safari, go to <b>Settings → Privacy</b> and uncheck <b>"Upgrade to HTTPS"</b>, then click the button above.</span>'
-          : '';
-        document.querySelector('p').innerHTML = 'Click below to complete the connection:<br><br><a href="' + callbackUrl + '" style="background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Complete connection →</a>' + hint + '<br><br><span style="font-size:12px;color:#4a5568;">Or paste this URL in a new tab:</span><br><code style="font-size:11px;color:#6366f1;word-break:break-all;cursor:pointer;" onclick="navigator.clipboard.writeText(\'' + callbackUrl + '\');this.style.color=\'#10b981\';this.textContent=\'Copied!\';setTimeout(function(){}.bind(this),1500)">' + callbackUrl + '</code>';
-      }, 2000);
-    } else {
-      // Cancelled or error — redirect back to Bridge Bank
-      var bbUrl = getBridgeBankUrl();
-      if (bbUrl) {
-        window.location.href = bbUrl + '/connect?error=auth_cancelled';
+      if (isV2) {
+        // Start relay delivery; the legacy redirect stays available in parallel.
+        runRelay();
+        if (isSafari && callbackUrl.indexOf('http://') === 0) {
+          // Safari with HTTPS-First can tear this page down when auto-navigating
+          // to an http address. Show the manual button immediately instead.
+          showV2Manual();
+        } else {
+          window.location.href = callbackUrl;
+          setTimeout(function () { if (view === 'loading') showV2Manual(); }, 2000);
+        }
       } else {
-        // No state available — show link back with fallback
-        document.querySelector('.spinner').style.display = 'none';
-        document.querySelector('p').innerHTML = 'Bank connection was cancelled or failed.<br><br><span style="font-size:13px;color:#94a3b8;">Use your browser\'s back button or return to Bridge Bank to try again.</span>';
+        // v1: redirect immediately, show the manual fallback if still here after 2s.
+        window.location.href = callbackUrl;
+        setTimeout(function () { if (view === 'loading') showV1Manual(); }, 2000);
       }
+    } else if (state) {
+      // Bank denied the request or the user cancelled.
+      if (isV2) {
+        try { postComplete({ state_id: stateId, error: 'cancelled' }).catch(function () {}); } catch (e) {}
+      }
+      if (instanceUrl) {
+        if (isSafari && cancelUrl.indexOf('http://') === 0) {
+          showCancelManual();
+        } else {
+          window.location.href = cancelUrl;
+          setTimeout(function () { if (view === 'loading') showCancelManual(); }, 2000);
+        }
+      } else {
+        showStaticCancelled();
+      }
+    } else {
+      showStaticCancelled();
     }
+  })();
   </script>
 </body>
 </html>
