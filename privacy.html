@@ -45,11 +45,11 @@
 
     <div class="meta">
       <h1>Privacy Policy</h1>
-      <p class="date">Last updated: March 2026</p>
+      <p class="date">Last updated: July 2026</p>
     </div>
 
     <div class="intro">
-      Bridge Bank is a self-hosted application. Your bank transactions, credentials, and financial data never leave your machine &mdash; they are never sent to or stored on our servers. The only data we handle is what is strictly necessary to operate the licence system. This policy explains what that is.
+      Bridge Bank is a self-hosted application. Your bank transactions, credentials, and financial data never leave your machine &mdash; they are never sent to or stored on our servers. The only data we handle is what is strictly necessary to operate the licence system and, during bank connection, a short-lived encrypted authorisation code that we cannot read. This policy explains what that is.
     </div>
 
     <h2>Who we are</h2>
@@ -63,7 +63,7 @@
     </ul>
 
     <div class="highlight">
-      We do not collect, store, or have access to your bank account data, transaction history, Actual Budget content, Enable Banking credentials, SMTP passwords, or any financial information. All of this stays on your machine.
+      We do not collect, store, or have access to your bank account data, transaction history, Actual Budget content, Enable Banking credentials, SMTP passwords, or any financial information. All of this stays on your machine. During bank connection we briefly hold an encrypted authorisation code that we cannot read (see "Bank connection relay" below).
     </div>
 
     <h2>What we do not collect</h2>
@@ -75,6 +75,9 @@
       <li>Usage analytics or telemetry</li>
       <li>IP addresses or device identifiers</li>
     </ul>
+
+    <h2>Bank connection relay</h2>
+    <p>When you connect or re-authorise a bank, the bank confirms the authorisation with a short-lived authorisation code. To complete the connection reliably, this code can pass through Bridge Bank infrastructure. It is encrypted in your browser with a key held only by your own Bridge Bank installation, it is stored for at most 30 minutes and then deleted, and it cannot be read by us. It contains no account data, transactions, or balances, and it gives us no access to your bank.</p>
 
     <h2>Third-party services</h2>
     <p><strong>Stripe</strong> &mdash; processes payments. When you purchase Bridge Bank, Stripe collects your email and payment information. Their privacy policy is available at <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a>.</p>
