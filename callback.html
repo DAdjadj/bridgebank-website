@@ -59,7 +59,9 @@
 
     var bridgeUrl = instanceUrl || 'http://localhost:3002';
     var callbackUrl = bridgeUrl + '/callback?' + window.location.search.slice(1);
-    var cancelUrl = instanceUrl ? instanceUrl + '/callback?error=auth_cancelled' : '';
+    var cancelUrl = instanceUrl
+      ? instanceUrl + '/callback?error=auth_cancelled' + (state ? '&state=' + encodeURIComponent(state) : '')
+      : '';
 
     // 'loading' | 'manual-v2' | 'manual-v1' | 'success' | 'cancel'
     var view = 'loading';
