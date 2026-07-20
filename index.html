@@ -1501,5 +1501,45 @@
 })();
 </script>
 
+<script>
+(function () {
+  // Summer sale 2026 banner. Self-expiring: from 2 Aug 2026 23:59 Lisbon
+  // onwards this block does nothing, so there is nothing to switch off.
+  // Safe to delete any time after the sale.
+  var SALE_END = Date.parse('2026-08-02T22:59:00Z'); // 23:59 Europe/Lisbon
+  if (Date.now() >= SALE_END) return;
+  var BUY = 'https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03';
+  var SALE_URL = BUY + '?prefilled_promo_code=SUMMER15';
+
+  // Pre-apply the code on every buy link on the page
+  document.querySelectorAll('a[href="' + BUY + '"]').forEach(function (a) { a.href = SALE_URL; });
+
+  // Sale note inside the pricing card
+  var priceType = document.querySelector('.price-type');
+  if (priceType) {
+    var note = document.createElement('div');
+    note.textContent = 'Summer sale: €24.65 with code SUMMER15, until 2 August';
+    note.style.cssText = 'margin-top:6px;font-size:13px;font-weight:600;color:var(--accent);';
+    priceType.after(note);
+  }
+
+  // Announcement bar above the fixed header
+  var bar = document.createElement('div');
+  bar.id = 'summer-sale-banner';
+  bar.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:101;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;text-align:center;padding:9px 16px;font-size:13px;font-weight:600;letter-spacing:-0.1px;';
+  bar.innerHTML = 'Summer sale &middot; 15% off until Sunday 2 August &middot; <a href="' + SALE_URL + '" style="color:#fff;text-decoration:underline;">code SUMMER15 applied automatically &rarr;</a>';
+  document.body.prepend(bar);
+
+  var header = document.querySelector('header');
+  function layout() {
+    var h = bar.offsetHeight;
+    if (header) header.style.top = h + 'px';
+    document.body.style.paddingTop = h + 'px';
+  }
+  layout();
+  window.addEventListener('resize', layout);
+})();
+</script>
+
 </body>
 </html>
