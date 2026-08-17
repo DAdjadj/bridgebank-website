@@ -59,8 +59,18 @@
 
     var bridgeUrl = instanceUrl || 'http://localhost:3002';
     var callbackUrl = bridgeUrl + '/callback?' + window.location.search.slice(1);
+    // The bank's refusal reason exists only in this redirect, and hardcoding
+    // 'auth_cancelled' here used to discard it, so an outright rejection by
+    // the bank reached the instance looking exactly like the user pressing
+    // cancel. Forward whatever the bank actually said.
+    var bankError = error || 'auth_cancelled';
+    // Rendered with textContent everywhere, so this is not injectable, but it
+    // is URL-controlled: cap it so a crafted link cannot distort the page.
+    var bankDetail = (params.get('error_description') || params.get('error_message') || '').slice(0, 160);
     var cancelUrl = instanceUrl
-      ? instanceUrl + '/callback?error=auth_cancelled' + (state ? '&state=' + encodeURIComponent(state) : '')
+      ? instanceUrl + '/callback?error=' + encodeURIComponent(bankError)
+          + (bankDetail ? '&error_description=' + encodeURIComponent(bankDetail) : '')
+          + (state ? '&state=' + encodeURIComponent(state) : '')
       : '';
 
     // Auto-navigation is limited to private targets (localhost, LAN IPs,
@@ -308,7 +318,9 @@
       view = 'cancel';
       setView({
         title: 'Bank connection cancelled.',
-        detail: 'The bank denied the request or the sign-in was cancelled. Return to Bridge Bank to try again.',
+        detail: bankDetail
+          ? 'Your bank refused the request: "' + bankDetail + '". Return to Bridge Bank to try again.'
+          : 'The bank denied the request or the sign-in was cancelled. Return to Bridge Bank to try again.',
         button: { label: 'Return to Bridge Bank', url: cancelUrl },
         url: { label: 'Or open this link in a new tab (click to copy):', text: cancelUrl },
         hint: cancelUrl.indexOf('http://') === 0 ? 'If nothing happens, copy the link and open it in Chrome or Firefox.' : ''
