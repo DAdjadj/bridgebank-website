@@ -182,14 +182,16 @@
       <div class="step-desc">
         <p>Once logged in, go to <strong>API applications</strong> and click <strong>Register new application</strong>. Fill in the form as follows:</p>
         <div class="substeps">
-          <div class="substep"><div class="substep-num">1</div><div class="substep-text"><strong>Application name:</strong> <code>Bridge Bank</code> <button class="copy-btn" onclick="copyText('Bridge Bank', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">2</div><div class="substep-text"><strong>Allowed redirect URLs:</strong> <code>https://bridgebank.app/callback</code> <button class="copy-btn" onclick="copyText('https://bridgebank.app/callback', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">3</div><div class="substep-text"><strong>Application description:</strong> <code>Connect Actual Budget with my bank</code> <button class="copy-btn" onclick="copyText('Connect Actual Budget with my bank', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">4</div><div class="substep-text"><strong>Email for data protection matters:</strong> your email address</div></div>
-          <div class="substep"><div class="substep-num">5</div><div class="substep-text"><strong>Privacy URL:</strong> <code>https://bridgebank.app/privacy</code> <button class="copy-btn" onclick="copyText('https://bridgebank.app/privacy', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">6</div><div class="substep-text"><strong>Terms URL:</strong> <code>https://bridgebank.app/terms</code> <button class="copy-btn" onclick="copyText('https://bridgebank.app/terms', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">7</div><div class="substep-text">Click <strong>Register</strong>. A <code>.pem</code> file will be automatically downloaded to your Downloads folder. The filename will match your Application ID (e.g. <code>aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.pem</code>). Keep this file safe — you'll need it in the setup wizard.</div></div>
+          <div class="substep"><div class="substep-num">1</div><div class="substep-text"><strong>Mode:</strong> select <strong>Production</strong>, not <strong>Sandbox</strong></div></div>
+          <div class="substep"><div class="substep-num">2</div><div class="substep-text"><strong>Application name:</strong> <code>Bridge Bank</code> <button class="copy-btn" onclick="copyText('Bridge Bank', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">3</div><div class="substep-text"><strong>Allowed redirect URLs:</strong> <code>https://bridgebank.app/callback</code> <button class="copy-btn" onclick="copyText('https://bridgebank.app/callback', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">4</div><div class="substep-text"><strong>Application description:</strong> <code>Connect Actual Budget with my bank</code> <button class="copy-btn" onclick="copyText('Connect Actual Budget with my bank', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">5</div><div class="substep-text"><strong>Email for data protection matters:</strong> your email address</div></div>
+          <div class="substep"><div class="substep-num">6</div><div class="substep-text"><strong>Privacy URL:</strong> <code>https://bridgebank.app/privacy</code> <button class="copy-btn" onclick="copyText('https://bridgebank.app/privacy', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">7</div><div class="substep-text"><strong>Terms URL:</strong> <code>https://bridgebank.app/terms</code> <button class="copy-btn" onclick="copyText('https://bridgebank.app/terms', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">8</div><div class="substep-text">Click <strong>Register</strong>. A <code>.pem</code> file will be automatically downloaded to your Downloads folder. The filename will match your Application ID (e.g. <code>aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.pem</code>). Keep this file safe — you'll need it in the setup wizard.</div></div>
         </div>
+        <div class="note note-warn"><strong>Choose the mode before you register.</strong> Enable Banking asks for it at the top of the form, and the choice is permanent: applications cannot be moved between Sandbox and Production afterwards. A Sandbox application only returns simulated test data, so it will never connect to your real bank. If you already registered one in Sandbox by mistake, just register a second application in Production and use that one.</div>
       </div>
     </div>
   </div>
@@ -201,21 +203,6 @@
       <div class="step-line"></div>
     </div>
     <div class="step-body">
-      <div class="step-title">Set your application to Production</div>
-      <div class="step-desc">
-        <p>After registering, your application starts in <strong>Sandbox</strong> mode. Go to your application settings and switch the mode from <strong>Sandbox</strong> to <strong>Production</strong>.</p>
-        <p>This is required for Bridge Bank to connect to your real bank account.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Step 4 -->
-  <div class="step">
-    <div class="step-left">
-      <div class="step-num">4</div>
-      <div class="step-line"></div>
-    </div>
-    <div class="step-body">
       <div class="step-title">Activate by linking your bank account</div>
       <div class="step-desc">
         <p>Click <strong>Activate by linking accounts</strong> on your application page. Select your country and bank, click <strong>Link</strong>, and follow your bank's login flow to approve read-only access.</p>
@@ -224,10 +211,10 @@
     </div>
   </div>
 
-  <!-- Step 5 -->
+  <!-- Step 4 -->
   <div class="step">
     <div class="step-left">
-      <div class="step-num">5</div>
+      <div class="step-num">4</div>
       <div class="step-line"></div>
     </div>
     <div class="step-body">
@@ -281,10 +268,10 @@ docker compose up -d</div>
     </div>
   </div>
 
-  <!-- Step 6 -->
+  <!-- Step 5 -->
   <div class="step">
     <div class="step-left">
-      <div class="step-num">6</div>
+      <div class="step-num">5</div>
     </div>
     <div class="step-body">
       <div class="step-title">Open Bridge Bank and complete setup</div>
