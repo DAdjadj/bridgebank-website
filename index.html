@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bridge Bank · Sync your European bank to Actual Budget</title>
-<meta name="description" content="Bridge Bank connects your European bank via open banking and syncs every transaction into Actual Budget automatically. Self-hosted, open source, €29 one-time.">
+<meta name="description" content="Every transaction from your European bank, in Actual Budget, automatically. Free for 7 days, then €29 once. No subscription.">
 <meta property="og:title" content="Bridge Bank · Your European bank, in Actual Budget">
 <meta property="og:description" content="Open banking sync for Actual Budget. 2,500+ banks in 29 countries. Runs on your machine. €29 once.">
 <meta property="og:image" content="https://bridgebank.app/media/hero-poster.jpg">
@@ -115,6 +115,11 @@
   }
   .trust span { display: inline-flex; align-items: center; gap: 7px; }
   .trust svg { color: var(--green); flex-shrink: 0; }
+
+  .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 860px; margin: 56px auto 0; }
+  .promises div { border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; background: #fff; }
+  .promises b { display: block; font-size: 20px; letter-spacing: -0.02em; }
+  .promises span { font-size: 15px; color: var(--muted); }
 
   /* --- Demo window --- */
   .window {
@@ -290,12 +295,14 @@
   @media (max-width: 900px) {
     .step { grid-template-columns: 1fr; gap: 28px; margin-bottom: 72px; }
     .step.flip .step-text { order: 0; }
-    .features { grid-template-columns: 1fr 1fr; }
+    .features, .trust-grid { grid-template-columns: 1fr 1fr !important; }
     .nav-links .hide-m { display: none; }
     section { padding: 72px 0; }
   }
   @media (max-width: 600px) {
     body { font-size: 16px; }
+    .promises { grid-template-columns: 1fr; margin-top: 40px; }
+    .trust-grid, .features { grid-template-columns: 1fr !important; }
     .container, .narrow { padding: 0 16px; }
     .hero { padding: 48px 0 24px; }
     .lead { font-size: 17px; }
@@ -336,21 +343,21 @@
 <!-- ====== HERO ====== -->
 <div class="hero">
   <div class="container">
-    <div class="pill"><span class="dot"></span>Open source &middot; &euro;29 once &middot; no subscription</div>
+    <div class="pill"><span class="dot"></span>7 days free &middot; then &euro;29 once &middot; no subscription</div>
     <h1>Your European bank, in Actual&nbsp;Budget. <span class="soft">Automatically.</span></h1>
-    <p class="lead">Bridge Bank connects to your bank through regulated open banking and drops every new transaction into Actual Budget. No CSV exports, no typing. It runs on your own machine.</p>
+    <p class="lead">Bridge Bank brings every new transaction from your bank into Actual Budget on its own. No CSV exports, no typing, no monthly fee.</p>
 
     <div class="trial-form">
       <input type="email" id="trial-email" placeholder="you@example.com" aria-label="Email for your free trial">
       <button class="btn btn-primary" id="trial-btn" onclick="startTrial('trial')">Start 7-day free trial</button>
     </div>
     <div class="form-msg" id="trial-msg"></div>
-    <div class="hero-sub">No credit card. Or <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03">buy a license for &euro;29</a>.</div>
+    <div class="hero-sub">No credit card. If you keep it, it's &euro;29 once and yours for good. <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03">Buy now</a></div>
 
     <div class="trust">
-      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>2,500+ banks in 29 countries</span>
-      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Read-only access</span>
-      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Self-hosted with Docker</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>2,500+ European banks</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Read-only, can't move money</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Runs on your own server</span>
       <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><a href="https://github.com/DAdjadj/bridge-bank" target="_blank" rel="noopener" style="color:inherit;">Open source on GitHub</a></span>
     </div>
 
@@ -361,6 +368,12 @@
       </div>
       <p class="demo-caption">The real app with made-up data: one sync, and the new transactions are waiting in Actual Budget.</p>
     </div>
+
+    <div class="promises reveal">
+      <div><b>Free for 7 days</b><span>No credit card needed</span></div>
+      <div><b>&euro;29, once</b><span>No subscription, ever</span></div>
+      <div><b>Yours for good</b><span>Updates included for life</span></div>
+    </div>
   </div>
 </div>
 
@@ -369,15 +382,15 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow">How it works</div>
-      <h2>Set up once in about 15 minutes. Then forget about it.</h2>
-      <p>You need Docker, a self-hosted Actual Budget and a free Enable Banking account. The <a href="/getting-started.html">setup guide</a> walks you through all of it.</p>
+      <h2>Set up once. Then forget about it.</h2>
+      <p>About 15 minutes from start to syncing, with a <a href="/getting-started.html">step-by-step guide</a> the whole way.</p>
     </div>
 
     <div class="step reveal">
       <div class="step-text">
         <div class="step-num">1</div>
         <h3>Start it with one command</h3>
-        <p>Bridge Bank is a small Docker container. It runs on Linux, Mac, Windows, a Raspberry Pi or your NAS, next to Actual Budget.</p>
+        <p>Bridge Bank runs right next to your Actual Budget, on whatever already hosts it: a home server, a Raspberry Pi, a NAS, or your Mac or PC.</p>
         <div class="time">About 2 minutes</div>
       </div>
       <pre class="code"><button class="copy" onclick="copyCode(this)">Copy</button><span class="c"># Linux / Mac</span>
@@ -439,8 +452,8 @@
           <p>New versions install in the background. Nothing to babysit.</p>
         </div>
         <div class="feature">
-          <h4>No Bridge Bank cloud</h4>
-          <p>It runs on your server. Your transactions aren't stored anywhere else.</p>
+          <h4>Email when it matters</h4>
+          <p>A heads-up if a sync fails or a bank needs renewing.</p>
         </div>
       </div>
     </div>
@@ -474,6 +487,38 @@
   </div>
 </section>
 
+<!-- ====== TRUST ====== -->
+<section id="trust">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Safe by design</div>
+      <h2>Your money stays where it is. Your data stays with you.</h2>
+    </div>
+    <div class="features trust-grid reveal" style="grid-template-columns:repeat(4,1fr);">
+      <div class="feature">
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <h4>Read-only</h4>
+        <p>You approve access on your bank's own page, through Enable Banking, a regulated open banking provider. Bridge Bank never sees your password and can't move money.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div>
+        <h4>On your server</h4>
+        <p>Bridge Bank runs on your own machine. Your transactions aren't sent to or stored on our servers.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg></div>
+        <h4>Open source</h4>
+        <p>Every line is <a href="https://github.com/DAdjadj/bridge-bank" target="_blank" rel="noopener">on GitHub</a>. Read it, or have someone you trust read it.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+        <h4>A real person</h4>
+        <p>Made by David Alves, an independent developer. Emails go straight to him at <a href="mailto:support@david-alves.com">support@david-alves.com</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ====== REVIEWS (shown when there are any) ====== -->
 <section id="reviews-section" style="display:none;">
   <div class="container">
@@ -490,12 +535,12 @@
   <div class="container">
     <div class="section-head reveal" style="margin-bottom:40px;">
       <div class="eyebrow">Pricing</div>
-      <h2>Pay once. Use it for good.</h2>
-      <p>Try everything free for 7 days first.</p>
+      <h2>Pay once. Keep it forever.</h2>
+      <p>No subscription, no renewals. Try everything free for 7 days first.</p>
     </div>
     <div class="pricing reveal">
       <div class="price">&euro;29<small>one-time</small></div>
-      <p class="price-note">No subscription. Lifetime updates.</p>
+      <p class="price-note">Yours for good, with updates included.</p>
       <ul class="price-list">
         <li>All 2,500+ European banks</li>
         <li>2 bank accounts included</li>
@@ -523,9 +568,16 @@
     </div>
     <div class="faq">
       <details>
-        <summary>What do I need to run it?</summary>
+        <summary>Is it really a one-time payment?</summary>
         <div class="answer">
-          <p>A machine that runs Docker (Linux, Mac, Windows, Raspberry Pi or a NAS), a self-hosted <a href="https://actualbudget.org" target="_blank" rel="noopener">Actual Budget</a>, and a free <a href="https://enablebanking.com" target="_blank" rel="noopener">Enable Banking</a> account. The <a href="/getting-started.html">setup guide</a> covers each step.</p>
+          <p>Yes. &euro;29 once, no subscription and nothing to renew. Updates are included.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Will it work with my setup?</summary>
+        <div class="answer">
+          <p>If you self-host <a href="https://actualbudget.org" target="_blank" rel="noopener">Actual Budget</a>, you're most of the way there. Bridge Bank runs as a small Docker container right next to it. The bank connection goes through <a href="https://enablebanking.com" target="_blank" rel="noopener">Enable Banking</a>, which is free, and the <a href="/getting-started.html">setup guide</a> walks you through it.</p>
+          <p>The 7-day trial is the easiest way to find out.</p>
         </div>
       </details>
       <details>
@@ -544,7 +596,7 @@
       <details>
         <summary>What happens when the trial ends?</summary>
         <div class="answer">
-          <p>Syncing stops until you add a license. Buy one for &euro;29, enter the key on the License page, and syncing starts again. Your setup stays as it is.</p>
+          <p>Nothing is deleted. Syncing pauses until you add a license: buy one for &euro;29, enter the key on the License page, and it starts again with your setup exactly as you left it.</p>
         </div>
       </details>
       <details>
@@ -578,8 +630,8 @@
 <!-- ====== FINAL CTA ====== -->
 <section class="soft final">
   <div class="narrow reveal">
-    <h2>Stop typing transactions into Actual.</h2>
-    <p style="color:var(--text-2);font-size:18px;">Free for 7 days. &euro;29 once if you keep it.</p>
+    <h2>Try it free for 7 days.</h2>
+    <p style="color:var(--text-2);font-size:18px;">If you keep it, it's &euro;29 once. No subscription, ever.</p>
     <div class="btns">
       <a href="#top" class="btn btn-primary" onclick="focusTrial(event)">Start free trial</a>
       <a href="/getting-started.html" class="btn btn-outline">Read the setup guide</a>
