@@ -269,6 +269,8 @@
   .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
   .foot-left { display: flex; align-items: center; gap: 10px; }
   .foot-left img { width: 28px; height: auto; }
+  .foot-left .maker { color: var(--muted); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+  .foot-left .maker:hover { color: var(--text); }
   .foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
   .foot-links a { color: var(--muted); }
   .foot-links a:hover { color: var(--text); }
@@ -513,7 +515,7 @@
       <div class="feature">
         <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
         <h4>A real person</h4>
-        <p>Made by David Alves, an independent developer. Emails go straight to him at <a href="mailto:support@david-alves.com">support@david-alves.com</a>.</p>
+        <p>Made by <a href="https://david-alves.com/building/" target="_blank" rel="noopener">David Alves</a>, an independent developer. Emails go straight to him at <a href="mailto:support@david-alves.com">support@david-alves.com</a>.</p>
       </div>
     </div>
   </div>
@@ -654,7 +656,7 @@
 
 <footer>
   <div class="container foot">
-    <div class="foot-left"><img src="/da.png" alt="">&copy; 2026 Bridge Bank</div>
+    <div class="foot-left"><a href="https://david-alves.com" target="_blank" rel="noopener" aria-label="David Alves"><img src="/da.png" alt=""></a><span>&copy; 2026 Bridge Bank &middot; Made by <a href="https://david-alves.com" target="_blank" rel="noopener" class="maker">David Alves</a></span></div>
     <div class="foot-links">
       <a href="/getting-started.html">Setup guide</a>
       <a href="/help">Help</a>
@@ -797,6 +799,8 @@
     .then(function (r) { return r.json(); })
     .then(function (reviews) {
       if (!reviews.length) return;
+      // Named, longer reviews first
+      reviews.sort(function (a, b) { return (!!b.name - !!a.name) || (b.review.length - a.review.length); });
       document.getElementById('reviews-section').style.display = 'block';
       document.getElementById('reviews-grid').innerHTML = reviews.map(function (r) {
         var stars = '';
