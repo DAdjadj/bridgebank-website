@@ -8,23 +8,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #080b12;
-    --surface: #0f1420;
-    --surface2: #161d2e;
-    --border: #1e2a40;
-    --border2: #253450;
-    --accent: #3b82f6;
-    --accent2: #6366f1;
-    --green: #10b981;
-    --text: #e8edf5;
-    --text2: #94a3b8;
-    --muted: #4a5568;
+    --bg: #ffffff;
+    --surface: #f6f7f9;
+    --surface2: #f1f3f6;
+    --border: #e6e8ec;
+    --border2: #d5d9e0;
+    --accent: #2563eb;
+    --accent2: #2563eb;
+    --green: #059669;
+    --text: #0f172a;
+    --text2: #5b6475;
+    --muted: #64748b;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
-  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
 
-  header { position: relative; z-index: 10; padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); background: rgba(8,11,18,0.8); backdrop-filter: blur(12px); }
+  header { position: relative; z-index: 10; padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); }
   .logo { font-weight: 700; font-size: 17px; color: var(--text); display: flex; align-items: center; gap: 10px; text-decoration: none; }
   .logo-icon { width: 30px; height: 30px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
 
@@ -63,7 +62,7 @@
 
 <header>
   <a href="/" class="logo">
-    <div class="logo-icon">&#x27F7;</div>
+    <img src="/da.png" alt="" style="width:34px;height:auto;">
     Bridge Bank
   </a>
 </header>
