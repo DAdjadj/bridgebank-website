@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bridge Bank · Sync your European bank to Actual Budget</title>
+<title>Bridge Bank · Sync your European bank to Actual Budget</title><meta name="launch-ends" content="2026-10-25T23:59:59+00:00">
+
 <meta name="description" content="Every transaction from your European bank, in Actual Budget, automatically. Free for 7 days, then €29 once. No subscription.">
 <meta property="og:title" content="Bridge Bank · Your European bank, in Actual Budget">
 <meta property="og:description" content="Open banking sync for Actual Budget. 2,500+ banks in 29 countries. Runs on your machine. €29 once.">
@@ -28,7 +29,44 @@
     --red: #dc2626;
     --radius: 14px;
     --shadow: 0 1px 2px rgba(15,23,42,0.04), 0 12px 40px -12px rgba(15,23,42,0.14);
+    --card: #ffffff;
+    --header-bg: rgba(255,255,255,0.86);
+    --link: var(--accent);
+    --green-text: #0f6b3b;
+    --chip: #eef0f4;
   }
+  /* Dark mode follows the device setting (on Macs and phones set to Auto,
+     that is the time of day). */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --bg-soft: #0f1629;
+      --card: #121a2e;
+      --header-bg: rgba(11,16,32,0.86);
+      --line: #1e293b;
+      --line-strong: #2d3a52;
+      --text: #e6e9ef;
+      --text-2: #b6c0d0;
+      --muted: #8d98ab;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-soft: #14213d;
+      --link: #8ab4ff;
+      --green: #34d399;
+      --green-soft: #0c2a20;
+      --green-text: #6ee7b7;
+      --amber: #fbbf24;
+      --amber-soft: #2b2110;
+      --red: #f87171;
+      --red-soft: #2c1517;
+      --chip: #1a2338;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 18px 50px -18px rgba(0,0,0,0.6);
+    }
+    a { color: var(--link); }
+    a:hover { color: #b3cdff; }
+  }
+
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: 80px; }
@@ -51,7 +89,7 @@
   /* --- Header --- */
   header {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(255,255,255,0.85);
+    background: var(--header-bg);
     backdrop-filter: saturate(1.4) blur(14px);
     -webkit-backdrop-filter: saturate(1.4) blur(14px);
     border-bottom: 1px solid transparent;
@@ -77,11 +115,16 @@
   .btn-primary { background: var(--accent); color: #fff; }
   .btn-primary:hover { background: var(--accent-hover); color: #fff; }
   .btn-primary:disabled { opacity: 0.7; cursor: default; }
-  .btn-outline { background: #fff; color: var(--text); border-color: var(--line-strong); }
+  .btn-outline { background: var(--card); color: var(--text); border-color: var(--line-strong); }
   .btn-outline:hover { border-color: var(--text-2); color: var(--text); }
   .btn-sm { padding: 8px 14px; font-size: 14px; }
 
   /* --- Hero --- */
+  .bb-strip { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 11px 16px; background: var(--accent-soft); border-bottom: 1px solid var(--line); color: var(--text); font-size: 15px; text-align: center; }
+  .bb-strip:hover { color: var(--text); background: color-mix(in srgb, var(--accent-soft) 70%, var(--accent) 12%); }
+  .bb-strip-new { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #fff; background: var(--accent); border-radius: 999px; padding: 2px 9px; }
+  .bb-strip-go { font-weight: 600; color: var(--link); white-space: nowrap; }
+  @media (max-width: 640px) { .bb-strip { font-size: 14px; gap: 6px 10px; } }
   .hero { padding: 72px 0 40px; text-align: center; }
   .pill {
     display: inline-flex; align-items: center; gap: 8px;
@@ -101,7 +144,7 @@
   .trial-form input {
     flex: 1; min-width: 0; font: inherit; font-size: 16px;
     padding: 12px 14px; border-radius: 10px;
-    border: 1px solid var(--line-strong); background: #fff; color: var(--text); outline: none;
+    border: 1px solid var(--line-strong); background: var(--card); color: var(--text); outline: none;
     transition: border-color 0.15s, box-shadow 0.15s;
   }
   .trial-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(37,99,235,0.12); }
@@ -117,7 +160,7 @@
   .trust svg { color: var(--green); flex-shrink: 0; }
 
   .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 860px; margin: 56px auto 0; }
-  .promises div { border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; background: #fff; }
+  .promises div { border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; background: var(--card); }
   .promises b { display: block; font-size: 20px; letter-spacing: -0.02em; }
   .promises span { font-size: 15px; color: var(--muted); }
 
@@ -130,7 +173,7 @@
     display: flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px;
     background: var(--bg-soft); border-bottom: 1px solid var(--line);
   }
-  .window-bar i { width: 11px; height: 11px; border-radius: 50%; background: #d9dde3; }
+  .window-bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--line-strong); }
   .window-bar span {
     flex: 1; text-align: center; font-size: 12.5px; color: var(--muted);
     font-family: 'JetBrains Mono', monospace; margin-right: 40px;
@@ -145,6 +188,17 @@
   .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
   h1, h2, h3 { text-wrap: balance; }
   h2 { font-size: clamp(30px, 4vw, 42px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 14px; }
+  .ynab-split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px; align-items: center; }
+  .ynab-split h2 { margin-top: 0; }
+  .ynab-lead { color: var(--text-2); font-size: 18px; margin: 0 0 14px; }
+  .ynab-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-start; margin-top: 22px; }
+  .ynab-cost { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 22px 24px; }
+  .cost-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--text-2); font-size: 15px; }
+  .cost-row b { font-size: 24px; color: var(--text); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .cost-row.best b { color: var(--accent); }
+  .ynab-cost p { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+  .bundle-note { text-align: center; color: var(--text-2); margin: 28px auto 0; font-size: 16px; }
+  @media (max-width: 860px) { .ynab-split { grid-template-columns: minmax(0, 1fr); } }
   .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
   .section-head p { color: var(--text-2); font-size: 18px; }
 
@@ -174,19 +228,19 @@
   .search svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
   .search input {
     width: 100%; font: inherit; font-size: 17px; padding: 16px 18px 16px 50px;
-    border: 1px solid var(--line-strong); border-radius: 12px; background: #fff; color: var(--text); outline: none;
+    border: 1px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--text); outline: none;
     box-shadow: 0 1px 2px rgba(15,23,42,0.04); transition: border-color 0.15s, box-shadow 0.15s;
   }
   .search input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(37,99,235,0.12); }
   #bb-bank-results { max-width: 620px; margin: 10px auto 0; border-radius: 12px; }
-  #bb-bank-results:not(:empty) { border: 1px solid var(--line); background: #fff; }
+  #bb-bank-results:not(:empty) { border: 1px solid var(--line); background: var(--card); }
   .bank-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: 16px; }
   .bank-row:last-child { border-bottom: none; }
   .cc { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--text-2); background: var(--bg-soft); border: 1px solid var(--line); padding: 2px 8px; border-radius: 6px; }
   #bb-bank-status { text-align: center; font-size: 14px; color: var(--muted); margin-top: 10px; min-height: 22px; }
 
   .flow { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 48px; }
-  .flow-node { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 18px; text-align: center; min-width: 150px; }
+  .flow-node { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 18px; text-align: center; min-width: 150px; }
   .flow-node b { display: block; font-size: 15px; }
   .flow-node small { font-size: 13px; color: var(--muted); }
   .flow-node.me { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
@@ -194,20 +248,20 @@
 
   /* Features */
   .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .feature { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; background: #fff; }
+  .feature { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; background: var(--card); }
   .feature-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
   .feature h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
   .feature p { font-size: 15px; color: var(--text-2); line-height: 1.55; }
 
   /* Reviews */
   #reviews-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .review-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; background: #fff; }
+  .review-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; background: var(--card); }
   .review-stars { color: #f59e0b; letter-spacing: 2px; margin-bottom: 10px; }
   .review-text { color: var(--text-2); font-size: 16px; margin-bottom: 14px; }
   .review-author { font-size: 14px; color: var(--muted); font-weight: 500; }
 
   /* Pricing */
-  .pricing { max-width: 480px; margin: 0 auto; background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 40px; box-shadow: var(--shadow); text-align: center; }
+  .pricing { max-width: 480px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 40px; box-shadow: var(--shadow); text-align: center; }
   .price { font-size: 64px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
   .price small { font-size: 18px; font-weight: 500; color: var(--muted); letter-spacing: 0; margin-left: 6px; }
   .price-note { color: var(--text-2); margin: 10px 0 26px; }
@@ -261,7 +315,7 @@
   /* Success overlay */
   #success-overlay { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(15,23,42,0.45); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 16px; }
   #success-overlay.visible { display: flex; }
-  .success-card { position: relative; background: #fff; border-radius: 18px; padding: 44px 36px 36px; max-width: 460px; width: 100%; text-align: center; box-shadow: var(--shadow); }
+  .success-card { position: relative; background: var(--card); border-radius: 18px; padding: 44px 36px 36px; max-width: 460px; width: 100%; text-align: center; box-shadow: var(--shadow); }
   .success-check { width: 60px; height: 60px; border-radius: 50%; background: var(--green-soft); color: var(--green); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
   .success-card h2 { font-size: 26px; margin-bottom: 10px; }
   .success-card p { color: var(--text-2); margin-bottom: 26px; }
@@ -316,6 +370,7 @@
     <nav class="nav-links">
       <a href="#how" class="hide-m">How it works</a>
       <a href="#banks" class="hide-m">Banks</a>
+      <a href="/budget" class="hide-m">Bridge Budget</a>
       <a href="#pricing" class="hide-m">Pricing</a>
       <a href="#faq" class="hide-m">FAQ</a>
       <a href="/getting-started.html">Setup guide</a>
@@ -326,22 +381,29 @@
 
 <main id="top">
 
+<!-- ====== BRIDGE BUDGET BANNER ====== -->
+<a class="bb-strip" href="/budget">
+  <span class="bb-strip-new">New</span>
+  <span class="bb-strip-text"><strong>Bridge Budget:</strong> the YNAB way of budgeting, on your own server. Works with any bank, anywhere.</span>
+  <span class="bb-strip-go">See Bridge Budget &rarr;</span>
+</a>
+
 <!-- ====== HERO ====== -->
 <div class="hero">
   <div class="container">
-    <div class="pill"><span class="dot"></span>7 days free &middot; then &euro;29 once &middot; no subscription</div>
-    <h1>Your European bank, in Actual&nbsp;Budget. <span class="soft">Automatically.</span></h1>
-    <p class="lead">Bridge Bank brings every new transaction from your bank into Actual Budget on its own. No CSV exports, no typing, no monthly fee.</p>
+    <div class="pill"><span class="dot"></span>7 days free &middot; then <span data-usd="about {e:29}">&euro;29</span> once &middot; no subscription</div>
+    <h1>Your bank, in Actual&nbsp;Budget. <span class="soft">Automatically.</span></h1>
+    <p class="lead">Bridge Bank brings every new transaction from your bank into Actual Budget on its own. No CSV exports, no typing, no monthly fee. It works with banks in 29 European countries, wherever you live.</p>
 
     <div class="trial-form">
       <input type="email" id="trial-email" placeholder="you@example.com" aria-label="Email for your free trial">
       <button class="btn btn-primary" id="trial-btn" onclick="startTrial('trial')">Start 7-day free trial</button>
     </div>
     <div class="form-msg" id="trial-msg"></div>
-    <div class="hero-sub">No credit card. If you keep it, it's &euro;29 once and yours for good. <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03">Buy now</a></div>
+    <div class="hero-sub">No credit card. If you keep it, it's <span data-usd="about {e:29}">&euro;29</span> once and yours for good. <a href="https://buy.stripe.com/aFabIU2ce8ntbuDeYVcMM03">Buy now</a></div>
 
     <div class="trust">
-      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>2,500+ European banks</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>2,500+ banks in Europe</span>
       <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Read-only, can't move money</span>
       <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Runs on your own server</span>
       <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><a href="https://github.com/DAdjadj/bridge-bank" target="_blank" rel="noopener" style="color:inherit;">Open source on GitHub</a></span>
@@ -357,7 +419,7 @@
 
     <div class="promises reveal">
       <div><b>Free for 7 days</b><span>No credit card needed</span></div>
-      <div><b>&euro;29, once</b><span>No subscription, ever</span></div>
+      <div><b data-usd="About {e:29}, once">&euro;29, once</b><span>No subscription, ever</span></div>
       <div><b>Yours for good</b><span>Updates included for life</span></div>
     </div>
   </div>
@@ -424,7 +486,7 @@
     <div class="section-head reveal" style="margin-bottom:36px;">
       <div class="eyebrow">Coverage</div>
       <h2>Is my bank supported?</h2>
-      <p>2,500+ banks across 29 European countries. Type yours to check.</p>
+      <p>2,500+ banks across 29 European countries. Type yours to check. Bank somewhere else? <a href="/budget">Bridge Budget</a> works with any bank.</p>
     </div>
     <div class="search reveal">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -488,6 +550,30 @@
   </div>
 </section>
 
+<!-- ====== LEAVING YNAB ====== -->
+<section id="leave-ynab">
+  <div class="container">
+    <div class="ynab-split reveal">
+      <div>
+        <div class="eyebrow">Leaving YNAB</div>
+        <h2>Your whole YNAB setup, on your own server.</h2>
+        <p class="ynab-lead">Moving to self-hosted used to mean starting over. Not any more. <a href="/budget">Bridge Budget</a> is YNAB-style budgeting built on Actual: paste one token from YNAB and your accounts, transactions, schedules, monthly budgets and targets come across in about a minute.</p>
+        <p class="ynab-lead">Bridge Bank does the part YNAB's linked accounts did: every new transaction from your European bank arrives on its own.</p>
+        <div class="btns ynab-btns">
+          <a href="/budget" class="btn btn-primary">See Bridge Budget</a>
+          <a href="/budget#switch" class="btn btn-outline">How switching works</a>
+        </div>
+      </div>
+      <div class="ynab-cost">
+        <div class="cost-row"><span>YNAB, every year</span><b data-usd="$109">about &euro;100</b></div>
+        <div class="cost-row"><span>YNAB for 5 years</span><b data-usd="$545">about &euro;500</b></div>
+        <div class="cost-row best"><span>Bridge Bank + Bridge Budget, for good</span><b data-usd="≈ {e:89}">&euro;89</b></div>
+        <p data-usd="YNAB charges $109 a year. The bundle is &euro;89 (about {e:89}), &euro;79 (about {e:79}) at launch: two licence keys, updates included. Prices are charged in euros at today's rate; your card converts them." data-after-usd="YNAB charges $109 a year. The bundle is &euro;89 (about {e:89}): two licence keys, updates included. Prices are charged in euros at today's rate; your card converts them." data-after="YNAB charges US$109 a year. The bundle is &euro;89: two licence keys, updates included. Prices are in euros; your card converts them.">YNAB charges US$109 a year. The bundle is &euro;89, or &euro;79 at launch: two licence keys, updates included. Prices are in euros; your card converts them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ====== PRICING ====== -->
 <section class="soft" id="pricing">
   <div class="container">
@@ -497,8 +583,8 @@
       <p>No subscription, no renewals. Try everything free for 7 days first.</p>
     </div>
     <div class="pricing reveal">
-      <div class="price">&euro;29<small>one-time</small></div>
-      <p class="price-note">Yours for good, with updates included.</p>
+      <div class="price"><span data-usd="≈ {e:29}">&euro;29</span><small>one-time</small></div>
+      <p class="price-note" data-usd="Charged as &euro;29, shown at today's rate. Yours for good, with updates included.">Yours for good, with updates included.</p>
       <ul class="price-list">
         <li>All 2,500+ European banks</li>
         <li>2 bank accounts included</li>
@@ -514,6 +600,7 @@
       </div>
       <div class="form-msg" id="trial2-msg"></div>
     </div>
+    <p class="bundle-note reveal">Want YNAB-style budgeting too? <a href="/budget#pricing">Bridge Bank + Bridge Budget</a>: <span data-usd="about {e:89} once, about {e:79} at launch" data-after-usd="about {e:89} once" data-after="&euro;89 once">&euro;89 once, &euro;79 at launch</span>.</p>
   </div>
 </section>
 
@@ -525,6 +612,12 @@
       <h2>Questions</h2>
     </div>
     <div class="faq">
+      <details>
+        <summary>Can I use it to leave YNAB?</summary>
+        <div class="answer">
+          <p>Yes, that's what the pair is for. <a href="/budget">Bridge Budget</a> imports your YNAB budget straight from YNAB with a personal access token: accounts, transactions, categories, monthly budgets, targets and scheduled transactions. Bridge Bank then keeps your European bank flowing in automatically, the way YNAB's linked accounts did.</p>
+        </div>
+      </details>
       <details>
         <summary>Is it really a one-time payment?</summary>
         <div class="answer">
@@ -589,7 +682,7 @@
 <section class="soft final">
   <div class="narrow reveal">
     <h2>Try it free for 7 days.</h2>
-    <p style="color:var(--text-2);font-size:18px;">If you keep it, it's &euro;29 once. No subscription, ever.</p>
+    <p style="color:var(--text-2);font-size:18px;">If you keep it, it's <span data-usd="about {e:29}">&euro;29</span> once. No subscription, ever.</p>
     <div class="btns">
       <a href="#top" class="btn btn-primary" onclick="focusTrial(event)">Start free trial</a>
       <a href="/getting-started.html" class="btn btn-outline">Read the setup guide</a>
@@ -622,6 +715,7 @@
       <a href="mailto:support@david-alves.com">Support</a>
     </div>
   </div>
+  <div class="container" style="margin-top:10px;font-size:12px;color:var(--muted);">YNAB and Actual Budget are trademarks of their owners. Bridge Bank and Bridge Budget are not affiliated with or endorsed by YNAB. YNAB price as listed on ynab.com in October 2026.</div>
 </footer>
 
 <script>
@@ -803,5 +897,6 @@
 })();
 </script>
 
+<script src="/fx.js" defer></script>
 </body>
 </html>

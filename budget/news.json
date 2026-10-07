@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "release-2026.10.07.4",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.07.4",
+      "date": "2026-10-07",
+      "version": "2026.10.07.4",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "The first public release of Bridge Budget.\n\n- **Switch from YNAB in a minute:** paste a YNAB personal access token and your accounts, transactions, schedules, monthly budgets and targets come across.\n- **Bills can share a category:** put water, power and gas in Utilities and their amounts add up, each by its own due date.\n- **Fund everything in one click:** Ready to Assign can fill every underfunded target at once, or cover everything you overspent.\n- **Late payments:** a scheduled payment that has not arrived shows as *Expected, not arrived*. If it turns up within 30 days, it still links to its schedule and lands in its category.\n- **Notes on schedules:** jot down why a bill exists or who shares it. The note shows in the schedules list.\n- **On your phone:** the budget, targets, reports and schedules all work in your phone's browser.\n- **Undo and Redo:** buttons on the budget, or Cmd+Z and Shift+Cmd+Z.\n- **Privacy mode:** hide every amount with one click.\n- **Download logs:** one file to email if something goes wrong, with account numbers and passwords masked.\n- **Updates:** Bridge Budget tells you when a new version is out, with the one command to install it, and saves a copy of your budgets first."
+    }
+  ]
+}

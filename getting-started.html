@@ -19,7 +19,35 @@
     --text: #0f172a;
     --text2: #334155;
     --muted: #5b6475;
+    --header-bg: rgba(255,255,255,0.85);
+    --link: var(--accent);
+    --warn-text: #b45309;
+    --ok-text: #047857;
   }
+  /* Dark mode follows the device setting (on Macs and phones set to Auto,
+     that is the time of day). */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --surface: #121a2e;
+      --surface2: #0f1629;
+      --border: #1e293b;
+      --border2: #2d3a52;
+      --accent: #3b82f6;
+      --accent2: #3b82f6;
+      --green: #34d399;
+      --text: #e6e9ef;
+      --text2: #b6c0d0;
+      --muted: #8d98ab;
+      --header-bg: rgba(11,16,32,0.86);
+      --link: #8ab4ff;
+      --warn-text: #fbbf24;
+      --ok-text: #6ee7b7;
+    }
+    a { color: var(--link); }
+  }
+
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -52,10 +80,10 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 0 48px; height: 64px;
     display: flex; align-items: center; justify-content: space-between;
-    background: rgba(255,255,255,0.85);
+    background: var(--header-bg);
     backdrop-filter: blur(20px) saturate(1.2);
     -webkit-backdrop-filter: blur(20px) saturate(1.2);
-    border-bottom: 1px solid #e6e8ec;
+    border-bottom: 1px solid var(--border);
   }
   .logo {
     font-weight: 700; font-size: 18px; letter-spacing: -0.3px;
@@ -86,7 +114,7 @@
   .step-desc p { margin-bottom: 12px; }
   .step-desc p:last-child { margin-bottom: 0; }
   .step-desc a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
-  .step-desc a:hover { color: #1d4ed8; }
+  .step-desc a:hover { color: var(--accent); }
 
   .substeps { margin-top: 16px; display: flex; flex-direction: column; gap: 12px; }
   .substep { display: flex; gap: 12px; align-items: flex-start; }
@@ -112,7 +140,7 @@
   .note { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15); border-radius: 10px; padding: 16px 20px; font-size: 16px; color: var(--text2); line-height: 1.65; margin-top: 16px; }
   .note strong { color: var(--text); }
   .note-warn { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2); }
-  .note-warn strong { color: #b45309; }
+  .note-warn strong { color: var(--warn-text); }
 
   .done-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 14px; padding: 28px; margin-top: 16px; }
   .done-card label { display: block; font-size: 14px; font-weight: 600; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
@@ -124,7 +152,7 @@
   .url-row button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(59,130,246,0.25); }
   .url-hint { font-size: 14px; color: var(--muted); margin-top: 8px; }
 
-  .success-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 20px; padding: 8px 16px; font-size: 15px; font-weight: 500; color: #047857; margin-bottom: 24px; }
+  .success-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 20px; padding: 8px 16px; font-size: 15px; font-weight: 500; color: var(--ok-text); margin-bottom: 24px; }
 
   .info-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 14px; padding: 28px; margin-top: 48px; }
   .info-card-title { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 10px; color: var(--text); }

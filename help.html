@@ -19,11 +19,39 @@
     --text: #0f172a;
     --text2: #5b6475;
     --muted: #64748b;
+    --header-bg: rgba(255,255,255,0.85);
+    --link: var(--accent);
+    --warn-text: #b45309;
+    --ok-text: #047857;
   }
+  /* Dark mode follows the device setting (on Macs and phones set to Auto,
+     that is the time of day). */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --surface: #121a2e;
+      --surface2: #0f1629;
+      --border: #1e293b;
+      --border2: #2d3a52;
+      --accent: #3b82f6;
+      --accent2: #3b82f6;
+      --green: #34d399;
+      --text: #e6e9ef;
+      --text2: #b6c0d0;
+      --muted: #8d98ab;
+      --header-bg: rgba(11,16,32,0.86);
+      --link: #8ab4ff;
+      --warn-text: #fbbf24;
+      --ok-text: #6ee7b7;
+    }
+    a { color: var(--link); }
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
 
-  header { position: relative; z-index: 10; padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); }
+  header { position: relative; z-index: 10; padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); background: var(--header-bg); backdrop-filter: blur(12px); }
   .logo { font-weight: 700; font-size: 17px; color: var(--text); display: flex; align-items: center; gap: 10px; text-decoration: none; }
   .logo-icon { width: 30px; height: 30px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
 

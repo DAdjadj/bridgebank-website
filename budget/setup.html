@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set up Bridge Budget</title>
+<link rel="icon" href="/media/bridge-budget.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f6f7f9;
+    --surface2: #f1f3f6;
+    --border: #e6e8ec;
+    --border2: #d5d9e0;
+    --accent: #2563eb;
+    --accent2: #2563eb;
+    --green: #059669;
+    --text: #0f172a;
+    --text2: #334155;
+    --muted: #5b6475;
+    --header-bg: rgba(255,255,255,0.85);
+    --link: var(--accent);
+    --warn-text: #b45309;
+    --ok-text: #047857;
+  }
+  /* Dark mode follows the device setting (on Macs and phones set to Auto,
+     that is the time of day). */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --surface: #121a2e;
+      --surface2: #0f1629;
+      --border: #1e293b;
+      --border2: #2d3a52;
+      --accent: #3b82f6;
+      --accent2: #3b82f6;
+      --green: #34d399;
+      --text: #e6e9ef;
+      --text2: #b6c0d0;
+      --muted: #8d98ab;
+      --header-bg: rgba(11,16,32,0.86);
+      --link: #8ab4ff;
+      --warn-text: #fbbf24;
+      --ok-text: #6ee7b7;
+    }
+    a { color: var(--link); }
+  }
+
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Noise texture, same as landing page */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* Header, same as landing page */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 48px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--header-bg);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-weight: 700; font-size: 18px; letter-spacing: -0.3px;
+    color: var(--text); display: flex; align-items: center; gap: 10px;
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .logo:hover { opacity: 0.8; }
+  .logo-icon {
+    width: 30px; height: 30px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 7px; display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  .container { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 100px 48px 120px; }
+
+  .page-title { font-size: 40px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 10px; color: var(--text); }
+  .page-sub { font-size: 18px; color: var(--text2); margin-bottom: 56px; line-height: 1.7; }
+
+  .step { display: flex; gap: 28px; margin-bottom: 48px; }
+  .step-left { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .step-num { width: 44px; height: 44px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .step-line { width: 2px; flex: 1; background: var(--border); margin-top: 8px; min-height: 40px; }
+  .step:last-child .step-line { display: none; }
+  .step-body { padding-top: 6px; flex: 1; }
+  .step-title { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 10px; color: var(--text); }
+  .step-desc { font-size: 18px; color: var(--text2); line-height: 1.7; margin-bottom: 0; }
+  .step-desc p { margin-bottom: 12px; }
+  .step-desc p:last-child { margin-bottom: 0; }
+  .step-desc a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+  .step-desc a:hover { color: var(--accent); }
+
+  .substeps { margin-top: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .substep { display: flex; gap: 12px; align-items: flex-start; }
+  .substep-num { width: 24px; height: 24px; background: var(--surface2); border: 1px solid var(--border2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+  .substep-text { font-size: 16px; color: var(--text2); line-height: 1.65; }
+  .substep-text strong { color: var(--text); }
+
+  code { background: var(--surface2); border: 1px solid var(--border); padding: 2px 8px; border-radius: 5px; font-size: 16px; font-family: 'JetBrains Mono', monospace; color: var(--accent); }
+  .copy-btn { padding: 4px 10px; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; background: var(--surface2); border: 1px solid var(--border2); border-radius: 5px; cursor: pointer; color: var(--muted); transition: border-color 0.15s, color 0.15s; vertical-align: middle; }
+  .copy-btn:hover { border-color: var(--accent); color: var(--text); }
+
+  .code-block { background: var(--surface2); border: 1px solid var(--border2); border-radius: 10px; padding: 18px 20px; font-size: 16px; font-family: 'JetBrains Mono', monospace; color: var(--text); font-weight: 500; line-height: 1.8; margin-top: 12px; white-space: pre; overflow-x: auto; }
+  .code-comment { color: var(--muted); }
+
+  .os-tabs { display: flex; gap: 0; margin-top: 16px; }
+  .os-tab { padding: 10px 20px; font-size: 15px; font-weight: 600; font-family: 'Inter', sans-serif; background: var(--surface2); border: 1px solid var(--border2); color: var(--muted); cursor: pointer; transition: all 0.2s; }
+  .os-tab:first-child { border-radius: 8px 0 0 8px; }
+  .os-tab:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+  .os-tab.active { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); color: var(--accent); }
+  .os-panel { display: none; }
+  .os-panel.active { display: block; }
+
+  .note { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15); border-radius: 10px; padding: 16px 20px; font-size: 16px; color: var(--text2); line-height: 1.65; margin-top: 16px; }
+  .note strong { color: var(--text); }
+  .note-warn { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2); }
+  .note-warn strong { color: var(--warn-text); }
+
+  .done-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 14px; padding: 28px; margin-top: 16px; }
+  .done-card label { display: block; font-size: 14px; font-weight: 600; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .url-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .url-row input { flex: 1; min-width: 100px; background: var(--bg); border: 1px solid var(--border2); color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 16px; padding: 12px 14px; border-radius: 8px; outline: none; transition: border-color 0.2s; }
+  .url-row input:focus { border-color: var(--accent); }
+  .url-row button { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; padding: 12px 24px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; white-space: nowrap; opacity: 0.4; }
+  .url-row button.active { opacity: 1; }
+  .url-row button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(59,130,246,0.25); }
+  .url-hint { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+  .success-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 20px; padding: 8px 16px; font-size: 15px; font-weight: 500; color: var(--ok-text); margin-bottom: 24px; }
+
+  .info-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 14px; padding: 28px; margin-top: 48px; }
+  .info-card-title { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 10px; color: var(--text); }
+  .info-card-body { font-size: 18px; color: var(--text2); line-height: 1.7; }
+  .info-card-body strong { color: var(--text); }
+  .info-card-body p { margin-bottom: 10px; }
+  .info-card-body p:last-child { margin-bottom: 0; }
+
+  @media (max-width: 640px) {
+    header { padding: 0 20px; }
+    .container { padding: 80px 20px 80px; }
+    .step { gap: 16px; }
+    .page-title { font-size: 32px; }
+    .os-tab { padding: 8px 14px; font-size: 14px; }
+  }
+</style>
+<style>
+  .code-wrap { position: relative; }
+  .copy-btn { position: absolute; top: 8px; right: 8px; font: 600 12px Inter, sans-serif; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border2); background: var(--bg); color: var(--text2); cursor: pointer; }
+  .copy-btn:hover { color: var(--text); }
+  .path-tabs { display: flex; gap: 8px; margin: 8px 0 16px; flex-wrap: wrap; }
+  .note { margin-top: 16px; background: var(--surface2); border: 1px solid var(--border2); border-radius: 10px; padding: 16px 20px; font-size: 16px; color: var(--text2); line-height: 1.65; }
+  .note strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/budget" class="logo">
+    <svg viewBox="0 0 64 64" width="32" height="32" aria-hidden="true"><defs><clipPath id="bb"><path d="M14 52V30a18 18 0 0 1 36 0v22z"/></clipPath></defs><rect width="64" height="64" rx="15" fill="#2563eb"/><g clip-path="url(#bb)" fill="#fff"><rect x="14" width="10" height="64"/><rect x="27" width="10" height="64" opacity=".72"/><rect x="40" width="10" height="64" opacity=".42"/></g></svg>
+    Bridge Budget
+  </a>
+</header>
+
+<div class="container">
+  <h1 class="page-title">Let's get you set up</h1>
+  <p class="page-sub">Bridge Budget runs on your own server with Docker, the same way Actual does. If you already run Actual, it's a one-line change and your budget opens exactly as it is.</p>
+
+  <!-- Step 1 -->
+  <div class="step">
+    <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+    <div class="step-body">
+      <div class="step-title">Install Bridge Budget</div>
+      <div class="step-desc">
+        <div class="os-tabs">
+          <button class="os-tab active" onclick="switchPath('switch')">I already run Actual</button>
+          <button class="os-tab" onclick="switchPath('fresh')">I'm starting fresh</button>
+        </div>
+
+        <div class="os-panel active" id="path-switch">
+          <p>Open the <code>docker-compose.yml</code> you use for Actual and change one line, the image. Keep everything else, especially the data folder.</p>
+          <div class="code-block">image: actualbudget/actual-server:latest</div>
+          <p>becomes</p>
+          <div class="code-block">image: daalves/bridge-budget:latest</div>
+          <p>Then restart it:</p>
+          <div class="code-block">docker compose pull && docker compose up -d</div>
+          <div class="note"><strong>Changed your mind?</strong> Put the Actual image back and run the same command. Your budget is a normal Actual budget the whole time, so nothing is lost either way.</div>
+        </div>
+
+        <div class="os-panel" id="path-fresh">
+          <p>You'll need <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker</a>. It works on Linux, Mac, Windows and a Raspberry Pi 4 or 5 with a 64-bit system.</p>
+          <div class="code-block">mkdir -p ~/bridge-budget/data && cd ~/bridge-budget
+curl -O https://bridgebank.app/budget/docker-compose.yml
+docker compose up -d</div>
+          <p>Then open <code>http://&lt;your server&gt;:5006</code>, set a server password and create your budget.</p>
+          <div class="note"><strong>Coming from YNAB?</strong> Choose <strong>Import my budget</strong>, then <strong>YNAB</strong>. To get the token: open <a href="https://app.ynab.com/settings/developer" target="_blank">YNAB's Developer settings</a>, click <strong>New Token</strong>, type your YNAB password, click <strong>Generate</strong> and copy the token shown at the top (YNAB shows it only once). Paste it in Bridge Budget. Your accounts, transactions, categories, monthly budgets, targets and scheduled transactions come across in about a minute. The token is used once from your browser and never saved; your YNAB account isn't changed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step">
+    <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+    <div class="step-body">
+      <div class="step-title">Start your trial, or enter your key</div>
+      <div class="step-desc">
+        <p>Open the budget. A banner at the top offers a <strong>free 7-day trial</strong>: type your email and it starts straight away. There's no account to create; we email you the trial key so you have it.</p>
+        <p>Bought a licence? Paste the key from your email into the same banner (or the Trial button in the budget header). If you bought during the trial with the same email, your trial key upgrades by itself.</p>
+        <div class="note">One licence covers one Bridge Budget server, and every computer and phone that uses it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step">
+    <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+    <div class="step-body">
+      <div class="step-title">Bring your bank in (optional)</div>
+      <div class="step-desc">
+        <p>Bridge Budget reads and writes normal Actual budgets, so <a href="/">Bridge Bank</a> works with it as it is. Already syncing? Nothing to change. New to it? Follow the <a href="/getting-started">Bridge Bank setup</a> and point it at your Bridge Budget address.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="step" id="assistant">
+    <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+    <div class="step-body">
+      <div class="step-title">Connect your own assistant (optional)</div>
+      <div class="step-desc">
+        <p>Bridge Budget has no AI of its own. If you already use Claude or ChatGPT:</p>
+        <p><strong>No setup:</strong> the Ask your assistant box on the budget opens the assistant you use, with this month's numbers already filled in.</p>
+        <p><strong>Let the assistant do the work</strong> (categorise, write rules, set targets, move money): give it your server's private assistant link.</p>
+        <div class="substeps">
+          <div class="substep"><div class="substep-num">1</div><div class="substep-text"><strong>A public https address for your server.</strong> Claude and ChatGPT connect from the internet, so an address that only works at home won't do. If you already open Bridge Budget from outside over https, you have one. If not, two free ways: <a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/" target="_blank">Cloudflare Tunnel</a> if you have a domain, or <a href="https://tailscale.com/kb/1223/funnel" target="_blank">Tailscale Funnel</a> if you don't.</div></div>
+          <div class="substep"><div class="substep-num">2</div><div class="substep-text"><strong>Make the link.</strong> Open Bridge Budget at that public address, go to Settings, Connect your assistant, and choose Make my assistant link. It serves the budget you have open.</div></div>
+          <div class="substep"><div class="substep-num">3</div><div class="substep-text"><strong>Paste it into your assistant.</strong> Claude: Settings, Connectors, Add custom connector, paste the link and choose No sign-in. ChatGPT: Settings, Apps and connectors, add a connector by URL and paste the link.</div></div>
+        </div>
+        <div class="note">The link goes straight from your assistant to your server; nothing passes through us, and the assistant only sees what it looks up to answer you. The long secret in the link is the key, so keep it private. Settings can make a new link at any time, and the old one stops working at once. If a sign-in page protects your address (Cloudflare Access, for example), let paths starting with <code>/mcp/</code> through.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 5 -->
+  <div class="step" id="update">
+    <div class="step-left"><div class="step-num">5</div></div>
+    <div class="step-body">
+      <div class="step-title">Keep it up to date</div>
+      <div class="step-desc">
+        <p>Updates are included. To update:</p>
+        <div class="code-block">docker compose pull && docker compose up -d</div>
+        <p>Before a new version runs for the first time, Bridge Budget saves a copy of your budgets in <code>data/backups</code> (the last five are kept). If an update ever misbehaves, go back to the previous version by naming it in the image line, for example <code>daalves/bridge-budget:2026.10.05</code>, and let me know.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-card-title">Need a hand?</div>
+    <div class="info-card-body">
+      <p>Email <a href="mailto:support@david-alves.com">support@david-alves.com</a>. It comes straight to me.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchPath(which) {
+  var tabs = document.querySelectorAll('.os-tab');
+  tabs[0].classList.toggle('active', which === 'switch');
+  tabs[1].classList.toggle('active', which === 'fresh');
+  document.getElementById('path-switch').classList.toggle('active', which === 'switch');
+  document.getElementById('path-fresh').classList.toggle('active', which === 'fresh');
+}
+document.querySelectorAll('.code-block').forEach(function (block) {
+  var wrap = document.createElement('div');
+  wrap.className = 'code-wrap';
+  block.parentNode.insertBefore(wrap, block);
+  wrap.appendChild(block);
+  var btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.type = 'button';
+  btn.textContent = 'Copy';
+  btn.onclick = function () {
+    navigator.clipboard.writeText(block.textContent).then(function () {
+      btn.textContent = 'Copied';
+      setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+    });
+  };
+  wrap.appendChild(btn);
+});
+</script>
+</body>
+</html>
