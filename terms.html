@@ -31,6 +31,19 @@
     footer { margin-top: 5rem; padding-top: 2rem; border-top: 1px solid #e6e8ec; display: flex; gap: 1.5rem; flex-wrap: wrap; }
     footer a { font-size: 13px; color: #64748b; text-decoration: none; }
     footer a:hover { color: #0f172a; }
+  
+    @media (prefers-color-scheme: dark) {
+      :root { color-scheme: dark; }
+      body { background: #0b1020; color: #e6e9ef; }
+      header, footer { border-color: #1e293b; }
+      .logo, .back:hover, h1, h2, h3, strong, footer a:hover, .title, .url.big { color: #e6e9ef; }
+      .back, .meta .date, p, ul, li, footer a, .detail, .hint, .url-label { color: #a3adbf; }
+      .intro, .highlight, .url { background: #121a2e; border-color: #1e293b; color: #a3adbf; }
+      .highlight { border-left-color: #3b82f6; }
+      .url { color: #8ab4ff; }
+      .spinner { border-color: #1e293b; border-top-color: #3b82f6; }
+      a:not(.btn) { color: #8ab4ff; }
+    }
   </style>
 </head>
 <body>

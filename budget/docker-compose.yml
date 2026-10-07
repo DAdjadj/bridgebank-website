@@ -1,0 +1,10 @@
+# Bridge Budget: https://bridgebank.app/budget/setup
+services:
+  bridge-budget:
+    image: daalves/bridge-budget:latest
+    container_name: bridge-budget
+    restart: unless-stopped
+    ports:
+      - "5006:5006"
+    volumes:
+      - ./data:/data

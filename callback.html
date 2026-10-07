@@ -20,6 +20,19 @@
     .url.big { font-size: 17px; font-weight: 600; color: #0f172a; padding: 14px 18px; }
     .url.copied { color: #059669; border-color: rgba(16,185,129,0.45); }
     .hint { display: none; font-size: 13px; color: #5b6475; margin: 1.5rem 0 0; line-height: 1.6; }
+  
+    @media (prefers-color-scheme: dark) {
+      :root { color-scheme: dark; }
+      body { background: #0b1020; color: #e6e9ef; }
+      header, footer { border-color: #1e293b; }
+      .logo, .back:hover, h1, h2, h3, strong, footer a:hover, .title, .url.big { color: #e6e9ef; }
+      .back, .meta .date, p, ul, li, footer a, .detail, .hint, .url-label { color: #a3adbf; }
+      .intro, .highlight, .url { background: #121a2e; border-color: #1e293b; color: #a3adbf; }
+      .highlight { border-left-color: #3b82f6; }
+      .url { color: #8ab4ff; }
+      .spinner { border-color: #1e293b; border-top-color: #3b82f6; }
+      a:not(.btn) { color: #8ab4ff; }
+    }
   </style>
 </head>
 <body>
