@@ -120,11 +120,6 @@
   .btn-sm { padding: 8px 14px; font-size: 14px; }
 
   /* --- Hero --- */
-  .bb-strip { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 11px 16px; background: var(--accent-soft); border-bottom: 1px solid var(--line); color: var(--text); font-size: 15px; text-align: center; }
-  .bb-strip:hover { color: var(--text); background: color-mix(in srgb, var(--accent-soft) 70%, var(--accent) 12%); }
-  .bb-strip-new { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #fff; background: var(--accent); border-radius: 999px; padding: 2px 9px; }
-  .bb-strip-go { font-weight: 600; color: var(--link); white-space: nowrap; }
-  @media (max-width: 640px) { .bb-strip { font-size: 14px; gap: 6px 10px; } }
   .hero { padding: 72px 0 40px; text-align: center; }
   .pill {
     display: inline-flex; align-items: center; gap: 8px;
@@ -199,6 +194,22 @@
   .ynab-cost p { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
   .bundle-note { text-align: center; color: var(--text-2); margin: 28px auto 0; font-size: 16px; }
   @media (max-width: 860px) { .ynab-split { grid-template-columns: minmax(0, 1fr); } }
+  /* --- Bridge Budget: the second app --- */
+  .also { padding: 40px 0 8px; }
+  .also-card { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 40px; align-items: center; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); padding: 36px 40px; }
+  .also-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-2); margin-bottom: 14px; }
+  .also-tag b { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--accent); border-radius: 999px; padding: 2px 8px; }
+  .also-card h2 { font-size: clamp(26px, 3.2vw, 34px); margin: 0 0 12px; }
+  .also-card > div > p { color: var(--text-2); font-size: 17px; margin: 0 0 18px; }
+  .also-pair { display: grid; gap: 10px; margin: 0 0 22px; }
+  .also-pair div { display: flex; gap: 12px; align-items: baseline; font-size: 15px; color: var(--text-2); }
+  .also-pair b { flex: 0 0 118px; color: var(--text); }
+  .also-pair em { font-style: normal; font-size: 12px; color: var(--muted); }
+  .also-shot { display: block; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
+  .also-shot img { display: block; width: 100%; height: auto; }
+  @media (max-width: 860px) { .also-card { grid-template-columns: minmax(0, 1fr); padding: 26px 20px; gap: 26px; } .also-pair div { flex-direction: column; gap: 2px; } .also-pair b { flex: none; } }
+  .nav-new { display: inline-flex; align-items: center; gap: 6px; }
+  .nav-new b { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--accent); border-radius: 999px; padding: 1px 6px; }
   .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
   .section-head p { color: var(--text-2); font-size: 18px; }
 
@@ -370,9 +381,9 @@
     <nav class="nav-links">
       <a href="#how" class="hide-m">How it works</a>
       <a href="#banks" class="hide-m">Banks</a>
-      <a href="/budget" class="hide-m">Bridge Budget</a>
       <a href="#pricing" class="hide-m">Pricing</a>
       <a href="#faq" class="hide-m">FAQ</a>
+      <a href="/budget" class="hide-m nav-new">Bridge Budget <b>New</b></a>
       <a href="/getting-started.html">Setup guide</a>
       <a href="#pricing" class="btn btn-primary btn-sm" style="color:#fff;">Try free</a>
     </nav>
@@ -380,13 +391,6 @@
 </header>
 
 <main id="top">
-
-<!-- ====== BRIDGE BUDGET BANNER ====== -->
-<a class="bb-strip" href="/budget">
-  <span class="bb-strip-new">New</span>
-  <span class="bb-strip-text"><strong>Bridge Budget:</strong> the YNAB way of budgeting, on your own server. Works with any bank, anywhere.</span>
-  <span class="bb-strip-go">See Bridge Budget &rarr;</span>
-</a>
 
 <!-- ====== HERO ====== -->
 <div class="hero">
@@ -421,6 +425,25 @@
       <div><b>Free for 7 days</b><span>No credit card needed</span></div>
       <div><b data-usd="About {e:29}, once">&euro;29, once</b><span>No subscription, ever</span></div>
       <div><b>Yours for good</b><span>Updates included for life</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== BRIDGE BUDGET: SECOND APP ====== -->
+<div class="also">
+  <div class="container">
+    <div class="also-card reveal">
+      <div>
+        <div class="also-tag"><b>New</b> A second app from the maker of Bridge Bank</div>
+        <h2>Bridge Budget: the YNAB way of budgeting, on your own server.</h2>
+        <p>A separate app, built on Actual Budget: targets for every category, one click to fund them, reports, and a straight import from YNAB. It works with any bank, anywhere.</p>
+        <div class="also-pair">
+          <div><b>Bridge Bank</b><span>Brings your bank's transactions into Actual. <em>(this page)</em></span></div>
+          <div><b>Bridge Budget</b><span>Where you budget them, YNAB style.</span></div>
+        </div>
+        <a href="/budget" class="btn btn-primary">See Bridge Budget &rarr;</a>
+      </div>
+      <a class="also-shot" href="/budget" aria-label="See Bridge Budget"><picture><source srcset="/media/budget-budget-dark.jpg?v=20261007b" media="(prefers-color-scheme: dark)"><img src="/media/budget-budget-light.jpg?v=20261007b" width="1440" height="900" alt="The Bridge Budget budget screen: categories with targets and Available amounts" loading="lazy"></picture></a>
     </div>
   </div>
 </div>
@@ -557,7 +580,7 @@
       <div>
         <div class="eyebrow">Leaving YNAB</div>
         <h2>Your whole YNAB setup, on your own server.</h2>
-        <p class="ynab-lead">Moving to self-hosted used to mean starting over. Not any more. <a href="/budget">Bridge Budget</a> is YNAB-style budgeting built on Actual: paste one token from YNAB and your accounts, transactions, schedules, monthly budgets and targets come across in about a minute.</p>
+        <p class="ynab-lead">Moving to self-hosted used to mean starting over. Not any more. <a href="/budget">Bridge Budget</a>, a separate app from the same maker, is YNAB-style budgeting built on Actual: paste one token from YNAB and your accounts, transactions, schedules, monthly budgets and targets come across in about a minute.</p>
         <p class="ynab-lead">Bridge Bank does the part YNAB's linked accounts did: every new transaction from your European bank arrives on its own.</p>
         <div class="btns ynab-btns">
           <a href="/budget" class="btn btn-primary">See Bridge Budget</a>
@@ -708,6 +731,7 @@
     <div class="foot-left"><a href="https://david-alves.com" target="_blank" rel="noopener" aria-label="David Alves"><img src="/da.png" alt=""></a><span>&copy; 2026 Bridge Bank &middot; Made by <a href="https://david-alves.com" target="_blank" rel="noopener" class="maker">David Alves</a></span></div>
     <div class="foot-links">
       <a href="/getting-started.html">Setup guide</a>
+      <a href="/budget">Bridge Budget</a>
       <a href="/help">Help</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
