@@ -305,6 +305,7 @@ docker compose up -d</div>
       <div class="step-title">Open Bridge Bank and complete setup</div>
       <div class="step-desc">
         <p>Enter your server address below to open Bridge Bank. The setup wizard will guide you through the rest: license key, Actual Budget connection, Enable Banking key upload, notifications, and bank connection.</p>
+        <div class="note note-warn"><strong>In Actual Budget, create a plain account and nothing more.</strong> Before you start the wizard, add an account in Actual for each bank (for example "Revolut") and leave it unlinked: don't set up bank sync, Enable Banking or GoCardless inside Actual. Bridge Bank makes the bank connection itself, and if Actual is also linked to the bank, every transaction comes in twice. The wizard asks for this account's name, which must match Actual exactly.</div>
         <div class="done-card">
           <label>Your server address</label>
           <div class="url-row">
