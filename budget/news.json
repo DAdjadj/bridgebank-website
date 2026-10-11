@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.11.9",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.11.9",
+      "date": "2026-10-11",
+      "version": "2026.10.11.9",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Loans and instalments:** a schedule can be paid Once, Repeat, or run Until paid off. Enter the total and what you pay per month, and Bridge Budget works out the payments. A smaller last payment gets its own schedule, so it is expected and budgeted at exactly that amount.\n- **Connect your assistant from the budget:** until Claude or ChatGPT is connected, a button at the top of the budget takes you straight to the steps."
+    },
+    {
       "id": "release-2026.10.11.4",
       "type": "release",
       "title": "Bridge Budget 2026.10.11.4",
