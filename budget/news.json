@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.11.4",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.11.4",
+      "date": "2026-10-11",
+      "version": "2026.10.11.4",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Choose how long a bill runs:** a repeating schedule now has a How long field: until you stop it, for a number of months, for a number of payments or until a date. It shows how many payments that comes to and the date of the last one.\n- **Picking a payee fills in the rest:** a new schedule takes the account, amount and budget category from that payee's last payment.\n- **New schedules start as one-off payments:** tick Repeats, right next to the date, for a recurring bill. The date you picked stays.\n- **Colours in every category list:** moving money, covering overspending and picking a category show balances green when funded, amber when short of the target and red when overspent. Money coming in goes to Ready to Assign, and Starting Balances is gone from the list.\n- **Works offline, syncs by itself:** changes made without a connection are kept, and Bridge Budget now reconnects and syncs them as soon as your server is reachable again, without a reload.\n- **Tidier schedule editor:** notes grow as you type, Add and Cancel are always in view, and notes show an icon on the phone."
+    },
+    {
       "id": "release-2026.10.11",
       "type": "release",
       "title": "Bridge Budget 2026.10.11",
