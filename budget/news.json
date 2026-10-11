@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.11",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.11",
+      "date": "2026-10-11",
+      "version": "2026.10.11",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Money that comes in counts toward targets:** a refund, a repayment or money from someone else now funds a category's bill or save-by-date target, like in YNAB. A bill that is already covered shows as funded instead of asking for more.\n- **Renaming a schedule no longer breaks its target:** the target follows the schedule when you rename it, and a deleted schedule's bill comes off its category's target instead of showing an error.\n- **Schedule names with a colon** now work everywhere."
+    },
+    {
       "id": "release-2026.10.07.4",
       "type": "release",
       "title": "Bridge Budget 2026.10.07.4",
