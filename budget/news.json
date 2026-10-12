@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.11.11",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.11.11",
+      "date": "2026-10-12",
+      "version": "2026.10.11.11",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Loans stay one schedule:** Until paid off no longer adds a separate last-payment schedule. When the last payment is next, the amount drops to the smaller remainder by itself, so it is expected and budgeted at exactly that. Loans made with the previous version are turned into one schedule automatically.\n- **First payment starts today** when you choose Until paid off.\n- **Connect your assistant** now sits under Ask your assistant on the budget."
+    },
+    {
       "id": "release-2026.10.11.9",
       "type": "release",
       "title": "Bridge Budget 2026.10.11.9",
