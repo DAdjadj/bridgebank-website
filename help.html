@@ -213,6 +213,18 @@
     </div>
   </div>
 
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">"Update now" or automatic updates stopped working</div>
+    <div class="faq-a">
+      <p>If you also run your own Watchtower on the same server, current Watchtower versions treat the two as duplicates and delete one of them, usually the <code>bridge-bank-watchtower</code> that Bridge Bank uses for updates. Giving Bridge Bank's Watchtower its own scope lets both run side by side.</p>
+      <p>Open the <code>docker-compose.yml</code> in your Bridge Bank folder and add these two lines under <strong>both</strong> the <code>bridge-bank:</code> and the <code>watchtower:</code> service, lined up with <code>restart:</code>:</p>
+      <p><code>labels:</code><br><code>&nbsp;&nbsp;- com.centurylinklabs.watchtower.scope=bridge-bank</code></p>
+      <p>Then add this line to the <code>environment:</code> list of the <code>watchtower:</code> service:</p>
+      <p><code>- WATCHTOWER_SCOPE=bridge-bank</code></p>
+      <p>Save the file and run <code>docker compose up -d</code> in the same folder. This brings the missing Watchtower back and leaves your own Watchtower untouched. New installs already include these lines.</p>
+    </div>
+  </div>
+
   <div class="section-label">License</div>
 
   <div class="faq-item">
