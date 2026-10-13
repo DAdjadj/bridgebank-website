@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.13.2",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.13.2",
+      "date": "2026-10-13",
+      "version": "2026.10.13.2",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Bill reminders:** turn them on in Settings, Bill reminders, and you get a notification at 9:00 the day before a bill in Schedules is due, with what it comes to. Works where Bridge Budget is on your Home Screen (iPhone and iPad) or in the Dock (Mac), and in browsers that show notifications. Each device is turned on separately.\n- **Bill targets show the amount:** a category that saves for a bill now shows what the bill comes to and when it is due, and the total when it saves for several."
+    },
+    {
       "id": "release-2026.10.11.11",
       "type": "release",
       "title": "Bridge Budget 2026.10.11.11",
