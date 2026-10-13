@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.13.7",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.13.7",
+      "date": "2026-10-13",
+      "version": "2026.10.13.7",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Bill reminders:** turn them on in Settings, Bill reminders, and you get a notification at 9:00 the day before a bill in Schedules is due, with what it comes to. Works where Bridge Budget is on your Home Screen (iPhone and iPad) or in the Dock (Mac), and in browsers that show notifications. Each device is turned on separately.\n- **Reports for one account:** pick an account next to the date range, or keep All accounts.\n- **Where your money moved:** every move between categories is now kept, like YNAB's move history. The category sheet lists the month's moves under Assigned (to or from which category, and when), the month view has a Recent moves list, and moves from before this update are read back from the month notes where possible. The category sheet also shows what was left over from last month.\n- **Late bills on the app icon:** where Bridge Budget is in the Dock or on the Home Screen, its icon shows how many bills are late (on iPhone, once notifications are allowed).\n- **Activity instead of Spent:** the column holds refunds and sales too, so it has YNAB's name again. Reports no longer let a payback in one category cancel out the month's spending.\n- **Assistant setup:** Settings now says to switch Bridge Budget on and allow it in each assistant app, the phone apps included.\n- **Bill targets show the amount:** a category that saves for a bill now shows what the bill comes to and when it is due, and the total when it saves for several."
+    },
+    {
       "id": "release-2026.10.13.2",
       "type": "release",
       "title": "Bridge Budget 2026.10.13.2",
