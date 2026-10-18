@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.18.3",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.18.3",
+      "date": "2026-10-18",
+      "version": "2026.10.18.3",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Every payment is in Schedules:** a target with a date is a payment, so it goes to Schedules by itself, gets matched when it's paid, and changing it in the budget or in Schedules changes both. Editing a bill's target edits its amount, date and how often right there. Weekly targets can be payments too.\n- **All targets in one place:** Schedules now lists the targets that aren't payments (spending money like groceries, savings to keep) under Budget targets. Tap one to edit it.\n- **Recently deleted:** under More (Deleted on the phone). Everything deleted in the last 30 days, on any device: transactions, categories, groups, schedules, payees, accounts and targets, each with Restore. Deleting a payment's target deletes its schedule too, and Restore brings both back.\n- **Dates on a calendar:** pick when the money is needed by, or the next payment, from a calendar.\n- **Start later:** a target can start asking in a later month and asks for nothing before it. New targets start in the month on screen.\n- **Clearer choices:** Put in an amount each time, Top up to an amount, Pay an amount on a date, or Keep an amount in the category, each with a line saying what it does.\n- **Edit from the budget:** click a category's target bar to open its target, or Add target on a category without one.\n- **Notes on targets:** add a note when you create or edit a target. A payment's note is the same one Schedules shows.\n- **Ready to Assign counts later months:** money already assigned in a later month is left out of this month's Ready to Assign, like YNAB. The month summary shows how much, and Auto-Assign won't hand it out twice.\n- **Overspent says where:** the overspent button names the category, or lists them when there are several.\n- **Phone:** link transactions to a schedule, assign Ready to Assign or take it back from the month sheet, tap the month to jump to any month (Today brings you back), and custom reports have a way back.\n- **Cleaner pickers:** the payee, category and account dropdowns now look like the rest of the budget."
+    },
+    {
       "id": "release-2026.10.13.7",
       "type": "release",
       "title": "Bridge Budget 2026.10.13.7",
