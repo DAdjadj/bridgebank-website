@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.18.9",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.18.9",
+      "date": "2026-10-18",
+      "version": "2026.10.18.9",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Ready to Assign tells the truth:** it now holds back everything later months need: money already assigned in later months, and this month's overspending, which comes out of next month. If you've assigned more than you have, it shows a negative number. The month summary lists both parts.\n- **Adding a target:** done from the category's side panel only; rows no longer show an Add target button on hover.\n- **Clearer target errors:** if a target can't be saved you see why, the date stays in its box when you click away, and a one-off payment can't be dated in the past.\n- **No more flicker:** Ready to Assign appears together with the rest of the budget, with the right number, when the page loads and when you move between months.\n- **Sharp header on iPhone:** the top of the screen is no longer dimmed and blurred under the clock, in Safari and in the Home Screen app, light and dark.\n- **Clear filter:** account pages have a Clear filter button next to the filters, handy after opening a category's activity from the budget.\n- **Clicking a category just selects it:** the side panel opens without jumping into the target editor. Use Edit in the panel to change a target.\n- **Assistant box clears itself:** after Open in Claude or ChatGPT, the box is empty and ready for the next question.\n- **Outflow and Inflow:** the Payment and Deposit columns now use YNAB's names, and money coming in is green, on the computer and the phone.\n- **Filters in plain words:** yes/no filters read as one phrase (Cleared, Not cleared, Only transfers, No transfers) instead of \"is true\" or \"is false\", and the rest read naturally: \"is any of\", \"is at least\", \"is on or after\", \"Category is any of Groceries, Gadgets or Family\"."
+    },
+    {
       "id": "release-2026.10.18.3",
       "type": "release",
       "title": "Bridge Budget 2026.10.18.3",
