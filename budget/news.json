@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.19",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.19",
+      "date": "2026-10-19",
+      "version": "2026.10.19",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Moving between months, no flicker:** a month now appears all at once with its own numbers (Ready to Assign, Underfunded, Overspent, the categories and the side panel), instead of briefly showing the previous month's amounts. The months either side load in the background, so the arrows switch straight away, even the first time after opening the app.\n- **30-day free trial:** the trial buttons and notes now say 30 days."
+    },
+    {
       "id": "release-2026.10.18.9",
       "type": "release",
       "title": "Bridge Budget 2026.10.18.9",
