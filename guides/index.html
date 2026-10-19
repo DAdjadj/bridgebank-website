@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guides · Bridge Budget and Bridge Bank</title>
+<meta name="description" content="Step-by-step guides for budgeting on your own server with Actual Budget, Bridge Budget and Bridge Bank.">
+<link rel="canonical" href="https://bridgebank.app/guides/">
+<link rel="icon" href="/media/bridge-budget.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f6f7f9;
+    --card: #ffffff;
+    --header-bg: rgba(255,255,255,0.86);
+    --line: #e6e8ec;
+    --line-strong: #d5d9e0;
+    --text: #0f172a;
+    --text-2: #475569;
+    --muted: #64748b;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-soft: #eff4ff;
+    --link: var(--accent);
+    --green: #059669;
+    --red: #dc2626;
+    --chip: #eef0f4;
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --bg-soft: #0f1629;
+      --card: #121a2e;
+      --header-bg: rgba(11,16,32,0.86);
+      --line: #1e293b;
+      --line-strong: #2d3a52;
+      --text: #e6e9ef;
+      --text-2: #b6c0d0;
+      --muted: #8d98ab;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-soft: #14213d;
+      --link: #8ab4ff;
+      --green: #34d399;
+      --red: #f87171;
+      --chip: #1a2338;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+  header { position: sticky; top: 0; z-index: 50; background: var(--header-bg); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; color: var(--text); letter-spacing: -0.2px; }
+  .logo:hover { text-decoration: none; }
+  .logo svg { width: 32px; height: 32px; }
+  .nav-links { display: flex; align-items: center; gap: 24px; }
+  .nav-links a { color: var(--text-2); font-size: 15px; font-weight: 500; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; font: inherit; font-weight: 600; font-size: 15px; padding: 12px 20px; border-radius: 10px; border: 1px solid transparent; white-space: nowrap; }
+  .btn:hover { text-decoration: none; }
+  .btn-primary, .nav-links a.btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); color: #fff; }
+  .btn-outline { background: var(--card); color: var(--text); border-color: var(--line-strong); }
+  .btn-sm { padding: 8px 14px; font-size: 14px; }
+
+  article { max-width: 760px; margin: 0 auto; padding: 56px 24px 72px; }
+  .eyebrow { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 14px; }
+  h1 { font-size: clamp(32px, 4.6vw, 48px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 20px; text-wrap: balance; }
+  .lead { font-size: 19px; color: var(--text-2); }
+  h2 { font-size: clamp(24px, 3vw, 30px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin: 56px 0 14px; scroll-margin-top: 80px; }
+  h3 { font-size: 18px; letter-spacing: -0.01em; margin: 28px 0 8px; }
+  p { margin: 0 0 14px; }
+  article ul, article ol { margin: 0 0 16px; padding-left: 22px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  article li { min-width: 0; }
+  article li::marker { color: var(--muted); }
+  strong { color: var(--text); }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 0.86em; background: var(--chip); padding: 1px 6px; border-radius: 5px; word-break: break-word; }
+  pre { font-family: 'JetBrains Mono', monospace; font-size: 14px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; margin: 0 0 16px; line-height: 1.55; }
+  pre code { background: none; padding: 0; font-size: inherit; }
+
+  .note { border: 1px solid var(--line); background: var(--bg-soft); border-radius: var(--radius); padding: 18px 20px; margin: 28px 0 0; font-size: 16px; color: var(--text-2); }
+  .note p:last-child { margin-bottom: 0; }
+  .answer { border: 1px solid var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); background: var(--card); border-radius: var(--radius); padding: 20px 22px; margin: 28px 0 0; }
+  .answer h2 { margin: 0 0 10px; font-size: 19px; letter-spacing: -0.01em; }
+  .answer ul { margin: 0; }
+  .toc { margin: 28px 0 0; font-size: 15px; }
+  .toc ol { margin: 6px 0 0; }
+
+  .steps { list-style: none; padding: 0; counter-reset: s; display: grid; gap: 18px; margin: 18px 0 20px; }
+  .steps > li { counter-increment: s; position: relative; padding-left: 44px; }
+  .steps > li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; display: grid; place-items: center; }
+  .steps h3 { margin: 2px 0 6px; }
+
+  .table-wrap { overflow-x: auto; margin: 16px 0 20px; border: 1px solid var(--line); border-radius: 12px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15.5px; }
+  table.wide { min-width: 520px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  thead th { background: var(--bg-soft); font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); font-weight: 600; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.yes { color: var(--green); font-weight: 600; }
+  td.no { color: var(--muted); }
+  .fine { font-size: 14px; color: var(--muted); }
+
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq details:first-child { border-top: 1px solid var(--line); }
+  .faq summary { cursor: pointer; list-style: none; padding: 16px 32px 16px 0; font-weight: 600; position: relative; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: ''; position: absolute; right: 6px; top: 22px; width: 9px; height: 9px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); }
+  .faq details[open] summary::after { transform: rotate(-135deg); top: 26px; }
+  .faq .a { padding: 0 0 16px; color: var(--text-2); font-size: 16px; }
+
+  .cta { margin-top: 48px; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); }
+  .cta h2 { margin: 0 0 8px; font-size: 22px; }
+  .cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+  footer { padding: 32px 0 44px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+  footer .container { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer a { color: var(--muted); }
+  footer .legal { margin-top: 10px; font-size: 12px; }
+
+  @media (max-width: 760px) { .nav-links a:not(.btn) { display: none; } }
+  @media (max-width: 560px) {
+    .container { padding-left: 16px; padding-right: 16px; }
+    article { padding: 40px 16px 56px; }
+    .steps > li { padding-left: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="/budget" class="logo">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><clipPath id="bb"><path d="M14 52V30a18 18 0 0 1 36 0v22z"/></clipPath></defs><rect width="64" height="64" rx="15" fill="#2563eb"/><g clip-path="url(#bb)" fill="#fff"><rect x="14" width="10" height="64"/><rect x="27" width="10" height="64" opacity=".72"/><rect x="40" width="10" height="64" opacity=".42"/></g></svg>
+      Bridge Budget
+    </a>
+    <nav class="nav-links">
+      <a href="/guides/">Guides</a>
+      <a href="/budget">Bridge Budget</a>
+      <a href="/">Bridge Bank</a>
+      <a href="/budget/setup" class="btn btn-primary btn-sm">Start free trial</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article>
+  <div class="eyebrow">Guides</div>
+  <h1>Budgeting on your own server</h1>
+  <p class="lead">Step-by-step guides for Actual Budget, Bridge Budget and Bridge Bank. Each one says what's free, what isn't, and what to check afterwards.</p>
+  <h2><a href="/guides/ynab-to-actual-budget">How to move from YNAB to Actual Budget, and keep your targets</a></h2>
+  <p>The free JSON import step by step, what it brings across, what it leaves behind, and how to bring your YNAB targets too.</p>
+</article>
+</main>
+
+<footer>
+  <div class="container">
+    <span>Written by <a href="https://david-alves.com/building/" target="_blank" rel="noopener">David Alves</a>, maker of Bridge Budget, Bridge Bank and Klartion</span>
+    <span><a href="/guides/">Guides</a> · <a href="/budget">Bridge Budget</a> · <a href="/">Bridge Bank</a> · <a href="/privacy.html">Privacy</a></span>
+  </div>
+  <div class="container legal">YNAB is a trademark of YNAB LLC. Actual Budget is an open-source project. Bridge Budget is not affiliated with or endorsed by either.</div>
+</footer>
+
+</body>
+</html>
