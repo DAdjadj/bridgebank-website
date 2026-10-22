@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.22",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.22",
+      "date": "2026-10-22",
+      "version": "2026.10.22",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Assigned on your phone:** the phone budget now has an Assigned column next to Available, so when you look ahead to a later month you can see what you've already put in each category.\n- **Where later money went:** in the month summary, Assigned in later months now lists each category and month it's in (money taken back shows as a minus). Tap or click one to jump to that month."
+    },
+    {
       "id": "release-2026.10.19",
       "type": "release",
       "title": "Bridge Budget 2026.10.19",
