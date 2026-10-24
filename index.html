@@ -337,9 +337,6 @@
   .faq details[open] summary::after { transform: rotate(45deg); }
   .faq .answer { padding: 0 0 20px 58px; color: var(--text-2); font-size: 16px; }
   .faq .answer p + p { margin-top: 10px; }
-  .wl { display: flex; gap: 8px; margin-top: 12px; max-width: 440px; }
-  .wl input { flex: 1; min-width: 0; padding: 9px 12px; font-size: 15px; }
-  #wl-msg { font-size: 14px; margin-top: 8px; display: none; }
   .more-help { margin-top: 26px; color: var(--muted); font-size: 15px; }
 
   /* ====== FINAL ====== */
@@ -759,12 +756,7 @@
       <details>
         <summary>I don't have Docker. Can you host it?</summary>
         <div class="answer">
-          <p>Hosting on PikaPods is coming soon. Leave your email and you'll hear when it's ready.</p>
-          <div class="wl">
-            <input type="email" id="wl-email" placeholder="you@example.com" aria-label="Email for the hosting waitlist">
-            <button class="btn btn-outline btn-sm" onclick="joinWaitlist()">Join waitlist</button>
-          </div>
-          <div id="wl-msg"></div>
+          <p>Not right now. Bridge Bank runs in Docker, which is free and installs in a few minutes on a Mac, a Windows PC, a NAS or a Raspberry Pi, and the <a href="/getting-started.html">setup guide</a> walks you through every step. Stuck? Email <a href="mailto:support@david-alves.com">support@david-alves.com</a>.</p>
         </div>
       </details>
     </div>
@@ -982,27 +974,6 @@
     document.getElementById(id + '-email').addEventListener('keydown', function (e) { if (e.key === 'Enter') startTrial(id); });
   });
 
-  // PikaPods waitlist
-  async function joinWaitlist() {
-    var email = document.getElementById('wl-email').value.trim();
-    var msg = document.getElementById('wl-msg');
-    msg.style.display = 'block';
-    if (!isValidEmail(email)) { msg.textContent = 'Please enter a valid email.'; msg.style.color = 'var(--red)'; return; }
-    try {
-      var res = await fetch('https://api.klartion.com/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, product: 'bridge-bank-pikapods' })
-      });
-      var data = await res.json();
-      msg.textContent = data.status === 'ok' ? "You're on the list. We'll email you when it's ready." : "You're already on the list.";
-      msg.style.color = 'var(--green)';
-    } catch (e) {
-      msg.textContent = 'Something went wrong. Try again.';
-      msg.style.color = 'var(--red)';
-    }
-  }
-  document.getElementById('wl-email').addEventListener('keydown', function (e) { if (e.key === 'Enter') joinWaitlist(); });
 </script>
 
 <!-- Reviews -->
