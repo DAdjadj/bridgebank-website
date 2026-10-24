@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getting Started — Bridge Bank</title>
+<title>Getting Started · Bridge Bank</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -62,7 +62,7 @@
     position: relative;
   }
 
-  /* Noise texture — same as landing page */
+  /* Noise texture (same as landing page) */
   body::before {
     content: '';
     position: fixed;
@@ -75,7 +75,7 @@
     background-size: 256px 256px;
   }
 
-  /* Header — same as landing page */
+  /* Header (same as landing page) */
   header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 0 48px; height: 64px;
@@ -192,7 +192,7 @@
     <div class="step-body">
       <div class="step-title">Create a free Enable Banking account</div>
       <div class="step-desc">
-        <p>Enable Banking is the regulated open banking provider that Bridge Bank uses to connect to your bank. You need a free account — no credit card required.</p>
+        <p>Enable Banking is the regulated open banking provider that Bridge Bank uses to connect to your bank. You need a free account. No credit card required.</p>
         <p>Go to <a href="https://enablebanking.com" target="_blank">enablebanking.com</a> and sign up.</p>
       </div>
     </div>
@@ -216,7 +216,7 @@
           <div class="substep"><div class="substep-num">5</div><div class="substep-text"><strong>Email for data protection matters:</strong> your email address</div></div>
           <div class="substep"><div class="substep-num">6</div><div class="substep-text"><strong>Privacy URL:</strong> <code>https://bridgebank.app/privacy</code> <button class="copy-btn" onclick="copyText('https://bridgebank.app/privacy', this)">Copy</button></div></div>
           <div class="substep"><div class="substep-num">7</div><div class="substep-text"><strong>Terms URL:</strong> <code>https://bridgebank.app/terms</code> <button class="copy-btn" onclick="copyText('https://bridgebank.app/terms', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">8</div><div class="substep-text">Click <strong>Register</strong>. A <code>.pem</code> file will be automatically downloaded to your Downloads folder. The filename will match your Application ID (e.g. <code>aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.pem</code>). Keep this file safe — you'll need it in the setup wizard.</div></div>
+          <div class="substep"><div class="substep-num">8</div><div class="substep-text">Click <strong>Register</strong>. A <code>.pem</code> file will be automatically downloaded to your Downloads folder. The filename will match your Application ID (e.g. <code>aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.pem</code>). Keep this file safe: you'll need it in the setup wizard.</div></div>
         </div>
         <div class="note note-warn"><strong>Choose the mode before you register.</strong> Enable Banking asks for it at the top of the form, and the choice is permanent: applications cannot be moved between Sandbox and Production afterwards. A Sandbox application only returns simulated test data, so it will never connect to your real bank. If you already registered one in Sandbox by mistake, just register a second application in Production and use that one.</div>
       </div>
@@ -335,7 +335,7 @@ docker compose up -d</div>
     <div class="info-card-title">End-to-end encryption</div>
     <div class="info-card-body">
       <p>If you have <strong>end-to-end encryption</strong> enabled in Actual Budget, enter your encryption password in the setup wizard when connecting to Actual Budget. This is separate from your regular Actual Budget password.</p>
-      <p>If you don't use end-to-end encryption, leave the field blank &mdash; everything works the same as before.</p>
+      <p>If you don't use end-to-end encryption, leave the field blank. Everything works the same as before.</p>
     </div>
   </div>
 
@@ -367,7 +367,7 @@ function updatePort() {
   var cmd = document.getElementById('start-cmd');
   if (port && port !== '3002') {
     cmd.textContent = "sed -i 's/3002:3000/" + port + ":3000/' docker-compose.yml && docker compose up -d";
-    status.textContent = 'Port ' + port + ' — the command below will update your compose file automatically.';
+    status.textContent = 'Port ' + port + ': the command below will update your compose file automatically.';
   } else {
     cmd.textContent = 'docker compose up -d';
     status.textContent = '';
