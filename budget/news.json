@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.25",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.25",
+      "date": "2026-10-25",
+      "version": "2026.10.25",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Ready to Assign goes down when you assign:** moving money from Ready to Assign into a category now always lowers it by that amount. Before, if the category was overspent, or a later month had moved money out of it, the money quietly filled that gap and Ready to Assign stayed the same.\n- **Overspending shows on its own:** overspent money now shows in the red Overspent amount instead of being taken off Ready to Assign, like YNAB, and the Overspent button can use all of Ready to Assign to cover it."
+    },
+    {
       "id": "release-2026.10.22",
       "type": "release",
       "title": "Bridge Budget 2026.10.22",
