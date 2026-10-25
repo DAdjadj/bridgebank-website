@@ -347,7 +347,7 @@
           <div class="b-row" data-t="1100"><div class="b-name"><b>Rent</b><small>Monthly bill</small></div><div class="b-assigned num">0.00</div><div class="b-avail"><div class="bar"><i></i></div><span class="pill num">Needs 1,100.00</span></div></div>
           <div class="b-row" data-t="420"><div class="b-name"><b>Groceries</b><small>Refill up to 420.00</small></div><div class="b-assigned num">0.00</div><div class="b-avail"><div class="bar"><i></i></div><span class="pill num">Needs 420.00</span></div></div>
           <div class="b-row" data-t="90"><div class="b-name"><b>Transport</b><small>Monthly</small></div><div class="b-assigned num">0.00</div><div class="b-avail"><div class="bar"><i></i></div><span class="pill num">Needs 90.00</span></div></div>
-          <div class="b-row" data-t="45"><div class="b-name"><b>Internet</b><small>Linked to a schedule</small></div><div class="b-assigned num">0.00</div><div class="b-avail"><div class="bar"><i></i></div><span class="pill num">Needs 45.00</span></div></div>
+          <div class="b-row" data-t="45"><div class="b-name"><b>Internet</b><small>Bill in Schedules</small></div><div class="b-assigned num">0.00</div><div class="b-avail"><div class="bar"><i></i></div><span class="pill num">Needs 45.00</span></div></div>
           <div class="b-row" data-t="150"><div class="b-name"><b>Summer holiday</b><small>1,800.00 by June</small></div><div class="b-assigned num">0.00</div><div class="b-avail"><div class="bar"><i></i></div><span class="pill num">Needs 150.00</span></div></div>
           <div class="b-row" data-t="645"><div class="b-name"><b>Emergency fund</b><small>Whatever's left</small></div><div class="b-assigned num">0.00</div><div class="b-avail"><div class="bar"><i></i></div><span class="pill num">Needs 645.00</span></div></div>
           <div class="b-foot">
@@ -422,7 +422,7 @@
         <div class="feat reveal">
           <div class="chips"><span class="chip c-green">Funded</span><span class="chip c-yellow">Underfunded</span></div>
           <h3>Targets you set with a few clicks</h3>
-          <p>Weekly, monthly, yearly or by a date. Set aside a fixed amount or refill up to one. Point a category at a bill in Schedules and its target follows the bill's amount and date. Your YNAB targets come across as they are. No template syntax to learn.</p>
+          <p>Weekly, monthly, yearly or by a date. Set aside a fixed amount or refill up to one. Give a target a date and it's a bill in Schedules, and the two stay in step. Your YNAB targets come across as they are. No template syntax to learn.</p>
         </div>
         <div class="feat reveal" style="--d:0.06s">
           <div class="chips"><span class="chip c-blue">Auto-Assign</span><span class="chip c-red">Overspent</span></div>
@@ -464,15 +464,16 @@
       <div class="reveal">
         <div class="kicker">Only in Bridge Budget</div>
         <h2>Bills that budget for themselves.</h2>
-        <p class="sub">Give a bill in Schedules a budget category, and that category saves for it by the due date.</p>
+        <p class="sub">Give a category's target a date, and it's a bill in Schedules too. The category saves for it by the due date.</p>
         <ul class="mini">
-          <li>Several bills can share one category.</li>
+          <li>Change it in the budget or in Schedules, and the other follows.</li>
+          <li>Several bills can share one category, each with its own date.</li>
           <li>Money you're expecting lands in its category.</li>
           <li>A late payment shows as "Expected, not arrived", and links itself once it's in, from bank sync, a file or typed by hand.</li>
         </ul>
       </div>
       <div class="clip-wrap reveal" style="--d:0.1s">
-        <video class="clip" src="/media/budget-schedules.mp4?v=20261007b" poster="/media/budget-schedules-poster.jpg?v=20261007b" autoplay muted loop playsinline preload="metadata" aria-label="In Schedules, the Internet bill gets the Internet budget category. On the budget, the Internet category now saves for it: 45 euros more needed this month."></video>
+        <video class="clip" src="/media/budget-schedules.mp4?v=20261025" poster="/media/budget-schedules-poster.jpg?v=20261025" autoplay muted loop playsinline preload="metadata" aria-label="In the budget, Internet gets a target of 45 euros on the 28th of each month. The category now asks for 45 euros this month, and Schedules shows the Internet bill, paid to Fiber Co."></video>
       </div>
     </div>
   </section>
@@ -485,7 +486,7 @@
         <div class="reveal"><h3>Leaving YNAB costs nothing</h3><p>Self-hosted apps usually mean rebuilding your budget by hand. Here one token brings it all across, targets included.</p></div>
         <div class="reveal" style="--d:0.06s"><h3>Your data stays home</h3><p>Most budgeting apps keep your finances on their servers. Bridge Budget runs on yours, and nothing about your budget is sent to us.</p></div>
         <div class="reveal" style="--d:0.12s"><h3>Pay once</h3><p>No subscription. YNAB costs <span data-usd="$109">about €100</span> every year; Bridge Budget is a single payment with updates included.</p></div>
-        <div class="reveal"><h3>Schedules wired into the budget</h3><p>Bills create their own targets, several bills can share one category, and incoming money finds its category. We haven't seen another budgeting app do this.</p></div>
+        <div class="reveal"><h3>Schedules wired into the budget</h3><p>A target with a date is a bill in Schedules, several bills can share one category, and incoming money finds its category. We haven't seen another budgeting app do this.</p></div>
         <div class="reveal" style="--d:0.06s"><h3>No lock-in</h3><p>Underneath it's a standard Actual budget. Switch back to Actual, or move anywhere else, and take all of it with you.</p></div>
         <div class="reveal" style="--d:0.12s"><h3>Support from the maker</h3><p>Questions go straight to the person who built it, and fixes ship as soon as they're ready.</p></div>
       </div>
