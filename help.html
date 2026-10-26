@@ -105,7 +105,7 @@
     <div class="faq-q" onclick="toggle(this)">Transactions aren't syncing</div>
     <div class="faq-a">
       <p>A few things to check:</p>
-      <p><strong>1. Check if your bank session is still active.</strong> Go to the Bank page and look for an expiry warning. If expired, click "Re-authorise bank".</p>
+      <p><strong>1. Check if your bank session is still active.</strong> Go to the Bank page and look for an expiry warning. If expired, click "Re-authorize bank".</p>
       <p><strong>2. Some banks have a delay.</strong> Open banking transactions can take 1-2 days to appear, even if they show in your bank's app. Try again tomorrow.</p>
       <p><strong>3. Check the sync log.</strong> Go to the Status page and look at the sync log. If it says "success" with 0 transactions, your bank returned no new transactions for that period.</p>
       <p><strong>4. Download your logs</strong> from the Status page and send them to <a href="mailto:support@bridgebank.app">support@bridgebank.app</a> if the issue persists.</p>
@@ -142,7 +142,7 @@
   <div class="faq-item">
     <div class="faq-q" onclick="toggle(this)">My bank session expired</div>
     <div class="faq-a">
-      <p>Bank sessions through open banking typically last 90-180 days. When yours expires, go to the Bank page and click <strong>"Re-authorise bank"</strong>. You'll go through your bank's login again to renew access.</p>
+      <p>Bank sessions through open banking typically last 90-180 days. When yours expires, go to the Bank page and click <strong>"Re-authorize bank"</strong>. You'll go through your bank's login again to renew access.</p>
       <p>Bridge Bank sends you an email warning when your session is about to expire.</p>
     </div>
   </div>
@@ -218,7 +218,7 @@
     <div class="faq-a">
       <p>If you also run your own Watchtower on the same server, current Watchtower versions treat the two as duplicates and delete one of them, usually the <code>bridge-bank-watchtower</code> that Bridge Bank uses for updates. Giving Bridge Bank's Watchtower its own scope lets both run side by side.</p>
       <p>Current versions of Bridge Bank make this change for you after updating, as long as your <code>docker-compose.yml</code> is close to the standard one, and keep a backup of the original next to it. If Bridge Bank's Watchtower is already gone, click <strong>Check for updates</strong> on the Status page once to install it.</p>
-      <p>If your file is customised, you can make the change by hand. Open the <code>docker-compose.yml</code> in your Bridge Bank folder and add these two lines under <strong>both</strong> the <code>bridge-bank:</code> and the <code>watchtower:</code> service, lined up with <code>restart:</code>:</p>
+      <p>If your file is customized, you can make the change by hand. Open the <code>docker-compose.yml</code> in your Bridge Bank folder and add these two lines under <strong>both</strong> the <code>bridge-bank:</code> and the <code>watchtower:</code> service, lined up with <code>restart:</code>:</p>
       <p><code>labels:</code><br><code>&nbsp;&nbsp;- com.centurylinklabs.watchtower.scope=bridge-bank</code></p>
       <p>Then add this line to the <code>environment:</code> list of the <code>watchtower:</code> service:</p>
       <p><code>- WATCHTOWER_SCOPE=bridge-bank</code></p>
