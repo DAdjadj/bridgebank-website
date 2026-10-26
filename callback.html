@@ -303,7 +303,7 @@
       setView({
         check: true,
         title: 'Connected. Your Bridge Bank server picked up the code.',
-        detail: 'Return to Bridge Bank to finish. You can close this tab afterwards.',
+        detail: 'Return to Bridge Bank to finish. You can close this tab afterward.',
         button: { label: 'Open Bridge Bank', url: instanceUrl || bridgeUrl },
         url: { label: 'Your Bridge Bank address (click to copy):', text: instanceUrl || bridgeUrl, big: true }
       });
@@ -330,10 +330,10 @@
     function showCancelManual() {
       view = 'cancel';
       setView({
-        title: 'Bank connection cancelled.',
+        title: 'Bank connection canceled.',
         detail: bankDetail
           ? 'Your bank refused the request: "' + bankDetail + '". Return to Bridge Bank to try again.'
-          : 'The bank denied the request or the sign-in was cancelled. Return to Bridge Bank to try again.',
+          : 'The bank denied the request or the sign-in was canceled. Return to Bridge Bank to try again.',
         button: { label: 'Return to Bridge Bank', url: cancelUrl },
         url: { label: 'Or open this link in a new tab (click to copy):', text: cancelUrl },
         hint: cancelUrl.indexOf('http://') === 0 ? 'If nothing happens, copy the link and open it in Chrome or Firefox.' : ''
@@ -343,7 +343,7 @@
     function showStaticCancelled() {
       view = 'cancel';
       setView({
-        title: 'Bank connection was cancelled or failed.',
+        title: 'Bank connection was canceled or failed.',
         detail: "Use your browser's back button or return to Bridge Bank to try again."
       });
     }
