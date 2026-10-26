@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.26",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.26",
+      "date": "2026-10-26",
+      "version": "2026.10.26",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **US English throughout:** license, organize and categorize, and Settings says Check this instead of Tick.\n- **Dates in US order:** targets, schedules, reports and Recently deleted show dates like Oct 5 and October 5, 2026."
+    },
+    {
       "id": "release-2026.10.25",
       "type": "release",
       "title": "Bridge Budget 2026.10.25",
