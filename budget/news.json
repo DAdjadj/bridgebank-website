@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.28.4",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.28.4",
+      "date": "2026-10-28",
+      "version": "2026.10.28.4",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Sync now on your phone:** if you use Bridge Bank, the Accounts tab now starts with a Bank sync card that shows when your banks last synced and fetches new transactions straight away, the same as the card in the sidebar on a computer. It is ready again an hour after the last sync."
+    },
+    {
       "id": "release-2026.10.28.2",
       "type": "release",
       "title": "Bridge Budget 2026.10.28.2",
