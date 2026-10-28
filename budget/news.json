@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.10.28",
+      "type": "release",
+      "title": "Bridge Budget 2026.10.28",
+      "date": "2026-10-28",
+      "version": "2026.10.28",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Dates day first again:** targets, schedules, reports and Recently deleted show dates like 5 Oct and 5 October 2026.\n- **Overspent in the budget's last month:** the Overspent amount beside Ready to Assign now shows in the last month too, where it used to read 0.\n- **No late one-off payments from the assistant:** a one-off payment can no longer be dated in the past from the Claude connector, the same as on the budget screen."
+    },
+    {
       "id": "release-2026.10.26",
       "type": "release",
       "title": "Bridge Budget 2026.10.26",
