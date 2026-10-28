@@ -19,7 +19,7 @@
   var ends = Date.parse(forced || (meta ? meta.content : ''));
   if (!ends) return;
   if (Date.now() <= ends) {
-    var label = ' until ' + new Date(ends).toLocaleDateString('en-US', { day: 'numeric', month: 'long' });
+    var label = ' until ' + new Date(ends).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
     document.querySelectorAll('[data-launch-until]').forEach(function (el) { el.textContent = label; });
     return;
   }
