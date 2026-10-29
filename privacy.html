@@ -74,6 +74,7 @@
     <ul>
       <li><strong>Your email address</strong>: collected by Stripe when you purchase a license, and stored on our license server to deliver your license key and provide support.</li>
       <li><strong>License activation records</strong>: when you activate your license key, we store an anonymized machine fingerprint (a hash of your hostname) and the number of active activations. We do not store device names, IP addresses, or any personally identifiable hardware information.</li>
+      <li><strong>Free trial</strong>: if you start a free trial, we store the email address you enter, to send your trial key and the reminders before it ends, and so the same address can't start a second trial. To stop repeat trials from one connection, we also keep a scrambled code made from your network address (a one-way hash, not the address itself) for 90 days, then delete it.</li>
     </ul>
 
     <div class="highlight">
