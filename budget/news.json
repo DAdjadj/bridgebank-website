@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.11.02.2",
+      "type": "release",
+      "title": "Bridge Budget 2026.11.02.2",
+      "date": "2026-11-02",
+      "version": "2026.11.02.2",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Tidier Settings:** Settings now has its own menu with General, Tags, Bank Sync and Advanced, and each section is easier to scan.\n- **Automatic bank sync (optional):** linked bank accounts can now sync on their own at an interval you choose, from the Bank Sync page.\n- **Faster with big budgets:** large budgets open faster and use less memory in the browser.\n- **Phone fixes:** clearing a payee, unlocking reconciled transactions and moving categories now work properly on your phone.\n- **Safer password changes:** changing the server password asks for the current one and signs out other devices."
+    },
+    {
       "id": "release-2026.11.02",
       "type": "release",
       "title": "Bridge Budget 2026.11.02",
