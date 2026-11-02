@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.11.02",
+      "type": "release",
+      "title": "Bridge Budget 2026.11.02",
+      "date": "2026-11-02",
+      "version": "2026.11.02",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Short in a later month:** if moving money leaves a category below zero in a later month, Needs attention now shows it (for example \"13,28 short in Dec\"), with buttons to open that month or cover it from Ready to Assign or another category. Moving money also asks first when it would leave a later month short.\n- **Bills that have ended:** a bill target whose last payment was in an earlier month no longer shows \"Funded\" in the months after it. The category reads as having no target there."
+    },
+    {
       "id": "release-2026.10.29",
       "type": "release",
       "title": "Bridge Budget 2026.10.29",
