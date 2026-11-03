@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actual Budget bank sync in Europe: every option in 2026 · Bridge Bank</title>
+<meta name="description" content="How to get your European bank transactions into Actual Budget in 2026: free file import, Actual's own experimental Enable Banking sync, GoCardless (closed to new accounts) and Bridge Bank, with what each needs and where each falls short.">
+<link rel="canonical" href="https://bridgebank.app/guides/actual-budget-bank-sync-europe">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bridgebank.app/guides/actual-budget-bank-sync-europe">
+<meta property="og:title" content="Actual Budget bank sync in Europe: every option in 2026">
+<meta property="og:description" content="The free ways first, what they need, and when a sync that runs on its own is worth it.">
+<link rel="icon" href="/da.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Actual Budget bank sync in Europe: every option in 2026",
+  "description": "Free file import, Actual's own Enable Banking sync, GoCardless and Bridge Bank compared.",
+  "datePublished": "2026-11-03",
+  "dateModified": "2026-11-03",
+  "author": { "@type": "Person", "name": "David Alves", "url": "https://david-alves.com" },
+  "publisher": { "@type": "Organization", "name": "Bridge Bank", "url": "https://bridgebank.app" },
+  "mainEntityOfPage": "https://bridgebank.app/guides/actual-budget-bank-sync-europe"
+}
+</script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f6f7f9;
+    --card: #ffffff;
+    --header-bg: rgba(255,255,255,0.86);
+    --line: #e6e8ec;
+    --line-strong: #d5d9e0;
+    --text: #0f172a;
+    --text-2: #475569;
+    --muted: #64748b;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-soft: #eff4ff;
+    --link: var(--accent);
+    --green: #059669;
+    --red: #dc2626;
+    --chip: #eef0f4;
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --bg-soft: #0f1629;
+      --card: #121a2e;
+      --header-bg: rgba(11,16,32,0.86);
+      --line: #1e293b;
+      --line-strong: #2d3a52;
+      --text: #e6e9ef;
+      --text-2: #b6c0d0;
+      --muted: #8d98ab;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-soft: #14213d;
+      --link: #8ab4ff;
+      --green: #34d399;
+      --red: #f87171;
+      --chip: #1a2338;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+  header { position: sticky; top: 0; z-index: 50; background: var(--header-bg); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; color: var(--text); letter-spacing: -0.2px; }
+  .logo:hover { text-decoration: none; }
+  .logo svg { width: 32px; height: 32px; }
+  .nav-links { display: flex; align-items: center; gap: 24px; }
+  .nav-links a { color: var(--text-2); font-size: 15px; font-weight: 500; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; font: inherit; font-weight: 600; font-size: 15px; padding: 12px 20px; border-radius: 10px; border: 1px solid transparent; white-space: nowrap; }
+  .btn:hover { text-decoration: none; }
+  .btn-primary, .nav-links a.btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); color: #fff; }
+  .btn-outline { background: var(--card); color: var(--text); border-color: var(--line-strong); }
+  .btn-sm { padding: 8px 14px; font-size: 14px; }
+
+  article { max-width: 760px; margin: 0 auto; padding: 56px 24px 72px; }
+  .eyebrow { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 14px; }
+  h1 { font-size: clamp(32px, 4.6vw, 48px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 20px; text-wrap: balance; }
+  .lead { font-size: 19px; color: var(--text-2); }
+  h2 { font-size: clamp(24px, 3vw, 30px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin: 56px 0 14px; scroll-margin-top: 80px; }
+  h3 { font-size: 18px; letter-spacing: -0.01em; margin: 28px 0 8px; }
+  p { margin: 0 0 14px; }
+  article ul, article ol { margin: 0 0 16px; padding-left: 22px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  article li { min-width: 0; }
+  article li::marker { color: var(--muted); }
+  strong { color: var(--text); }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 0.86em; background: var(--chip); padding: 1px 6px; border-radius: 5px; word-break: break-word; }
+  pre { font-family: 'JetBrains Mono', monospace; font-size: 14px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; margin: 0 0 16px; line-height: 1.55; }
+  pre code { background: none; padding: 0; font-size: inherit; }
+
+  .note { border: 1px solid var(--line); background: var(--bg-soft); border-radius: var(--radius); padding: 18px 20px; margin: 28px 0 0; font-size: 16px; color: var(--text-2); }
+  .note p:last-child { margin-bottom: 0; }
+  .answer { border: 1px solid var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); background: var(--card); border-radius: var(--radius); padding: 20px 22px; margin: 28px 0 0; }
+  .answer h2 { margin: 0 0 10px; font-size: 19px; letter-spacing: -0.01em; }
+  .answer ul { margin: 0; }
+  .toc { margin: 28px 0 0; font-size: 15px; }
+  .toc ol { margin: 6px 0 0; }
+
+  .steps { list-style: none; padding: 0; counter-reset: s; display: grid; gap: 18px; margin: 18px 0 20px; }
+  .steps > li { counter-increment: s; position: relative; padding-left: 44px; }
+  .steps > li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; display: grid; place-items: center; }
+  .steps h3 { margin: 2px 0 6px; }
+
+  .table-wrap { overflow-x: auto; margin: 16px 0 20px; border: 1px solid var(--line); border-radius: 12px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15.5px; }
+  table.wide { min-width: 520px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  thead th { background: var(--bg-soft); font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); font-weight: 600; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.yes { color: var(--green); font-weight: 600; }
+  td.no { color: var(--muted); }
+  .fine { font-size: 14px; color: var(--muted); }
+
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq details:first-child { border-top: 1px solid var(--line); }
+  .faq summary { cursor: pointer; list-style: none; padding: 16px 32px 16px 0; font-weight: 600; position: relative; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: ''; position: absolute; right: 6px; top: 22px; width: 9px; height: 9px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); }
+  .faq details[open] summary::after { transform: rotate(-135deg); top: 26px; }
+  .faq .a { padding: 0 0 16px; color: var(--text-2); font-size: 16px; }
+
+  .cta { margin-top: 48px; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); }
+  .cta h2 { margin: 0 0 8px; font-size: 22px; }
+  .cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+  footer { padding: 32px 0 44px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+  footer .container { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer a { color: var(--muted); }
+  footer .legal { margin-top: 10px; font-size: 12px; }
+
+  @media (max-width: 760px) { .nav-links a:not(.btn) { display: none; } }
+  @media (max-width: 560px) {
+    .container { padding-left: 16px; padding-right: 16px; }
+    article { padding: 40px 16px 56px; }
+    .steps > li { padding-left: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="/" class="logo">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><clipPath id="bb"><path d="M14 52V30a18 18 0 0 1 36 0v22z"/></clipPath></defs><rect width="64" height="64" rx="15" fill="#2563eb"/><g clip-path="url(#bb)" fill="#fff"><rect x="14" width="10" height="64"/><rect x="27" width="10" height="64" opacity=".72"/><rect x="40" width="10" height="64" opacity=".42"/></g></svg>
+      Bridge Bank
+    </a>
+    <nav class="nav-links">
+      <a href="/guides/">Guides</a>
+      <a href="/budget">Bridge Budget</a>
+      <a href="/">Bridge Bank</a>
+      <a href="/#pricing" class="btn btn-primary btn-sm">Try Bridge Bank free</a>
+    </nav>
+  </div>
+</header>
+<main>
+<article>
+  <div class="eyebrow">Guide · Updated 3 November 2026</div>
+  <h1>Actual Budget bank sync in Europe: every option in 2026</h1>
+  <p class="lead">Actual Budget doesn't need a bank connection to work, but typing in every coffee gets old fast. If your bank is in Europe, there are four ways to get transactions in today: two free, one closed to newcomers, and one paid. This guide covers what each needs and where each falls short.</p>
+
+  <div class="note">
+    <p>I'm David Alves, and I make Bridge Bank, one of the options here. The free ones come first, because for plenty of people they're enough.</p>
+  </div>
+
+  <section class="answer" aria-labelledby="short">
+    <h2 id="short">The short answer</h2>
+    <ul>
+      <li><strong>You don't mind a few minutes a week:</strong> download a file from your bank and import it into Actual. Free, and nothing to set up.</li>
+      <li><strong>You want it automatic and free, and you're fine with an experimental feature:</strong> turn on Actual's own Enable Banking sync. It needs Actual on an HTTPS address, and it syncs only while Actual is open.</li>
+      <li><strong>You want it to run on its own, even with Actual closed:</strong> Bridge Bank syncs on your server on a schedule, and emails you when something needs you.</li>
+      <li><strong>GoCardless</strong>, the old default, isn't taking new accounts.</li>
+    </ul>
+  </section>
+
+  <nav class="toc" aria-label="On this page">
+    <strong>On this page</strong>
+    <ol>
+      <li><a href="#file">Free: import your bank's file</a></li>
+      <li><a href="#enablebanking">Free: Actual's own Enable Banking sync</a></li>
+      <li><a href="#gocardless">What happened to GoCardless</a></li>
+      <li><a href="#bridgebank">Automatic on your server: Bridge Bank</a></li>
+      <li><a href="#compare">Side by side</a></li>
+      <li><a href="#questions">Questions</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="file">Free: import your bank's file</h2>
+  <p>Almost every European bank lets you download your transactions from its website or app. Actual reads CSV, OFX, QFX and QIF files, plus CAMT.053 (an XML format many European banks offer).</p>
+  <ol class="steps">
+    <li>
+      <h3>Download a file from your bank</h3>
+      <p>Look for "export", "download" or "statement" in your online banking, and pick any of the formats above.</p>
+    </li>
+    <li>
+      <h3>Import it into the matching account</h3>
+      <p>In Actual, open the account and click <strong>Import</strong>. For a CSV, tell Actual which column is which once; it remembers for next time. Transactions you already have are matched, so importing overlapping dates doesn't create doubles.</p>
+    </li>
+  </ol>
+  <p><strong>Good for:</strong> anyone who reconciles once a week anyway. <strong>Falls short:</strong> it's manual, and your budget is only as fresh as your last download.</p>
+
+  <h2 id="enablebanking">Free: Actual's own Enable Banking sync</h2>
+  <p>Since 2026, Actual has its own connection to <a href="https://enablebanking.com" target="_blank" rel="noopener">Enable Banking</a>, a regulated open banking provider that covers banks across Europe. It's marked experimental: Actual's settings warn that experimental features "may cause irrecoverable data loss", and <a href="https://actualbudget.org/docs/advanced/bank-sync/enable-banking" target="_blank" rel="noopener">its guide</a> suggests the nightly version for the newest fixes.</p>
+  <ol class="steps">
+    <li>
+      <h3>Switch it on</h3>
+      <p>In Actual's <strong>Settings</strong>, open <strong>Experimental features</strong> (among the advanced settings) and turn on <strong>Enable Banking sync (EU banks)</strong>. It only appears when you use an Actual server.</p>
+    </li>
+    <li>
+      <h3>Register an application at Enable Banking</h3>
+      <p>Create a free account at Enable Banking, register a new application in <strong>Production</strong> mode, and set its redirect URL to your own Actual address followed by <code>/enablebanking/auth_callback</code>. That address has to start with <code>https</code>. Then link your own bank accounts to the application in Enable Banking's control panel; without that, Actual shows no banks.</p>
+    </li>
+    <li>
+      <h3>Connect it in Actual</h3>
+      <p>Under <strong>More</strong>, <strong>Bank Sync</strong>, choose <strong>Set up Enable Banking</strong>, paste the application ID and upload the key file. Then in an account, choose <strong>Link account</strong>, Enable Banking, your country and your bank.</p>
+    </li>
+  </ol>
+  <p><strong>Good for:</strong> people who already reach Actual over HTTPS (a domain with a certificate, or a tunnel) and open it most days. <strong>Falls short:</strong> automatic sync is off by default, and when you turn it on, it runs only while Actual is open in a browser somewhere. Close it for a week and nothing arrives until you open it again. And it's experimental, so it can change between versions.</p>
+
+  <h2 id="gocardless">What happened to GoCardless</h2>
+  <p>For years, Actual's European bank sync went through GoCardless Bank Account Data (formerly Nordigen). <a href="https://actualbudget.org/docs/advanced/bank-sync/" target="_blank" rel="noopener">Actual's bank sync page</a> now says GoCardless is not accepting new accounts. If you already have one, it keeps working in Actual; if you don't, it's no longer an option. Actual's other providers are for other regions: SimpleFIN for North America, Pluggy.ai for Brazil and Akahu for New Zealand.</p>
+
+  <h2 id="bridgebank">Automatic on your server: Bridge Bank</h2>
+  <p><a href="/">Bridge Bank</a> is a small Docker container that runs next to Actual and syncs your bank on a schedule you pick, every 6, 12 or 24 hours, whether or not Actual is open. It uses Enable Banking too, read-only, for 2,500+ banks in 29 countries.</p>
+  <p>What it does differently from Actual's built-in sync:</p>
+  <ul>
+    <li><strong>It runs on its own.</strong> The schedule lives on your server, not in a browser tab.</li>
+    <li><strong>No HTTPS address of your own needed.</strong> Your bank sends you back through a page on bridgebank.app, which hands you over to your own Bridge Bank. Actual can stay on your home network.</li>
+    <li><strong>It tells you when something's wrong.</strong> An email when a sync fails, and before a bank connection expires (banks ask you to renew every 90 to 180 days).</li>
+    <li><strong>Transfers link themselves.</strong> A transfer between two of your own accounts is matched on your account numbers, even when every account has the same name.</li>
+    <li><strong>Pending transactions are updated</strong> when they settle, and duplicates are skipped.</li>
+  </ul>
+  <ol class="steps">
+    <li>
+      <h3>Register an Enable Banking application</h3>
+      <p>Same free account as above, with <code>https://bridgebank.app/callback</code> as the redirect URL. The <a href="/getting-started">setup guide</a> has every field to copy.</p>
+    </li>
+    <li>
+      <h3>Start Bridge Bank</h3>
+      <p>One command starts it next to Actual. A short wizard asks for your license key and where Actual lives.</p>
+    </li>
+    <li>
+      <h3>Connect your bank</h3>
+      <p>Pick your bank and approve read-only access on its own login page. Each bank account fills a plain Actual account; don't also link that account inside Actual, or every transaction arrives twice.</p>
+    </li>
+  </ol>
+  <p>The trial is free for 7 days and needs no card. A license is €29, once, with updates included and two bank accounts; extra accounts are €10 each. It works with plain Actual and with <a href="/budget">Bridge Budget</a>.</p>
+
+  <h2 id="compare">Side by side</h2>
+  <div class="table-wrap">
+    <table class="wide">
+      <thead><tr><th></th><th>File import</th><th>Actual + Enable Banking</th><th>Bridge Bank</th></tr></thead>
+      <tbody>
+        <tr><td>Automatic</td><td class="no">No</td><td class="yes">While Actual is open</td><td class="yes">Yes, on a schedule</td></tr>
+        <tr><td>Needs Actual on HTTPS</td><td class="no">No</td><td>Yes</td><td class="no">No</td></tr>
+        <tr><td>Status</td><td>Stable</td><td>Experimental</td><td>Stable</td></tr>
+        <tr><td>Email when a sync fails or a bank expires</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td>Transfers between your accounts linked</td><td class="no">By hand</td><td class="no">By hand</td><td class="yes">Yes, on account numbers</td></tr>
+        <tr><td>Read-only bank access</td><td class="yes">Nothing connected</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Price</td><td>Free</td><td>Free</td><td>€29 once, 7-day free trial</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="fine">Checked against Actual 26.11.0 and its documentation on 3 November 2026.</p>
+
+  <h2 id="questions">Questions</h2>
+  <div class="faq">
+    <details>
+      <summary>Is Enable Banking free?</summary>
+      <div class="a">Registering an application and linking your own accounts doesn't cost anything. Both Actual's built-in sync and Bridge Bank use that free route.</div>
+    </details>
+    <details>
+      <summary>Can Enable Banking or Bridge Bank move my money?</summary>
+      <div class="a">No. The access you approve on your bank's page is read-only: balances and transactions. Neither ever sees your bank password.</div>
+    </details>
+    <details>
+      <summary>How often do I have to log in to my bank again?</summary>
+      <div class="a">Banks ask you to renew open banking access every 90 to 180 days, whichever way you connect. Bridge Bank emails you before it runs out; renewing takes your bank login and a click.</div>
+    </details>
+    <details>
+      <summary>Can I use Actual's sync for one bank and Bridge Bank for another?</summary>
+      <div class="a">Yes, as long as each Actual account has only one source. An account linked both ways gets every transaction twice.</div>
+    </details>
+    <details>
+      <summary>My bank isn't in Europe. What then?</summary>
+      <div class="a">Look at <a href="https://actualbudget.org/docs/advanced/bank-sync/" target="_blank" rel="noopener">Actual's bank sync page</a> for SimpleFIN (North America), Pluggy.ai (Brazil) or Akahu (New Zealand), or import your bank's file.</div>
+    </details>
+  </div>
+
+  <section class="cta" aria-labelledby="cta-title">
+    <h2 id="cta-title">Let your bank fill Actual on its own</h2>
+    <p>Try Bridge Bank free for 7 days. No card, read-only, on your own server.</p>
+    <div class="cta-row">
+      <a href="/#pricing" class="btn btn-primary">Start the free trial</a>
+      <a href="/getting-started" class="btn btn-outline">Read the setup guide</a>
+    </div>
+  </section>
+</article>
+</main>
+
+<footer>
+  <div class="container">
+    <span>Written by <a href="https://david-alves.com/building/" target="_blank" rel="noopener">David Alves</a>, maker of Bridge Bank, Bridge Budget and Klartion</span>
+    <span><a href="/guides/">Guides</a> · <a href="/">Bridge Bank</a> · <a href="/budget">Bridge Budget</a> · <a href="/privacy">Privacy</a></span>
+  </div>
+  <div class="container legal">Actual Budget is an open-source project. Enable Banking and GoCardless are trademarks of their owners. Bridge Bank is not affiliated with or endorsed by any of them.</div>
+</footer>
+
+</body>
+</html>
