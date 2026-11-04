@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.11.04",
+      "type": "release",
+      "title": "Bridge Budget 2026.11.04",
+      "date": "2026-11-04",
+      "version": "2026.11.04",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Schedules set the category:** a transaction linked to a schedule now goes into that schedule's budget category, even when a payee rule would file it somewhere else. This works when your bank sync matches it, when you link it by hand, and for payments that arrive late."
+    },
+    {
       "id": "release-2026.11.02.2",
       "type": "release",
       "title": "Bridge Budget 2026.11.02.2",
