@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.11.08",
+      "type": "release",
+      "title": "Bridge Budget 2026.11.08",
+      "date": "2026-11-08",
+      "version": "2026.11.08",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Steadier assistant link:** making a new link now always leaves exactly one working connection, and a mistyped link address can no longer stop the connection for everyone.\n- **Your assistant changes only what you name:** when your assistant changes a category, schedule or account, it acts only when the name clearly points to one; otherwise it shows you the choices.\n- **Safer bill reminders:** reminders only go to your browser's own push service, and each person only gets reminders for budgets they can open. On a server with several people, the others may need to turn reminders on again.\n- **Running the connector as its own service:** it now listens only inside its own container. If you set it up that way, add `MCP_HTTP_HOST=0.0.0.0` to it. The in-app \"Connect your assistant\" link needs no change."
+    },
+    {
       "id": "release-2026.11.04",
       "type": "release",
       "title": "Bridge Budget 2026.11.04",
