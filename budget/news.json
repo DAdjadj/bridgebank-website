@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.11.16.3",
+      "type": "release",
+      "title": "Bridge Budget 2026.11.16.3",
+      "date": "2026-11-16",
+      "version": "2026.11.16.3",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Auto-Assign shows real amounts:** Assigned last month, Spent last month, Average assigned and Average spent now show the amount itself, for example what you really spent last month, instead of the difference from what is assigned now.\n- **Tidier side panel:** Recent moves now sits below Auto-Assign as one line you click to open."
+    },
+    {
       "id": "release-2026.11.16.2",
       "type": "release",
       "title": "Bridge Budget 2026.11.16.2",
