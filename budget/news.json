@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.11.16.4",
+      "type": "release",
+      "title": "Bridge Budget 2026.11.16.4",
+      "date": "2026-11-16",
+      "version": "2026.11.16.4",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Paid bills stop asking for money:** A bill whose payment is already matched no longer shows as still needed on its due day or when paid early.\n- **Later months count each bill once:** Next month no longer adds a bill you have just paid on top of its own."
+    },
+    {
       "id": "release-2026.11.16.3",
       "type": "release",
       "title": "Bridge Budget 2026.11.16.3",
