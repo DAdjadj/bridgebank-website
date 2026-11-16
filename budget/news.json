@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.11.16",
+      "type": "release",
+      "title": "Bridge Budget 2026.11.16",
+      "date": "2026-11-16",
+      "version": "2026.11.16",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Bills due this month check what is really left:** a category with a bill due this month now shows as short when less than the bill is left in it, even if more money came in earlier in the month and was spent again."
+    },
+    {
       "id": "release-2026.11.08",
       "type": "release",
       "title": "Bridge Budget 2026.11.08",
