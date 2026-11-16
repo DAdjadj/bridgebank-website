@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.11.16.2",
+      "type": "release",
+      "title": "Bridge Budget 2026.11.16.2",
+      "date": "2026-11-16",
+      "version": "2026.11.16.2",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Later months show what they really need:** when you look ahead to a later month, a bill no longer reads as funded with money that an earlier payment of the same bill will take first. Each month asks for its own amount."
+    },
+    {
       "id": "release-2026.11.16",
       "type": "release",
       "title": "Bridge Budget 2026.11.16",
