@@ -2,6 +2,15 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "id": "release-2026.11.17",
+      "type": "release",
+      "title": "Bridge Budget 2026.11.17",
+      "date": "2026-11-17",
+      "version": "2026.11.17",
+      "url": "https://bridgebank.app/budget/setup#update",
+      "body": "- **Bills are judged by what is still to pay:** A bill that is already paid, or covered by money left over from last month, no longer shows as needing more, whatever was assigned this month.\n- **Weekly bills count every payment left in the month:** The target now asks for all the payments still to come, not only the next one.\n- **Yearly bills saved in full stop asking:** Once the whole amount is in the category, no monthly share is asked until it is paid."
+    },
+    {
       "id": "release-2026.11.16.4",
       "type": "release",
       "title": "Bridge Budget 2026.11.16.4",
