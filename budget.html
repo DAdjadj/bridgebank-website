@@ -215,6 +215,11 @@
   .mini li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 8px; height: 8px; border-radius: 3px; background: var(--accent); opacity: 0.8; }
 
   /* ====== SCHEDULES ====== */
+  .phones { display: flex; gap: 18px; justify-content: center; align-items: flex-start; }
+  .phones img { width: min(46%, 260px); height: auto; border-radius: 34px; box-shadow: 0 0 0 7px #10172a, 0 0 0 8px #2e3b58, 0 30px 60px -25px rgba(11,16,32,.55); }
+  .phones img + img { margin-top: 44px; }
+  .soon { display: inline-block; margin-top: 22px; padding: 8px 14px; border-radius: 99px; font-weight: 600; font-size: 14px; color: var(--accent); background: var(--accent-soft); }
+  @media (max-width: 760px) { .phones img { border-radius: 26px; } }
   .split { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: center; }
   .split .mini { grid-template-columns: 1fr; margin-top: 22px; }
   .clip-wrap { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 10px; box-shadow: var(--shadow); }
@@ -397,7 +402,7 @@
             <h3>What's different</h3>
             <ul>
               <li><strong>Bank connections.</strong> YNAB's linked accounts don't move. In Europe, Bridge Bank syncs 2,500+ banks automatically; anywhere else, import your bank's file (CSV, OFX, QIF).</li>
-              <li><strong>The app.</strong> There's no app store app. It runs in your phone's browser and can sit on your home screen.</li>
+              <li><strong>The app.</strong> A native iPhone app is coming to the App Store, free with your licence. Until then it runs in your phone's browser and can sit on your home screen.</li>
               <li><strong>The server is yours.</strong> You run it, so your budget never sits on someone else's computer. That's the point.</li>
             </ul>
           </div>
@@ -450,7 +455,7 @@
       <div class="box reveal">
         <h3>Also in the box</h3>
         <ul class="mini">
-          <li>Works on your phone: the same budget, targets and buttons, in your phone's browser.</li>
+          <li>Works on your phone: in your phone's browser today, and soon in a native iPhone app.</li>
           <li>Undo and Redo for every change, with buttons or the usual shortcuts.</li>
           <li>Privacy mode hides every amount in one click, for budgeting in a caf&eacute; or on a shared screen.</li>
           <li>Notes on schedules: why a bill exists, or who shares it.</li>
@@ -477,6 +482,28 @@
       </div>
       <div class="clip-wrap reveal" style="--d:0.1s">
         <video class="clip" src="/media/budget-schedules.mp4?v=20261025" poster="/media/budget-schedules-poster.jpg?v=20261025" autoplay muted loop playsinline preload="metadata" aria-label="In the budget, Internet gets a target of 45 euros on the 28th of each month. The category now asks for 45 euros this month, and Schedules shows the Internet bill, paid to Fiber Co."></video>
+      </div>
+    </div>
+  </section>
+
+  <section id="iphone">
+    <div class="container split">
+      <div class="reveal">
+        <div class="kicker">New</div>
+        <h2>Bridge Budget on your iPhone.</h2>
+        <p class="sub">A native app, not a web page. It runs Bridge Budget's own engine on the phone and talks only to your own server.</p>
+        <ul class="mini">
+          <li>Opens in under a second, and always matches your server's version.</li>
+          <li>Add a transaction in seconds, split it, and pick payees you use nearby.</li>
+          <li>Widgets for Ready to Assign and upcoming bills, on your Home Screen.</li>
+          <li>Face ID lock, Dark Mode, Dynamic Type and VoiceOver.</li>
+          <li>Free with your Bridge Budget licence. No account with us, no tracking.</li>
+        </ul>
+        <span class="soon">Coming soon to the App Store</span>
+      </div>
+      <div class="phones reveal" style="--d:0.1s">
+        <img src="/media/budget-iphone.jpg?v=20261120" alt="The iPhone app's Budget tab: Ready to Assign, then Bills with Rent, Electric and Internet funded." loading="lazy">
+        <img src="/media/budget-iphone-widgets.jpg?v=20261120" alt="An iPhone Home Screen with the Upcoming bills and Ready to Assign widgets." loading="lazy">
       </div>
     </div>
   </section>
