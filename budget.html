@@ -286,7 +286,7 @@
     html { scroll-behavior: auto; }
   }
 
-  @media (max-width: 1080px) {
+  @media (max-width: 1240px) {
     .nav-links .hide-t { display: none; }
   }
   @media (max-width: 980px) {
@@ -306,6 +306,37 @@
     .b-foot { flex-direction: column; align-items: stretch; padding: 12px 14px; }
     .b-btns .btn { flex: 1; }
   }
+
+  .phones.three img { width: min(31%, 230px); }
+  .phones.three img + img { margin-top: 0; }
+  .phones.three img:nth-child(2) { margin-top: 48px; }
+  .phones.three img:nth-child(3) { margin-top: 0; }
+
+  .nav-links a.nav-new { color: var(--text); }
+  .nav-new b { font-size: 10.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #fff; background: var(--accent); padding: 2px 7px; border-radius: 99px; margin-left: 5px; vertical-align: 1px; }
+
+  .hero-new { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px; padding: 6px 14px 6px 6px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-sm); color: var(--text); font-size: 14.5px; font-weight: 600; }
+  .hero-new b { color: #fff; background: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; padding: 3px 9px; border-radius: 99px; }
+  .hero-new span { color: var(--accent); }
+  .hero-new i { font-style: normal; } .hero-new .sm { display: none; }
+  @media (max-width: 520px) { .hero-new .lg { display: none; } .hero-new .sm { display: inline; } }
+  @media (min-width: 981px) { .hero-grid.with-phone { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); } }
+  @media (min-width: 981px) and (max-width: 1180px) { .hero-grid.with-phone { grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.26fr); gap: 40px; } }
+  .demo-stack { --pw: 190px; --ov: 30px; position: relative; padding-right: calc(var(--pw) - var(--ov)); }
+  .demo-stack .b-foot { padding-right: 40px; }
+  .hero-phone { position: absolute; right: 0; bottom: -40px; width: var(--pw); height: auto; border-radius: 30px; box-shadow: 0 0 0 7px #10172a, 0 0 0 8px #2e3b58, 0 40px 70px -25px rgba(11,16,32,.6); }
+  @media (max-width: 1180px) { .demo-stack { --pw: 150px; --ov: -16px; } .demo-stack .b-foot { padding-right: 20px; } .hero-phone { border-radius: 24px; box-shadow: 0 0 0 5px #10172a, 0 0 0 6px #2e3b58, 0 30px 50px -20px rgba(11,16,32,.6); } }
+  @media (min-width: 981px) and (max-width: 1060px) { .demo-stack { padding-right: 0; } .hero-phone { display: none; } .with-phone .demo-note { margin-right: 0; } }
+  @media (max-width: 980px) { .demo-stack { --pw: 190px; --ov: 30px; } .demo-stack .b-foot { padding-right: 40px; } }
+  .with-phone .demo-note { text-align: left; margin-right: 200px; }
+  .phones.three { gap: 14px; }
+  @media (max-width: 720px) {
+    .hero-new { font-size: 13.5px; }
+    .demo-stack { padding-right: 0; }
+    .demo-stack .b-foot { padding-right: 20px; }
+    .hero-phone { display: none; }
+    .with-phone .demo-note { margin-right: 0; text-align: center; }
+  }
 </style>
 </head>
 <body>
@@ -318,11 +349,12 @@
       Bridge Budget
     </a>
     <nav class="nav-links">
-      <a href="#switch" class="hide-m">Switch from YNAB</a>
+      <a href="#switch" class="hide-m hide-t">Switch from YNAB</a>
       <a href="#features" class="hide-m hide-t">Features</a>
       <a href="#schedules" class="hide-m hide-t">Schedules</a>
       <a href="#assistant" class="hide-m hide-t">Assistants</a>
       <a href="#faq" class="hide-m hide-t">Questions</a>
+      <a href="#iphone" class="hide-m nav-new">iPhone app <b>New</b></a>
       <a href="/" class="hide-m">Bridge Bank</a>
       <a href="#pricing" class="hide-m">Pricing</a>
       <a href="/budget/setup" class="btn btn-primary btn-sm">Start free trial</a>
@@ -332,8 +364,9 @@
 
 <main id="top">
   <div class="hero">
-    <div class="container hero-grid">
+    <div class="container hero-grid with-phone">
       <div>
+        <a class="hero-new" href="#iphone"><b>New</b> <i class="lg">Bridge Budget for iPhone, coming soon</i><i class="sm">iPhone app, coming soon</i> <span>&rarr;</span></a><br>
         <div class="kicker">For everyone leaving YNAB</div>
         <h1>Give your money a job. <span>On your own server.</span></h1>
         <p class="lead">Bridge Budget is the YNAB way of budgeting, on a server you own. Paste one token from YNAB and your accounts, transactions, schedules, monthly budgets and targets come across in about a minute. Then stop paying every year: it's <span data-usd="about {e:69}">€69</span>, once.</p>
@@ -345,6 +378,7 @@
       </div>
 
       <div>
+        <div class="demo-stack">
         <div class="budget" data-budget>
           <div class="b-top">
             <div class="b-month"><b>October</b><small>Pay day: 2,450.00 arrived</small></div>
@@ -365,10 +399,35 @@
             </div>
           </div>
         </div>
+        <img class="hero-phone" src="/media/budget-iphone.jpg?v=20261120" width="506" height="1100" alt="The Bridge Budget iPhone app: the Budget tab with Ready to Assign and funded bills.">
+        </div>
         <p class="demo-note">Made-up numbers, in any currency. Press Auto-Assign, then Undo.</p>
       </div>
     </div>
   </div>
+
+  <section id="iphone">
+    <div class="container split">
+      <div class="reveal">
+        <div class="kicker">New</div>
+        <h2>Bridge Budget on your iPhone.</h2>
+        <p class="sub">A native app, not a web page. It runs Bridge Budget's own engine on the phone and talks only to your own server.</p>
+        <ul class="mini">
+          <li>Opens in under a second, and always matches your server's version.</li>
+          <li>Add a transaction in seconds, split it, and pick payees you use nearby.</li>
+          <li>Widgets for Ready to Assign and upcoming bills, on your Home Screen.</li>
+          <li>Face ID lock, Dark Mode, Dynamic Type and VoiceOver.</li>
+          <li>Free with your Bridge Budget licence. No account with us, no tracking.</li>
+        </ul>
+        <span class="soon">Coming soon to the App Store</span>
+      </div>
+      <div class="phones three reveal" style="--d:0.1s">
+        <img src="/media/budget-iphone-add.jpg?v=20261120" width="506" height="1100" alt="Adding a transaction on the iPhone: payee, category, account and the amount keypad." loading="lazy">
+        <img src="/media/budget-iphone.jpg?v=20261120" width="506" height="1100" alt="The iPhone app's Budget tab: Ready to Assign, then Bills with Rent, Electric and Internet funded." loading="lazy">
+        <img src="/media/budget-iphone-widgets.jpg?v=20261120" width="506" height="1100" alt="An iPhone Home Screen with the Upcoming bills and Ready to Assign widgets." loading="lazy">
+      </div>
+    </div>
+  </section>
 
   <section id="switch" class="soft">
     <div class="container">
@@ -482,28 +541,6 @@
       </div>
       <div class="clip-wrap reveal" style="--d:0.1s">
         <video class="clip" src="/media/budget-schedules.mp4?v=20261025" poster="/media/budget-schedules-poster.jpg?v=20261025" autoplay muted loop playsinline preload="metadata" aria-label="In the budget, Internet gets a target of 45 euros on the 28th of each month. The category now asks for 45 euros this month, and Schedules shows the Internet bill, paid to Fiber Co."></video>
-      </div>
-    </div>
-  </section>
-
-  <section id="iphone">
-    <div class="container split">
-      <div class="reveal">
-        <div class="kicker">New</div>
-        <h2>Bridge Budget on your iPhone.</h2>
-        <p class="sub">A native app, not a web page. It runs Bridge Budget's own engine on the phone and talks only to your own server.</p>
-        <ul class="mini">
-          <li>Opens in under a second, and always matches your server's version.</li>
-          <li>Add a transaction in seconds, split it, and pick payees you use nearby.</li>
-          <li>Widgets for Ready to Assign and upcoming bills, on your Home Screen.</li>
-          <li>Face ID lock, Dark Mode, Dynamic Type and VoiceOver.</li>
-          <li>Free with your Bridge Budget licence. No account with us, no tracking.</li>
-        </ul>
-        <span class="soon">Coming soon to the App Store</span>
-      </div>
-      <div class="phones reveal" style="--d:0.1s">
-        <img src="/media/budget-iphone.jpg?v=20261120" alt="The iPhone app's Budget tab: Ready to Assign, then Bills with Rent, Electric and Internet funded." loading="lazy">
-        <img src="/media/budget-iphone-widgets.jpg?v=20261120" alt="An iPhone Home Screen with the Upcoming bills and Ready to Assign widgets." loading="lazy">
       </div>
     </div>
   </section>

@@ -417,6 +417,14 @@
     .faq summary { grid-template-columns: 46px 1fr 20px; }
     .faq .answer { padding-left: 46px; }
   }
+
+  .comp-media { position: relative; padding-right: 70px; padding-bottom: 40px; }
+  .comp-media .comp-shot { display: block; }
+  .comp-phone { position: absolute; right: 0; bottom: 0; width: 34%; max-width: 190px; height: auto; border-radius: 28px; box-shadow: 0 0 0 6px #10172a, 0 0 0 7px #2e3b58, 0 30px 60px -20px rgba(6,13,31,.6); }
+  .ios-line { display: flex; align-items: center; gap: 12px; margin-top: 22px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--card, transparent); font-size: 15px; }
+  .ios-line svg { flex: none; width: 22px; height: 22px; }
+  .ios-line b { font-weight: 700; }
+  @media (max-width: 760px) { .comp-media { padding-right: 44px; padding-bottom: 30px; } .comp-phone { width: 30%; border-radius: 18px; box-shadow: 0 0 0 4px #10172a, 0 0 0 5px #2e3b58, 0 20px 40px -16px rgba(6,13,31,.6); } }
 </style>
 </head>
 <body>
@@ -430,7 +438,7 @@
       <a href="#banks" class="hide-m">Banks</a>
       <a href="#pricing" class="hide-m">Pricing</a>
       <a href="#faq" class="hide-m">FAQ</a>
-      <a href="/budget" class="hide-m nav-new">Bridge Budget <b>New</b></a>
+      <a href="/budget" class="hide-m nav-new">Bridge Budget <b>Now on iPhone</b></a>
       <a href="/getting-started">Setup guide</a>
       <a href="#pricing" class="btn btn-primary btn-sm">Try free</a>
     </nav>
@@ -641,7 +649,7 @@
   <div class="container">
     <div class="comp">
       <div class="reveal">
-        <div class="comp-tag"><b>New</b> Bridge Budget, a second app from the same maker</div>
+        <div class="comp-tag"><b>New</b> Bridge Budget, now on iPhone too</div>
         <h2>Leaving YNAB? Bring your whole budget with you.</h2>
         <p>Bridge Budget is YNAB-style budgeting built on Actual: targets for every category, one click to fund them, and reports. Paste one token from YNAB and your accounts, transactions, schedules, monthly budgets and targets come across in about a minute. It works with any bank, anywhere.</p>
         <div class="pair">
@@ -652,9 +660,10 @@
           <a href="/budget" class="btn btn-primary">See Bridge Budget <span class="arr">&rarr;</span></a>
           <a href="/budget#switch" class="btn btn-outline">How switching works</a>
         </div>
+        <div class="ios-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10.5 18.5h3"/></svg><span><b>Bridge Budget for iPhone</b>, coming soon to the App Store. Free with your Bridge Budget licence. <a href="/budget#iphone">Take a look</a></span></div>
         <p class="guide-line">Step by step, free and paid ways: <a href="/guides/ynab-to-actual-budget">How to move from YNAB to Actual Budget</a></p>
       </div>
-      <a class="comp-shot reveal" style="--d:0.1s" href="/budget" aria-label="See Bridge Budget"><picture><source srcset="/media/budget-budget-dark.jpg?v=20261007b" media="(prefers-color-scheme: dark)"><img src="/media/budget-budget-light.jpg?v=20261007b" width="1440" height="900" alt="The Bridge Budget budget screen: categories with targets and Available amounts" loading="lazy"></picture></a>
+      <div class="comp-media reveal" style="--d:0.1s"><a class="comp-shot" href="/budget" aria-label="See Bridge Budget"><picture><source srcset="/media/budget-budget-dark.jpg?v=20261007b" media="(prefers-color-scheme: dark)"><img src="/media/budget-budget-light.jpg?v=20261007b" width="1440" height="900" alt="The Bridge Budget budget screen: categories with targets and Available amounts" loading="lazy"></picture></a><img class="comp-phone" src="/media/budget-iphone.jpg?v=20261120" width="506" height="1100" alt="The Bridge Budget iPhone app: the Budget tab." loading="lazy"></div>
     </div>
     <div class="cost reveal">
       <div class="cost-row"><span>YNAB, every year</span><b data-usd="$109">about &euro;100</b></div>
